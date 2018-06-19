@@ -5,7 +5,8 @@ A declarative network manager API for hosts.
 NMState is a library with an accompanying command line tool that manages
 host networking settings in a declarative manner.
 The networking state is described by a pre-defined schema.
-Reporting of current state and changes to it (desired state) both conform to it.
+Reporting of current state and changes to it (desired state) both conform to
+the schema.
 
 NMState is aimed to satisfy enterprise needs to manage host networking through
 a northbound declarative API and multi provider support on the southbound.
