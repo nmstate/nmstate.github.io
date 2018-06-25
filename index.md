@@ -12,6 +12,8 @@ NMState is aimed to satisfy enterprise needs to manage host networking through
 a northbound declarative API and multi provider support on the southbound.
 NetworkManager acts as the main (and currently the only) provider supported.
 
+Visit the [demos page](./demos.md) to see what it can do.
+
 ## Quick Start Guide
 ### Install
 In the first few development cycles, it is recomended to install nmstate from
@@ -73,6 +75,9 @@ To dump the state in yaml format, use '--yaml' flag:
 file.
 - Edit the desired state with the new values.
 - Run the set command: `nmstatectl set --file desired_state.json`
+
+## Demos
+Want to see nmstate in action? Check out the [demos](./demos.md).
 
 ## Supported Interfaces:
 - bond
