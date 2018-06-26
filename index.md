@@ -1,4 +1,4 @@
-# We are nmstate!
+# We are NMState!
 A declarative network manager API for hosts.
 
 ## What is it?
