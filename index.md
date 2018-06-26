@@ -18,10 +18,10 @@ Visit the [demos page](./demos.md) to see what it can do.
 ### Install
 In the first few development cycles, it is recomended to install nmstate from
 sources.
-```
+```shell
 git clone https://github.com/nmstate/nmstate.git
 cd nmstate
-pip install .
+pip install --user --upgrade .
 ```
 
 Note: In order to report current state, installing nmstate as a non-root user
