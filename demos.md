@@ -1,8 +1,8 @@
 # Demos
-At the end of each development sprint a demo is presented describing
+At the end of each development sprint, a demo is presented describing
 new capabilities of nmstate.
 
-## Demo-1: Link Sate
+## Demo-1: Link State
 Date: 23 May 2018
 
 List all links on the node and control the links (admin) state.
