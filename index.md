@@ -74,7 +74,7 @@ To dump the state in yaml format, use '--yaml' flag:
 - Use `nmstatectl show > desired_state.json` to dump the current state to a
 file.
 - Edit the desired state with the new values.
-- Run the set command: `nmstatectl set --file desired_state.json`
+- Run the set command: `nmstatectl set desired_state.json`
 
 ## Demos
 Want to see nmstate in action? Check out the [demos](./demos.md).
