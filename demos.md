@@ -16,3 +16,8 @@ Date: 13 Jun 2018
 Create a bond over several slaves and define an IPv4 static address.
 
 [![asciicast](https://asciinema.org/a/xZNpB6Pl7Vo0yyDlSpAduYEuE.png)](https://asciinema.org/a/xZNpB6Pl7Vo0yyDlSpAduYEuE)
+
+
+Create a bond interface and change their members with Ansible.
+
+[![asciicast](https://asciinema.org/a/Ny2rkdpHJaZGnBWK8o3og5sGX.png)](https://asciinema.org/a/Ny2rkdpHJaZGnBWK8o3og5sGX)
