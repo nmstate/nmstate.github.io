@@ -21,3 +21,11 @@ Create a bond over several slaves and define an IPv4 static address.
 Create a bond interface and change their members with Ansible.
 
 [![asciicast](https://asciinema.org/a/Ny2rkdpHJaZGnBWK8o3og5sGX.png)](https://asciinema.org/a/Ny2rkdpHJaZGnBWK8o3og5sGX)
+
+
+## Demo-3: OVS Bridge
+Date: 5 Jul 2018
+
+Create an OVS bridge and connect a system interface to it.
+
+[![asciicast](https://asciinema.org/a/bv2g1RHADTjokXH4uYFljpNC6.png)](https://asciinema.org/a/bv2g1RHADTjokXH4uYFljpNC6)
