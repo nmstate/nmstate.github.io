@@ -2,6 +2,39 @@
 This page includes various configuration state examples of various entities.
 For readability, the examples are shown in yaml format.
 
+## Interfaces: Generic state manipulation
+The examples below show how to control the iface state, regardless of
+its type.
+
+### Setting the iface up:
+The `up` state also covers the creation of a virtual iface.
+```
+interfaces:
+- name: eth0
+  type: ethernet
+  state: up
+```
+
+### Setting the iface down
+For virtual ifaces, it removes the iface. Nevertheless, the correct way to
+remove an interface is using the `absent` keyword.
+```
+interfaces:
+- name: foo0
+  type: unknown
+  state: down
+```
+
+### Removing an iface:
+For a physical device (like an ethernet NIC), it just removes any
+configuration from the iface but does not (or can) physically delete it.
+```
+interfaces:
+- name: dummy0
+  type: dummy
+  state: absent
+```
+
 ## Interfaces: ethernet
 The example includes 3 ethernet interfaces, two with static IPv4 and the 3rd
 with no IP and with the state set to down.
