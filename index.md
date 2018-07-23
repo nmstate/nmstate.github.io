@@ -12,7 +12,8 @@ NMState is aimed to satisfy enterprise needs to manage host networking through
 a northbound declarative API and multi provider support on the southbound.
 NetworkManager acts as the main (and currently the only) provider supported.
 
-Visit the [demos page](./demos.md) to see what it can do.
+Visit the [demos page](./demos.md) and then [examples page](./examples.md)
+to see what it can do.
 
 ## Quick Start Guide
 ### Install
