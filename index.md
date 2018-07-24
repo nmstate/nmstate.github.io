@@ -28,6 +28,15 @@ pip install --user --upgrade .
 Note: In order to report current state, installing nmstate as a non-root user
 should be enough. For change support, install the package as root.
 
+### Dependencies
+In order to support specific capabilities, additional packages are required:
+- OpenVSwitch support through the NM provider requires `NetworkManager-ovs`.
+Installing it on Centos/RHEL, use:
+```shell
+sudo yum install NetworkManager-ovs
+systemctl restart NetworkManager
+```
+
 ### View state
 
 The following command will dump the current networking state in json format:
