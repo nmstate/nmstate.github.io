@@ -93,7 +93,8 @@ Want to see nmstate in action? Check out the [demos](./demos.md).
 - bond
 - dummy
 - ethernet
+- ovs-bridge
 
 ## Stack support:
-- IPv4 addresses
+- IPv4 addresses (static)
 
