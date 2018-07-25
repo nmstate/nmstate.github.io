@@ -90,11 +90,11 @@ file.
 Want to see nmstate in action? Check out the [demos](./demos.md).
 
 ## Supported Interfaces:
-- bond
-- dummy
-- ethernet
-- ovs-bridge
+- [ethernet](./examples.md#interfaces-ethernet)
+- [bond](./examples.md#interfaces-bond)
+- [ovs-bridge](./examples.md#interfaces-ovs-bridge)
+- [dummy](./examples.md#interfaces-dummy)
 
 ## Stack support:
-- IPv4 addresses (static)
+- [IPv4 addresses (static)](./examples.md#interfaces-ethernet)
 
