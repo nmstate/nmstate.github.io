@@ -48,7 +48,7 @@ The following command will dump the current networking state in json format:
     "interfaces": [
         {
             "ipv4": {
-                "addresses": [
+                "address": [
                     {
                         "ip": "192.168.122.1",
                         "prefix-length": 24
@@ -70,7 +70,7 @@ To dump the state in yaml format, use '--yaml' flag:
 
 ```
 - ipv4:
-    addresses:
+    address:
     - ip: 192.168.122.1
       prefix-length: 24
     enabled: true

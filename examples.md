@@ -45,7 +45,7 @@ interfaces:
   type: ethernet
   state: up
   ipv4:
-    addresses:
+    address:
     - ip: 192.168.122.250
       prefix-length: 24
     enabled: true
@@ -53,7 +53,7 @@ interfaces:
   type: ethernet
   state: up
   ipv4:
-    addresses:
+    address:
     - ip: 192.168.100.192
       prefix-length: 24
     enabled: true
@@ -86,7 +86,7 @@ interfaces:
   type: bond
   state: up
   ipv4:
-    addresses:
+    address:
     - ip: 10.10.10.10
       prefix-length: 24
     enabled: true
