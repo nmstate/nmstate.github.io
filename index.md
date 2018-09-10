@@ -47,16 +47,23 @@ The following command will dump the current networking state in json format:
 {
     "interfaces": [
         {
+            "description": "Production Network",
+            "ethernet": {
+                "auto-negotiation": true,
+                "duplex": "full",
+                "speed": 1000
+            },
             "ipv4": {
                 "address": [
                     {
-                        "ip": "192.168.122.1",
+                        "ip": "192.0.2.142",
                         "prefix-length": 24
                     }
                 ],
                 "enabled": true
             },
-            "name": "eth0",
+            "mtu": 1500,
+            "name": "eth3",
             "state": "up",
             "type": "ethernet"
         }
@@ -69,12 +76,19 @@ To dump the state in yaml format, use '--yaml' flag:
 `nmstatectl show --yaml`
 
 ```
-- ipv4:
+interfaces:
+- description: Production Network
+  ethernet:
+    auto-negotiation: true
+    duplex: full
+    speed: 1000
+  ipv4:
     address:
-    - ip: 192.168.122.1
+    - ip: 192.0.2.142
       prefix-length: 24
     enabled: true
-  name: eth0
+  mtu: 1500
+  name: eth3
   state: up
   type: ethernet
 ```
