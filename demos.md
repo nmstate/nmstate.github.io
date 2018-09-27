@@ -29,3 +29,16 @@ Date: 5 Jul 2018
 Create an OVS bridge and connect a system interface to it.
 
 [![asciicast](https://asciinema.org/a/bv2g1RHADTjokXH4uYFljpNC6.png)](https://asciinema.org/a/bv2g1RHADTjokXH4uYFljpNC6)
+
+## Demo-4: Revert when state change fails
+Date: 6 September 2018
+
+NMState now supports checking whether changing the Network Manager config
+actually results in the state that the user specified. To demonstrate this, a
+property of virtual network interfaces is used. They silently ignore changes to
+their speed settings. So when a speed is set that the card does not accept, the
+Network Manager configuration is changed for a short time. When the
+verification of the state fails, NMState reverts the configuration back to its
+previous state.
+
+[![asciicast](https://asciinema.org/a/4HojPs4JcvsFExKXuX5zQzm9I.png)](https://asciinema.org/a/4HojPs4JcvsFExKXuX5zQzm9I)
