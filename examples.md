@@ -36,8 +36,8 @@ interfaces:
 ```
 
 ## Interfaces: ethernet
-The example includes 3 ethernet interfaces, two with static IPv4 and the 3rd
-with no IP and with the state set to down.
+The example includes 3 ethernet interfaces, two with static IPv4 and IPv6 and
+the 3rd with no IP and with the state set to down.
 
 ```
 interfaces:
@@ -49,6 +49,11 @@ interfaces:
     - ip: 192.168.122.250
       prefix-length: 24
     enabled: true
+  ipv6:
+    address:
+    - ip: 2001:db8::1:1
+      prefix-length: 64
+    enabled: true
 - name: eth1
   type: ethernet
   state: up
@@ -56,6 +61,11 @@ interfaces:
     address:
     - ip: 192.168.100.192
       prefix-length: 24
+    enabled: true
+  ipv6:
+    address:
+    - ip: 2001:db8::2:1
+      prefix-length: 64
     enabled: true
 - name: eth2
   type: ethernet
