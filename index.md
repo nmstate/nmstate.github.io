@@ -110,5 +110,4 @@ Want to see nmstate in action? Check out the [demos](./demos.md).
 - [dummy](./examples.md#interfaces-dummy)
 
 ## Stack support:
-- [IPv4 addresses (static)](./examples.md#interfaces-ethernet)
-
+- [IPv4/IPv6 addresses (static)](./examples.md#interfaces-ethernet)
