@@ -1,3 +1,5 @@
 theme: jekyll-theme-hacker
 title: nmstate
 description: A Declarative API for Host Network Management
+github:
+  repository_url: https://github.com/nmstate/nmstate
