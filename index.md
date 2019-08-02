@@ -106,11 +106,15 @@ Want to see nmstate in action? Check out the [demos](./demos.md).
 ## Supported Interfaces:
 - [ethernet](./examples.md#interfaces-ethernet)
 - [bond](./examples.md#interfaces-bond)
+- [Vlan](./examples.md#interfaces-vlan)
+- [Linux bridge](./examples.md#interface-linux-bridge)
 - [ovs-bridge](./examples.md#interfaces-ovs-bridge)
 - [dummy](./examples.md#interfaces-dummy)
 
 ## Stack support:
 - [IPv4/IPv6 addresses (static)](./examples.md#interfaces-ethernet)
+- [IPv4/IPv6 route](./examples.md#route)
+- [IPv4/IPv6 DNS client configuration](./examples.md#dns)
 
 ## Development
 - [Design](./devel/design/networking-api.md)
