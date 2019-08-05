@@ -150,3 +150,82 @@ interfaces:
     enabled: false
 ```
 
+## Interface: VLAN
+
+```yaml
+---
+interfaces:
+  - name: eth1.101
+    type: vlan
+    state: up
+    vlan:
+      base-iface: eth1
+      id: 101
+```
+
+## Interface: Linux Bridge
+
+```yaml
+---
+interfaces:
+  - name: eth1
+    type: ethernet
+    state: up
+  - name: linux-br0
+    type: linux-bridge
+    state: up
+    bridge:
+      options:
+        group-forward-mask: 0
+        mac-ageing-time: 300
+        multicast-snooping: true
+        stp:
+          enabled: true
+          forward-delay: 15
+          hello-time: 2
+          max-age: 20
+          priority: 32768
+      port:
+        - name: eth1
+          stp-hairpin-mode: false
+          stp-path-cost: 100
+          stp-priority: 32
+```
+
+## Route
+
+```yaml
+---
+interfaces:
+  - name: eth1
+    type: ethernet
+    state: up
+    ipv4:
+      address:
+      - ip: 192.0.2.251
+        prefix-length: 24
+      dhcp: false
+      enabled: true
+
+routes:
+  config:
+  - destination: 198.51.100.0/24
+    metric: 150
+    next-hop-address: 192.0.2.1
+    next-hop-interface: eth1
+    table-id: 254
+```
+
+## DNS
+
+```yaml
+---
+dns-resolver:
+  config:
+    search:
+    - example.com
+    - example.org
+    server:
+    - 2001:4860:4860::8888
+    - 8.8.8.8
+```
