@@ -28,13 +28,21 @@ pip install --user --upgrade .
 Note: In order to report current state, installing nmstate as a non-root user
 should be enough. For change support, install the package as root.
 
+For installing stable release or other installation methods, please refer to
+[Nmstate Installation Guide](./install.md).
+
 ### Dependencies
+
+Nmstate requires NetworkManager 1.12 or later version installed and started.
+
 In order to support specific capabilities, additional packages are required:
 - OpenVSwitch support through the NM provider requires `NetworkManager-ovs`.
 Installing it on Centos/RHEL, use:
+
 ```shell
-sudo yum install NetworkManager-ovs
-systemctl restart NetworkManager
+sudo yum install NetworkManager-ovs openvswitch
+sudo systemctl restart openvswitch
+sudo systemctl restart NetworkManager
 ```
 
 ### View state
