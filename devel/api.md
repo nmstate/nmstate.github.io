@@ -49,6 +49,11 @@
 * [VLAN](#vlan)
     * [`VLAN.ID`](#vlanid)
     * [`VLAN.BASE_IFACE`](#vlanbase_iface)
+* [VXLAN](#vxlan)
+    * [`VXLAN.ID`](#vxlanid)
+    * [`VXLAN.BASE_IFACE`](#vxlanbase_iface)
+    * [`VXLAN.REMOTE`](#vxlanremote)
+    * [`VXLAN.DESTINATION_PORT`](#vxlandestination_port)
 * [Linux Bridge](#linux-bridge)
     * [`LinuxBridge.GROUP_FORWARD_MASK`](#linuxbridgegroup_forward_mask)
     * [`LinuxBridge.MAC_AGEING_TIME`](#linuxbridgemac_ageing_time)
@@ -275,6 +280,7 @@ Possible values:
  * `InterfaceType.OVS_PORT`
  * `InterfaceType.OVS_INTERFACE`
  * `InterfaceType.VLAN`
+ * `InterfaceType.VXLAN`
 
 ## `Interface.STATE`
 
@@ -654,6 +660,58 @@ new one after that.
 Type: `string`
 
 The interface name which current VLAN is based on.
+
+# VXLAN
+Besides basic interface properties, each VXLAN interface state also contains
+a dictionary saved in key `VXLAN.CONFIG_SUBTREE`.
+
+Example:
+
+```python
+{
+    Interface.KEY: [{
+        Interface.NAME: 'eth1.101',
+        Interface.TYPE: VXLAN.TYPE,
+        Interface.STATE: InterfaceState.UP,
+        VXLAN.CONFIG_SUBTREE: {
+            VXLAN.ID: 101,
+            VXLAN.BASE_IFACE: 'eth1',
+            VXLAN.REMOTE: '192.0.2.2',
+            VXLAN.DESTINATION_PORT: 4790 # optional
+        }
+    }]
+}
+```
+
+## `VXLAN.ID`
+
+Type: `integer`
+
+The VXLAN ID.
+
+To change the VXLAN ID, please remove the interface first by setting the state
+to `InterfaceState.ABSENT` and then add a new one.
+
+
+## `VXLAN.BASE_IFACE`
+
+Type: `string`
+
+The name of the underlying interface for the VXLAN.
+
+## `VXLAN.REMOTE`
+
+Type: `string`
+
+The unicast destination IP address to use in outgoing packets when the destination link layer address is not known in the VXLAN device forwarding database, or the multicast IP address to join.
+
+## `VXLAN.DESTINATION_PORT`
+
+Type: `integer`
+
+The UDP destination port to communicate to the remote VXLAN tunnel endpoint.
+Default: 4789
+
 
 # Linux Bridge
 Besides basic interface properties, each Linux Bridge interface state also
