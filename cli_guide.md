@@ -31,7 +31,7 @@ the interface name as `nmstatectl show <interface_names>`. Please be advised,
 global config like DNS will be included.
 
 For multiple interface names, use comma to separate them. You can also use
-regular expression patterns for interface names:
+patterns for interface names:
 
 ```text
 *       matches everything
