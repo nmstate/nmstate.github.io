@@ -86,9 +86,9 @@ The checkpoint string will be the last line of `nmstatectl` output, example:
 The network state will be applied to OS but allow user to decide whether
 rollback or commit.
 
-To rollback: `nmstatectl rollback <checkpoing_path>`.
+To rollback: `nmstatectl rollback <checkpoint_path>`.
 
-To commit: `nmstatectl commit <checkpoing_path>`.
+To commit: `nmstatectl commit <checkpoint_path>`.
 
 The user must commit the changes within `TIMEOUT`(default is 60 seconds), or
 they will be automatically rolled back.
