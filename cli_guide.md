@@ -31,7 +31,7 @@ the interface name as `nmstatectl show <interface_names>`. Please be advised,
 global config like DNS will be included.
 
 For multiple interface names, use comma to separate them. You can also use
-regular expression patterns for interface names:
+patterns for interface names:
 
 ```text
 *       matches everything
@@ -51,18 +51,18 @@ nmstatectl show eth\*
 
 The network state may be changed interactively or by file:
 
-    * Interactive: `nmstatectl edit [<interface_names>]`
-      The `nmstatectl` will invoke the text editor defined by environment
-      variable `$EDITOR` for editing the network state in [YAML][yaml] format.
-      Once the text editor quit, `nmstatectl` will try to apply it using
-      `nmstatectl set`.
-      If there is any syntax error, you will be asked to edit again.
-      Multiple interfaces are supported, check [`nmstatctl show`][ncl_show]
-      for detail.
+* Interactive: `nmstatectl edit [<interface_names>]`
+  The `nmstatectl` will invoke the text editor defined by environment
+  variable `EDITOR` for editing the network state in [YAML][yaml] format.
+  Once the text editor quit, `nmstatectl` will try to apply it using
+  `nmstatectl set`.
+  If there is any syntax error, you will be asked to edit again.
+  Multiple interfaces are supported, check [`nmstatctl show`][ncl_show]
+  for detail.
 
-    * File-based: `nmstatectl set <state_file_path>`
-      `nmstatectl set` apply the network state from specifed file in YAML
-      or JSON format.
+* File-based: `nmstatectl set <state_file_path>`
+  `nmstatectl set` apply the network state from specifed file in YAML
+  or JSON format.
 
 By default, if the network state after state applied is not identical to the
 desired state, `nmstatectl` rollbacks to the state before `edit`/`set` command.
