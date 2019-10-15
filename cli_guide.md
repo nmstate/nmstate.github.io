@@ -19,7 +19,7 @@ to the [API document][api_doc].
 
 To query current network state, please use the following command:
 
-```
+```bash
 nmstatectl show [<interface_name>]
 ```
 
