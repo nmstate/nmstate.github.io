@@ -546,7 +546,6 @@ interfaces:
       stp: true
     port:
     - name: eth3
-      type: system
   ipv4:
     enabled: false
 ```
