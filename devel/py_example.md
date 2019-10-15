@@ -600,11 +600,9 @@ libnmstate.apply(
                 OVSBridge.PORT_SUBTREE: [
                     {
                         OVSBridge.PORT_NAME: 'eth1',
-                        OVSBridge.PORT_TYPE: OVSBridgePortType.SYSTEM,
                     },
                     {
                         OVSBridge.PORT_NAME: 'ovs0',
-                        OVSBridge.PORT_TYPE: OVSBridgePortType.INTERNAL,
                     }
                 ]
             }

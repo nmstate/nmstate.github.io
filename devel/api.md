@@ -859,11 +859,9 @@ Example:
             OVSBridge.PORT_SUBTREE: [
                 {
                     OVSBridge.PORT_NAME: "ovs0",
-                    OVSBridge.PORT_TYPE: OVSBridgePortType.INTERNAL
                 },
                 {
                     OVSBridge.PORT_NAME: "eth1",
-                    OVSBridge.PORT_TYPE: OVSBridgePortType.SYSTEM
                 }
             ]
         },
@@ -908,19 +906,6 @@ required in desired state.
 Type: `string`
 
 The OVS bridge port name.
-
-## `OVSBridge.PORT_TYPE`
-
-Type: `string`, `OVSBridgePortType.SYSTEM` or `OVSBridgePortType.INTERNAL`
-
-The OVS bridge port type:
- * `OVSBridgePortType.SYSTEM`
-   The interface attached to this OVS bridge.
-
- * `OVSBridgePortType.INTERNAL`
-   The interface represents the bridge itself in kernel.
-   There is a interface created with `InterfaceType.OVS_INTERFACE` type
-   for internal OVS interface allowing IPv4/IPv6 configurations.
 
 # Route
 

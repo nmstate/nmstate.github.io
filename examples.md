@@ -141,9 +141,7 @@ interfaces:
       stp: true
     port:
     - name: eth3
-      type: system
     - name: ovs0
-      type: internal
 ```
 
 ## Interfaces: dummy
