@@ -450,7 +450,7 @@ host network configuration. It is presented in a programmatic manner.
 - confirm()
 - persist()
 
-***Prepare a configuration in several iterations and apply changes
+**Prepare a configuration in several iterations and apply changes
 (to running):**
 - modify_candidate(config1, target=CANDIDATE)
 - modify_candidate(config2, target=CANDIDATE)
