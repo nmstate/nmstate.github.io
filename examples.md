@@ -113,15 +113,37 @@ interfaces:
   state: up
   bridge:
     options:
-      fail-mode: ''
-      mcast-snooping-enable: false
-      rstp: false
       stp: true
     port:
     - name: eth3
       type: system
+```
+
+The following example shows a bridge with a system (eth3) and an internal (ovs0)
+ports. The internal interface represents the bridge itself in kernel and it can
+be used for IPv4/IPv6 configuration.
+
+```yaml
+interfaces:
+- name: ovs0
+  type: ovs-interface
+  state: up
   ipv4:
-    enabled: false
+    enabled: true
+    address:
+      - ip: 192.0.2.1
+        prefix-length: 24
+- name: ovs-br0
+  type: ovs-bridge
+  state: up
+  bridge:
+    options:
+      stp: true
+    port:
+    - name: eth3
+      type: system
+    - name: ovs0
+      type: internal
 ```
 
 ## Interfaces: dummy
