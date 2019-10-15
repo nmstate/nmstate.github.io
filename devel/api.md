@@ -76,6 +76,10 @@
     * [`OVSBridge.PORT_SUBTREE`](#ovsbridgeport_subtree)
     * [`OVSBridge.PORT_NAME`](#ovsbridgeport_name)
     * [`OVSBridge.PORT_TYPE`](#ovsbridgeport_type)
+    * [`OVSBridge.LA_SUBTREE`](#ovsbridgeportla_subtree)
+    * [`OVSBridge.LA_MODE`](#ovsbridgeportla_mode)
+    * [`OVSBridge.LA_SLAVE_SUBTREE`](#ovsbridgeportla_slave_subtree)
+    * [`OVSBridge.LA_SLAVE_NAME`](#ovsbridgeportla_slave_name)
 * [Route](#route)
     * [`Route.TABLE_ID`](#routetable_id)
     * [`Route.DESTINATION`](#routedestination)
@@ -843,7 +847,6 @@ contains a dictionary saved in key `OVSBridge.CONFIG_SUBTREE`.
 Example:
 
 ```python
-
 {
     Interface.KEY: [
         Interface.NAME: "ovs-br0",
@@ -870,6 +873,42 @@ Example:
     ]
 }
 ```
+
+Ports can also use aggregate multiple interfaces.
+
+```python
+{
+    Interface.KEY: [
+        {
+            Interface.NAME: 'ovs0-br0',
+            Interface.STATE: InterfaceState.UP,
+            Interface.TYPE: OVSBridge.TYPE,
+            OVSBridge.CONFIG_SUBTREE: {
+                OVSBridge.PORT_SUBTREE: [
+                    {
+                        OVSBridge.LA_SUBTREE: {
+                            OVSBridge.LA_MODE: 'balance-slb',
+                            OVSBridge.LA_SLAVE_SUBTREE: [
+                                {
+                                    OVSBridge.LA_SLAVE_NAME: 'eth3'
+                                },
+                                {
+                                    OVSBridge.LA_SLAVE_NAME: 'eth4'
+                                }
+                            ]
+                        }
+                    },
+                    {
+                        OVSBridge.PORT_NAME: 'ovs0',
+                    }
+                ]
+            }
+        },
+    ]
+}
+```
+
+Link aggregation example:
 
 ## `OVSBridge.FAIL_MODE`
 
@@ -921,6 +960,29 @@ The OVS bridge port type:
    The interface represents the bridge itself in kernel.
    There is a interface created with `InterfaceType.OVS_INTERFACE` type
    for internal OVS interface allowing IPv4/IPv6 configurations.
+   
+## `OVSBridge.LA_SUBTREE`
+
+Type: `dictionary`
+
+TODO
+
+## `OVSBridge.LA_MODE`
+
+Type: `string`, `"balance-slb"`
+
+TODO: string, only slb-bond is supported
+
+## `OVSBridge.LA_SLAVE_SUBTREE`
+
+Type: `list`
+
+TODO: requires at least two items, link aggregation with a single slave is invalid.
+
+## `OVSBridge.LA_SLAVE_NAME`
+
+Type: `string`
+
 
 # Route
 

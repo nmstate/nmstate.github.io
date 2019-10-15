@@ -631,3 +631,46 @@ libnmstate.apply(
     ]
 })
 ```
+
+### Create Open vSwitch Bridge with Link Aggregation
+
+```python
+import libnmstate
+from libnmstate.schema import Interface
+from libnmstate.schema import InterfaceType
+from libnmstate.schema import InterfaceState
+from libnmstate.schema import OVSBridge
+from libnmstate.schema import OVSBridgePortType
+
+
+libnmstate.apply(
+{
+    Interface.KEY: [
+        {
+            Interface.NAME: 'ovs0-br0',
+            Interface.STATE: InterfaceState.UP,
+            Interface.TYPE: OVSBridge.TYPE,
+            OVSBridge.CONFIG_SUBTREE: {
+                OVSBridge.PORT_SUBTREE: [
+                    {
+                        OVSBridge.LA_SUBTREE: {
+                            OVSBridge.LA_MODE: 'balance-slb',
+                            OVSBridge.LA_SLAVE_SUBTREE: [
+                                {
+                                    OVSBridge.LA_SLAVE_NAME: 'eth3'
+                                },
+                                {
+                                    OVSBridge.LA_SLAVE_NAME: 'eth4'
+                                }
+                            ]
+                        }
+                    },
+                    {
+                        OVSBridge.PORT_NAME: 'ovs0',
+                    }
+                ]
+            }
+        },
+    ]
+})
+```

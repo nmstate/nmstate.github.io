@@ -139,6 +139,25 @@ interfaces:
     enabled: false
 ```
 
+You can also aggregate interfaces into an OVS SLB bonding.
+Following example bonds eth3 and eth4 interfaces together.
+```
+interfaces:
+- name: ovs-br0
+  type: ovs-bridge
+  state: up
+  bridge:
+    options:
+      stp: false
+    port:
+    - name: bond1
+      link-aggregation:
+        mode: balance-slb
+        slaves:
+        - name: eth3
+        - name: eth4
+```
+
 ## Interfaces: dummy
 
 ```
