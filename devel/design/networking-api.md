@@ -466,7 +466,7 @@ host network configuration. It is presented in a programmatic manner.
 The example includes 3 ethernet interfaces, two with static IPv4 and IPv6 and
 the 3rd with no IP and with the state set to down.
 
-```
+```yaml
 interfaces:
 - name: eth0
   type: ethernet
@@ -507,7 +507,7 @@ The example defines a bond with two slaves and an IPv4 static address.
 The bond mode is specified to be `balance-rr` and the `miimon` options is
 specified.
 
-```
+```yaml
 interfaces:
 - name: eth2
   type: ethernet
@@ -543,7 +543,7 @@ eth3 interface (as a port).
 
 The bridge has spanning tree (stp) enabled.
 
-```
+```yaml
 interfaces:
 - name: eth3
   type: ethernet

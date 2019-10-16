@@ -19,7 +19,7 @@ to see what it can do.
 ### Install
 In the first few development cycles, it is recomended to install nmstate from
 sources.
-```shell
+```bash
 git clone https://github.com/nmstate/nmstate.git
 cd nmstate
 pip install --user --upgrade .
@@ -39,7 +39,7 @@ In order to support specific capabilities, additional packages are required:
 - OpenVSwitch support through the NM provider requires `NetworkManager-ovs`.
 Installing it on Centos/RHEL, use:
 
-```shell
+```bash
 sudo yum install NetworkManager-ovs openvswitch
 sudo systemctl restart openvswitch
 sudo systemctl restart NetworkManager
@@ -51,7 +51,7 @@ The following command will dump the current networking state in json format:
 
 `nmstatectl show`
 
-```
+```json
 {
     "interfaces": [
         {
@@ -83,7 +83,7 @@ To dump the state in yaml format, use '--yaml' flag:
 
 `nmstatectl show --yaml`
 
-```
+```yaml
 interfaces:
 - description: Production Network
   ethernet:

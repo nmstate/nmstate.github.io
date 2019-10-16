@@ -8,7 +8,7 @@ its type.
 
 ### Setting the iface up:
 The `up` state also covers the creation of a virtual iface.
-```
+```yaml
 interfaces:
 - name: eth0
   type: ethernet
@@ -18,7 +18,7 @@ interfaces:
 ### Setting the iface down
 For virtual ifaces, it removes the iface. Nevertheless, the correct way to
 remove an interface is using the `absent` keyword.
-```
+```yaml
 interfaces:
 - name: foo0
   type: unknown
@@ -28,7 +28,7 @@ interfaces:
 ### Removing an iface:
 For a physical device (like an ethernet NIC), it just removes any
 configuration from the iface but does not (or can) physically delete it.
-```
+```yaml
 interfaces:
 - name: dummy0
   type: dummy
@@ -39,7 +39,7 @@ interfaces:
 The example includes 3 ethernet interfaces, two with static IPv4 and IPv6 and
 the 3rd with no IP and with the state set to down.
 
-```
+```yaml
 interfaces:
 - name: eth0
   type: ethernet
@@ -80,7 +80,7 @@ The example defines a bond with two slaves and an IPv4 static address.
 The bond mode is specified to be `balance-rr` and the `miimon` options is
 specified.
 
-```
+```yaml
 interfaces:
 - name: eth2
   type: ethernet
@@ -116,7 +116,7 @@ eth3 interface (as a port).
 
 The bridge has spanning tree (stp) enabled.
 
-```
+```yaml
 interfaces:
 - name: eth3
   type: ethernet
@@ -141,7 +141,7 @@ interfaces:
 
 ## Interfaces: dummy
 
-```
+```yaml
 interfaces:
 - name: ;vdsmdummy;
   type: unknown
