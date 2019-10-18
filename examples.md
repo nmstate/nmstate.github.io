@@ -82,16 +82,6 @@ specified.
 
 ```yaml
 interfaces:
-- name: eth2
-  type: ethernet
-  state: up
-  ipv4:
-    enabled: false
-- name: eth3
-  type: ethernet
-  state: up
-  ipv4:
-    enabled: false
 - name: bond99
   type: bond
   state: up
@@ -118,11 +108,6 @@ The bridge has spanning tree (stp) enabled.
 
 ```yaml
 interfaces:
-- name: eth3
-  type: ethernet
-  state: up
-  ipv4:
-    enabled: false
 - name: ovs-br0
   type: ovs-bridge
   state: up
@@ -168,9 +153,6 @@ interfaces:
 ```yaml
 ---
 interfaces:
-  - name: eth1
-    type: ethernet
-    state: up
   - name: linux-br0
     type: linux-bridge
     state: up
