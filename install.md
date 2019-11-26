@@ -22,41 +22,15 @@
 Nmstate is in Fedora and EPEL 7 testing, you may install it using below
 commands.
 
- * Fedora 28+
+ * Fedora 31+
 ```bash
 sudo dnf install nmstate
-```
-
- * RHEL 7 using EPEL7-testing.
-
-```bash
-sudo subscription-manager repos --enable \
-    "rhel-*-optional-rpms" --enable "rhel-*-extras-rpms"
-sudo yum install https://dl.fedoraproject.org/pub/epel/epel-release-latest-7.noarch.rpm
-sudo yum-config-manager --enable epel-testing
-sudo yum install nmstate
-```
-
- * Centos 7 using EPEL7-testing.
-
-```bash
-sudo yum install epel-release -y
-sudo yum-config-manager --enable epel-testing
-sudo yum install nmstate
-```
-
- * RHEL/Centos 7 using copr repo
-
-```bash
-sudo yum install yum-plugin-copr
-sudo yum copr enable nmstate/nmstate-el7
-sudo yum install nmstate
 ```
 
  * RHEL 8 using copr repo
 
 ```bash
-sudo dnf copr enable nmstate/nmstate-el8
+sudo dnf copr enable nmstate/nmstate-stable
 sudo dnf install nmstate
 ```
 
@@ -64,25 +38,10 @@ sudo dnf install nmstate
 We have copr repos which automatically build whenever a patch goes into
 git master branch. Only for develop use.
 
- * Fedora 28+
+ * Fedora 31+, CentOS/RHEL 8
 
 ```bash
 sudo dnf copr enable nmstate/nmstate-git-fedora
-sudo dnf install nmstate
-```
-
- * RHEL/Centos 7
-
-```bash
-sudo yum install yum-plugin-copr
-sudo yum copr enable  nmstate/nmstate-git-el7
-sudo yum install nmstate
-```
-
- * RHEL 8
-
-```bash
-sudo dnf copr enable  nmstate/nmstate-git-el8
 sudo dnf install nmstate
 ```
 
