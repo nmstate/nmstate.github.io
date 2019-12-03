@@ -46,6 +46,8 @@
     * [`Ethernet.AUTO_NEGOTIATION`](#ethernetauto_negotiation)
     * [`Ethernet.DUPLEX`](#ethernetduplex)
     * [`Ethernet.SPEED`](#ethernetspeed)
+    * [`Ethernet.SRIOV_SUBTREE`](#ethernetsriov)
+	* [`Ethernet.SRIOV.TOTAL_VFS`](#sriovtotal_vfs)
 * [VLAN](#vlan)
     * [`VLAN.ID`](#vlanid)
     * [`VLAN.BASE_IFACE`](#vlanbase_iface)
@@ -590,7 +592,7 @@ Example:
 ```python
 {
     Interface.KEY: [
-        Interface.NAME: "eth1",
+	Interface.NAME: "eth1",
         Interface.TYPE: InterfaceType.ETHERNET,
         Interface.STATE: InterfaceState.UP
         Ethernet.CONFIG_SUBTREE: {
@@ -624,6 +626,38 @@ Ethernet duplex mode.
 Type: `integer`
 
 Ethernet speed in the unit of Mbps.
+
+## `Ethernet.SRIOV_SUBTREE`
+
+If the ethernet interface supports SR-IOV, the `Ethernet.SRIOV_SUBTREE`
+dictionary allows to configure it.  Nmstate supports the following options:
+
+### `Ethernet.SRIOV.TOTAL_VFS`
+
+Type: `integer`
+
+Total number of Virtual Functions per Physical Function. Changing the total VFs
+will also change the interfaces that are visible in the Nmstate state. Reducing
+the total VFs without setting `Interface.STATE` to `InterfaceState.ABSENT` for
+the corresponding interfaces might lead to an undefined system state or error.
+
+Example:
+```python
+{
+    Interface.KEY: [
+	{
+		Interface.NAME: "eth1",
+		Interface.TYPE: InterfaceType.ETHERNET,
+		Interface.STATE: InterfaceState.UP
+		Ethernet.CONFIG_SUBTREE: {
+			Ethernet.SRIOV_SUBTREE: {
+				Ethernet.SRIOV.TOTAL_VFS: 3
+			}
+		}
+	}
+    ]
+}
+```
 
 # VLAN
 Besides basic interface properties, each VLAN interface state also contains
