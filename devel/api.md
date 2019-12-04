@@ -57,32 +57,47 @@
     * [`VXLAN.REMOTE`](#vxlanremote)
     * [`VXLAN.DESTINATION_PORT`](#vxlandestination_port)
 * [Linux Bridge](#linux-bridge)
-    * [`LinuxBridge.GROUP_FORWARD_MASK`](#linuxbridgegroup_forward_mask)
-    * [`LinuxBridge.MAC_AGEING_TIME`](#linuxbridgemac_ageing_time)
-    * [`LinuxBridge.MULTICAST_SNOOPING`](#linuxbridgemulticast_snooping)
-    * [`LinuxBridge.STP_ENABLED`](#linuxbridgestp_enabled)
-    * [`LinuxBridge.STP_FORWARD_DELAY`](#linuxbridgestp_forward_delay)
-    * [`LinuxBridge.STP_HELLO_TIME`](#linuxbridgestp_hello_time)
-    * [`LinuxBridge.STP_MAX_AGE`](#linuxbridgestp_max_age)
-    * [`LinuxBridge.STP_PRIORITY`](#linuxbridgestp_priority)
+    * [`LinuxBridge.OPTIONS_SUBTREE`](#linuxbridgeoptions_subtree)
+        * [`LinuxBridge.Options.GROUP_FORWARD_MASK`](#linuxbridgeoptionsgroup_forward_mask)
+        * [`LinuxBridge.Options.MAC_AGEING_TIME`](#linuxbridgeoptionsmac_ageing_time)
+        * [`LinuxBridge.Options.MULTICAST_SNOOPING`](#linuxbridgeoptionsmulticast_snooping)
+    * [`LinuxBridge.STP_SUBTREE`](#linuxbridgestp_subtree)
+        * [`LinuxBridge.STP.ENABLED`](#linuxbridgestp_enabled)
+        * [`LinuxBridge.STP.FORWARD_DELAY`](#linuxbridgestp_forward_delay)
+        * [`LinuxBridge.STP.HELLO_TIME`](#linuxbridgestp_hello_time)
+        * [`LinuxBridge.STP.MAX_AGE`](#linuxbridgestp_max_age)
+        * [`LinuxBridge.STP.PRIORITY`](#linuxbridgestp_priority)
     * [`LinuxBridge.PORT_SUBTREE`](#linuxbridgeport_subtree)
-    * [`LinuxBridge.PORT_SUBTREE`](#linuxbridgeport_subtree-1)
-    * [`LinuxBridge.PORT_NAME`](#linuxbridgeport_name)
-    * [`LinuxBridge.PORT_STP_PRIORITY`](#linuxbridgeport_stp_priority)
-    * [`LinuxBridge.PORT_STP_HAIRPIN_MODE`](#linuxbridgeport_stp_hairpin_mode)
-    * [`LinuxBridge.PORT_STP_PATH_COST`](#linuxbridgeport_stp_path_cost)
+        * [`LinuxBridge.Port.NAME`](#linuxbridgeport_name)
+        * [`LinuxBridge.Port.STP_PRIORITY`](#linuxbridgeport_stp_priority)
+        * [`LinuxBridge.Port.STP_HAIRPIN_MODE`](#linuxbridgeport_stp_hairpin_mode)
+        * [`LinuxBridge.Port.STP_PATH_COST`](#linuxbridgeport_stp_path_cost)
+        * [`LinuxBridge.Port.VLAN_SUBTREE`](#linuxbridgeport_vlan_subtree)
+            * [`LinuxBridge.Port.VLAN.ENABLE_NATIVE`](#linuxbridgevlan_enable_native)
+            * [`LinuxBridge.Port.VLAN.MODE`](#linuxbridgevlan_mode)
+            * [`LinuxBridge.Port.VLAN.TAG`](#linuxbridgevlan_tag)
+            * [`LinuxBridge.Port.VLAN.TRUNK_TAGS`](#linuxbridgevlan_trunk_tags)
 * [Interface -- Bond](#interface----bond)
     * [`Bond.MODE`](#bondmode)
     * [`Bond.OPTIONS`](#bondoptions)
     * [`Bond.SLAVES`](#bondslaves)
 * [Interface -- Open vSwitch(OVS) Bridge](#interface----open-vswitchovs-bridge)
-    * [`OVSBridge.FAIL_MODE`](#ovsbridgefail_mode)
-    * [`OVSBridge.MCAST_SNOOPING_ENABLE`](#ovsbridgemcast_snooping_enable)
-    * [`OVSBridge.RSTP`](#ovsbridgerstp)
-    * [`OVSBridge.STP`](#ovsbridgestp)
+    * [`OVSBridge.OPTIONS_SUBTREE`](#ovsbridgeoptions_subtree)
+        * [`OVSBridge.Options.FAIL_MODE`](#ovsbridgefail_mode)
+        * [`OVSBridge.Options.MCAST_SNOOPING_ENABLE`](#ovsbridgemcast_snooping_enable)
+        * [`OVSBridge.Options.RSTP`](#ovsbridgerstp)
+        * [`OVSBridge.Options.STP`](#ovsbridgestp)
     * [`OVSBridge.PORT_SUBTREE`](#ovsbridgeport_subtree)
-    * [`OVSBridge.PORT_NAME`](#ovsbridgeport_name)
-    * [`OVSBridge.PORT_TYPE`](#ovsbridgeport_type)
+        * [`OVSBridge.Port.NAME`](#ovsbridgeport_name)
+        * [`OVSBridge.Port.VLAN_SUBTREE`](#ovsbridgeportvlan_subtree)
+            * [`OVSBridge.Port.Vlan.TRUNK_TAGS`](#ovsbridgevlan_trunk_tags)
+            * [`OVSBridge.Port.Vlan.TAG`](#ovsbridgevlan_tag)
+            * [`OVSBridge.Port.Vlan.ENABLE_NATIVE`](#ovsbridgevlan_enable_native)
+            * [`OVSBridge.Port.Vlan.MODE`](#ovsbridgevlan_mode)
+        * [`OVSBridge.Port.LINK_AGGREGATION_SUBTREE`](#ovsbridgeport_link_aggregation)
+            * [`OVSBridge.Port.LinkAggregation.MODE`](#ovsbridgelink_mode)
+            * [`OVSBridge.Port.LinkAggregation.SLAVES_SUBTREE`](#ovsbridgelink_slave_subtree)
+	        * [`OVSBridge.Port.LinkAggregation.Slave.NAME`](#ovsbridgelink_slave_name)
 * [Route](#route)
     * [`Route.TABLE_ID`](#routetable_id)
     * [`Route.DESTINATION`](#routedestination)
@@ -755,120 +770,112 @@ Example:
 
 ```python
 {
-    Interface.KEY: [
+    Interface.KEY: [{
         Interface.NAME: "linux-br0",
         Interface.TYPE: LinuxBridge.TYPE,
         Interface.STATE: InterfaceState.UP
         LinuxBridge.CONFIG_SUBTREE: {
             LinuxBridge.OPTIONS_SUBTREE: {
-                LinuxBridge.GROUP_FORWARD_MASK: 0,
-                LinuxBridge.MAC_AGEING_TIME: 300,
-                LinuxBridge.MULTICAST_SNOOPING: true,
+                LinuxBridge.Options.GROUP_FORWARD_MASK: 0,
+                LinuxBridge.Options.MAC_AGEING_TIME: 300,
+                LinuxBridge.Options.MULTICAST_SNOOPING: true,
                 LinuxBridge.STP_SUBTREE: {
-                    LinuxBridge.STP_ENABLED: true,
-                    LinuxBridge.STP_FORWARD_DELAY: 15,
-                    LinuxBridge.STP_HELLO_TIME: 2,
-                    LinuxBridge.STP_MAX_AGE: 20,
-                    LinuxBridge.STP_PRIORITY: 32768
+                    LinuxBridge.STP.ENABLED: true,
+                    LinuxBridge.STP.FORWARD_DELAY: 15,
+                    LinuxBridge.STP.HELLO_TIME: 2,
+                    LinuxBridge.STP.MAX_AGE: 20,
+                    LinuxBridge.STP.PRIORITY: 32768
                 }
             },
             PORT_SUBTREE: [
                 {
-                    LinuxBridge.PORT_NAME: "eth1",
-                    LinuxBridge.PORT_STP_PRIORITY: 32,
-                    LinuxBridge.PORT_STP_HAIRPIN_MODE: false,
-                    LinuxBridge.PORT_STP_PATH_COST: 100
+                    LinuxBridge.Port.NAME: "eth1",
+                    LinuxBridge.Port.STP_PRIORITY: 32,
+                    LinuxBridge.Port.STP_HAIRPIN_MODE: false,
+                    LinuxBridge.Port.STP_PATH_COST: 100
                 }
             ]
         }
-    ]
+    }]
 }
 ```
 
-## `LinuxBridge.GROUP_FORWARD_MASK`
+## `LinuxBridge.Options.GROUP_FORWARD_MASK`
 
 Type: `integer`
 
 The mask of group address to forward.
 
-## `LinuxBridge.MAC_AGEING_TIME`
+## `LinuxBridge.Options.MAC_AGEING_TIME`
 
 Type: `integer`
 
 The Spanning Tree Protocol (STP) maximum message age, in seconds.
 
-## `LinuxBridge.MULTICAST_SNOOPING`
+## `LinuxBridge.Options.MULTICAST_SNOOPING`
 
 Type: `bool`
 
 Whether IGMP snooping is enabled for this bridge.
 
-## `LinuxBridge.STP_ENABLED`
+## `LinuxBridge.STP.ENABLED`
 
 Type: `bool`
 
 Whether Spanning Tree Protocol (STP) is enabled for this bridge.
 
-## `LinuxBridge.STP_FORWARD_DELAY`
+## `LinuxBridge.STP.FORWARD_DELAY`
 
 Type: `integer`
 
 The Spanning Tree Protocol (STP) forwarding delay, in seconds.
 
-## `LinuxBridge.STP_HELLO_TIME`
+## `LinuxBridge.STP.HELLO_TIME`
 
 Type: `integer`
 
 The Spanning Tree Protocol (STP) hello time, in seconds.
 
-## `LinuxBridge.STP_MAX_AGE`
+## `LinuxBridge.STP.MAX_AGE`
 
 Type: `integer`
 
 The Spanning Tree Protocol (STP) maximum message age, in seconds.
 
-## `LinuxBridge.STP_PRIORITY`
+## `LinuxBridge.STP.PRIORITY`
 
 Type: `integer`
 
 Sets the Spanning Tree Protocol (STP) priority for this bridge. Lower values
 are "better"; the lowest priority bridge will be elected the root bridge.
 
-## `LinuxBridge.PORT_SUBTREE`
+## `LinuxBridge.Port.SUBTREE`
 
 Type: List of dictionary.
 
 This property does not support partial editing, the full list of ports is
 required in desired state.
 
-
-## `LinuxBridge.PORT_SUBTREE`
-
-Type: List of dictionary
-
-This property does not merge with current network state, the full list is
-required.
-
-## `LinuxBridge.PORT_NAME`
+## `LinuxBridge.Port.NAME`
 
 Type: `string`
 
 The interface name of the linux bridge port.
 
-## `LinuxBridge.PORT_STP_PRIORITY`
+## `LinuxBridge.Port.STP_PRIORITY`
 
 Type: `integer`
 
 The Spanning Tree Protocol (STP) priority of this bridge port. Lower values
 are "better".
 
-## `LinuxBridge.PORT_STP_HAIRPIN_MODE`
+## `LinuxBridge.Port.STP_HAIRPIN_MODE`
 
 Type: `bool`
 
 Whether [hairpin mode][hairpin] is enabled or not for the port.
 
-## `LinuxBridge.PORT_STP_PATH_COST`
+## `LinuxBridge.Port.STP_PATH_COST`
 
 Type: `integer`
 
@@ -937,7 +944,7 @@ Example:
 ```python
 
 {
-    Interface.KEY: [
+    Interface.KEY: [{
         Interface.NAME: "ovs-br0",
         Interface.TYPE: InterfaceType.BOND,
         Interface.STATE: InterfaceState.UP
@@ -957,29 +964,29 @@ Example:
                 }
             ]
         },
-    ]
+    }]
 }
 ```
 
-## `OVSBridge.FAIL_MODE`
+## `OVSBridge.Options.FAIL_MODE`
 
 Type: `string`, 'secure' or 'standalone' or empty.
 
 The bridge failure mode.
 
-## `OVSBridge.MCAST_SNOOPING_ENABLE`
+## `OVSBridge.Options.MCAST_SNOOPING_ENABLE`
 
 Type: `bool`
 
 Enable or disable multicast snooping.
 
-## `OVSBridge.RSTP`
+## `OVSBridge.Options.RSTP`
 
 Type: `bool`
 
 Enable or disable RSTP.
 
-## `OVSBridge.STP`
+## `OVSBridge.Options.STP`
 
 Type: `bool`
 
@@ -993,7 +1000,7 @@ This property does not support partial editing, the full list of ports is
 required in desired state.
 
 
-## `OVSBridge.PORT_NAME`
+## `OVSBridge.Port.NAME`
 
 Type: `string`
 
