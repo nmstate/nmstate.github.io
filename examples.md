@@ -116,7 +116,6 @@ interfaces:
       stp: true
     port:
     - name: eth3
-      type: system
 ```
 
 The following example shows a bridge with a system (eth3) and an internal (ovs0)
