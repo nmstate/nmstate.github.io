@@ -154,7 +154,7 @@ interfaces:
     enabled: false
 ```
 
-## Interface: VLAN
+## Interfaces: VLAN
 
 ```yaml
 ---
@@ -165,6 +165,20 @@ interfaces:
     vlan:
       base-iface: eth1
       id: 101
+```
+
+## Interfaces: VXLAN
+
+```yaml
+---
+interfaces:
+  - name: eth1.101
+    type: vxlan
+    state: up
+    vxlan:
+      base-iface: eth1
+      id: 101
+      remote: 192.0.2.2
 ```
 
 ## Interface: Linux Bridge

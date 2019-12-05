@@ -115,6 +115,7 @@ Want to see nmstate in action? Check out the [demos](./demos.md).
 - [ethernet](./examples.md#interfaces-ethernet)
 - [bond](./examples.md#interfaces-bond)
 - [Vlan](./examples.md#interfaces-vlan)
+- [Vxlan](./examples.md#interfaces-vxlan)
 - [Linux bridge](./examples.md#interface-linux-bridge)
 - [ovs-bridge](./examples.md#interfaces-ovs-bridge)
 - [dummy](./examples.md#interfaces-dummy)
