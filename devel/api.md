@@ -47,7 +47,14 @@
     * [`Ethernet.DUPLEX`](#ethernetduplex)
     * [`Ethernet.SPEED`](#ethernetspeed)
     * [`Ethernet.SRIOV_SUBTREE`](#ethernetsriov)
-	* [`Ethernet.SRIOV.TOTAL_VFS`](#sriovtotal_vfs)
+        * [`Ethernet.SRIOV.TOTAL_VFS`](#sriovtotal_vfs)
+        * [`Ethernet.SRIOV.VFS_SUBTREE`](#sriovvfs)
+            * [`Ethernet.SRIOV.VFS.ID`](#sriovvfsid)
+            * [`Ethernet.SRIOV.VFS.MAC_ADDRESS`](#sriovvfsmac)
+            * [`Ethernet.SRIOV.VFS.SPOOF_CHECK`](#sriovvfsspoof)
+            * [`Ethernet.SRIOV.VFS.TRUST`](#sriovvfstrust)
+            * [`Ethernet.SRIOV.VFS.MIN_TX_RATE`](#sriovvfsmintx)
+            * [`Ethernet.SRIOV.VFS.MAX_TX_RATE`](#sriovvfsmaxtx)
 * [VLAN](#vlan)
     * [`VLAN.ID`](#vlanid)
     * [`VLAN.BASE_IFACE`](#vlanbase_iface)
@@ -656,6 +663,46 @@ will also change the interfaces that are visible in the Nmstate state. Reducing
 the total VFs without setting `Interface.STATE` to `InterfaceState.ABSENT` for
 the corresponding interfaces might lead to an undefined system state or error.
 
+### `Ethernet.SRIOV.VFS_SUBTREE`
+
+If `Ethernet.SRIOV.TOTAL_VFS` is 1 or greater, the `Ethernet.SRIOV.VFS_SUBTREE`
+dictionary list allows to configure the VFS special options. Nmstate supports the
+following VF options:
+
+#### `Ethernet.SRIOV.VFS.ID`
+
+Type: `integer`
+
+ID of the VF to configure.
+
+#### `Ethernet.SRIOV.VFS.MAC_ADDRESS`
+
+Type: `string` in the format of `11:22:33:44:55:66`. Case insensitive.
+
+#### `Ethernet.SRIOV.VFS.SPOOF_CHECK`
+
+Type: `boolean`
+
+Enable or disable spoof checking on the VF.
+
+#### `Ethernet.SRIOV.VFS.TRUST`
+
+Type: `boolean`
+
+Enable or disable trust option on the VF.
+
+#### `Ethernet.SRIOV.VFS.MIN_TX_RATE`
+
+Type: `integer`
+
+Set the minimum TX rate on the VF. This value must be greater or equal than 0.
+
+#### `Ethernet.SRIOV.VFS.MAX_TX_RATE`
+
+Type: `integer`
+
+Set the maximum TX rate on the VF. This value must be greater or equal than 0.
+
 Example:
 ```python
 {
@@ -667,6 +714,19 @@ Example:
 		Ethernet.CONFIG_SUBTREE: {
 			Ethernet.SRIOV_SUBTREE: {
 				Ethernet.SRIOV.TOTAL_VFS: 3
+				Ethernet.SRIOV.VFS_SUBTREE: [
+					{
+						Ethernet.SRIOV.VFS.ID: 0,
+						Ethernet.SRIOV.VFS.MAC_ADDRESS: "11:22:33:44:55:66",
+						Ethernet.SRIOV.VFS.TRUST: True,
+					},
+					{
+						Ethernet.SRIOV.VFS.ID: 1,
+						Ethernet.SRIOV.VFS.SPOOF_CHECK: False,
+						Ethernet.SRIOV.VFS.MAX_TX_RATE: 1000,
+						Ethernet.SRIOV.VFS.MIN_TX_RATE: 100,
+					}
+				]
 			}
 		}
 	}
