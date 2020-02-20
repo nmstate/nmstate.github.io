@@ -119,6 +119,7 @@ Want to see nmstate in action? Check out the [demos](./demos.md).
 - [Linux bridge](./examples.md#interface-linux-bridge)
 - [ovs-bridge](./examples.md#interfaces-ovs-bridge)
 - [dummy](./examples.md#interfaces-dummy)
+- [team](./examples.md#interfaces-team)
 
 ## Stack support:
 - [IPv4/IPv6 addresses (static)](./examples.md#interfaces-ethernet)

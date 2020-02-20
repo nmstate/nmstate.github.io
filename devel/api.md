@@ -77,6 +77,13 @@
             * [`LinuxBridge.Port.VLAN.MODE`](#linuxbridgevlan_mode)
             * [`LinuxBridge.Port.VLAN.TAG`](#linuxbridgevlan_tag)
             * [`LinuxBridge.Port.VLAN.TRUNK_TAGS`](#linuxbridgevlan_trunk_tags)
+* [Team](#team)
+    * [`Team.CONFIG_SUBTREE`](#teamconfig_subtree)
+    * [`Team.PORT_SUBTREE`](#teamport_subtree)
+        * [`Team.Port.NAME`](#teamportname)
+    * [`Team.RUNNER_SUBTREE`](#teamrunner_subtree)
+        * [Team.Runner.NAME](#teamrunnername)
+        * [Team.Runner.RunnerMode.LOAD_BALANCE](#teamrunnerrunnermodeload_balance)
 * [Interface -- Bond](#interface----bond)
     * [`Bond.MODE`](#bondmode)
     * [`Bond.OPTIONS`](#bondoptions)
@@ -298,6 +305,7 @@ Possible values:
  * `InterfaceType.OVS_INTERFACE`
  * `InterfaceType.VLAN`
  * `InterfaceType.VXLAN`
+ * `InterfaceType.TEAM`
 
 ## `Interface.STATE`
 
@@ -880,6 +888,56 @@ Whether [hairpin mode][hairpin] is enabled or not for the port.
 Type: `integer`
 
 The Spanning Tree Protocol (STP) port cost for destinations via this port.
+
+# Team
+
+Besides basic interface properties, each Team interface state also contains a
+dictionary saved in key `Team.CONFIG_SUBTREE`. In addition, this dictionary
+contains a list of dictionaries saved in key `Team.PORT_SUBTREE` and a
+dictionary saved in key `Team.RUNNER_SUBTREE`.
+
+Example:
+
+```python
+{
+    Interface.KEY : [
+        Interface.NAME: "team0",
+        Interface.TYPE: InterfaceType.TEAM,
+        Interface.STATE: InterfaceState.UP,
+        Team.CONFIG_SUBTREE: {
+            Team.PORT_SUBTREE: [
+                {
+                    Team.Port.NAME: "eth1"
+                },
+                {
+                    Team.Port.NAME: "eth2"
+                }
+            ],
+            Team.RUNNER_SUBTREE: {
+                Team.Runner.NAME: Team.Runner.RunnerMode.LOAD_BALANCE
+            }
+        }
+    ]
+}
+```
+
+These values are based on the teamd JSON API. For further information please
+refer to [teamd manual page](https://www.mankier.com/5/teamd.conf)
+
+## `Team.Port.NAME`
+
+Type: `string`
+
+The interface name of the port.
+
+## `Team.Runner.NAME`
+
+Type: `string`
+
+The mode in which the interface is operating. Currently we are supporting the
+following values:
+
+ * `Team.Runner.RunnedMode.LOAD_BALANCE`
 
 # Interface -- Bond
 
