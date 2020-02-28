@@ -255,7 +255,7 @@ Each interface has these basic properties represented as a dictionary.
     Interface.STATE: InterfaceState.UP,
     Interface.TYPE: InterfaceType.ETHERNET,
     Interface.IPV4: {
-        InterfaceIPv4.ENABLED: True
+        InterfaceIPv4.ENABLED: True,
         InterfaceIPv4.DHCP: False,
         InterfaceIPv4.ADDRESS: [
             {
@@ -265,7 +265,7 @@ Each interface has these basic properties represented as a dictionary.
         ],
     },
     Interface.IPV6: {
-        InterfaceIPv6.ENABLED: True
+        InterfaceIPv6.ENABLED: True,
         InterfaceIPv6.DHCP: True,
         InterfaceIPv6.AUTOCONF: True,
         InterfaceIPv6.AUTO_DNS: True,
@@ -355,8 +355,8 @@ Example:
 ```python
 {
     Interface.IPV4: {
-        InterfaceIPv4.ENABLED: True
-        InterfaceIPv4.DHCP: TRUE,
+        InterfaceIPv4.ENABLED: True,
+        InterfaceIPv4.DHCP: True,
         InterfaceIPv4.ADDRESS: [],
         InterfaceIPv4.AUTO_DNS: True,
         InterfaceIPv4.AUTO_GATEWAY: True,
@@ -491,8 +491,8 @@ Example:
 ```python
 {
     Interface.IPV6: {
-        InterfaceIPv6.ENABLED: True
-        InterfaceIPv6.DHCP: TRUE,
+        InterfaceIPv6.ENABLED: True,
+        InterfaceIPv6.DHCP: True,
         InterfaceIPv6.ADDRESS: [],
         InterfaceIPv6.AUTO_DNS: True,
         InterfaceIPv6.AUTO_GATEWAY: True,
@@ -607,13 +607,15 @@ Example:
 ```python
 {
     Interface.KEY: [
-	Interface.NAME: "eth1",
-        Interface.TYPE: InterfaceType.ETHERNET,
-        Interface.STATE: InterfaceState.UP
-        Ethernet.CONFIG_SUBTREE: {
-            Ethernet.AUTO_NEGOTIATION: True,
-            Ethernet.DUPLEX: Ethernet.FULL_DUPLEX,
-            Ethernet.SPEED: 1000
+        {
+            Interface.NAME: "eth1",
+            Interface.TYPE: InterfaceType.ETHERNET,
+            Interface.STATE: InterfaceState.UP,
+            Ethernet.CONFIG_SUBTREE: {
+                Ethernet.AUTO_NEGOTIATION: True,
+                Ethernet.DUPLEX: Ethernet.FULL_DUPLEX,
+                Ethernet.SPEED: 1000
+            }
         }
     ]
 }
@@ -663,7 +665,7 @@ Example:
 	{
 		Interface.NAME: "eth1",
 		Interface.TYPE: InterfaceType.ETHERNET,
-		Interface.STATE: InterfaceState.UP
+		Interface.STATE: InterfaceState.UP,
 		Ethernet.CONFIG_SUBTREE: {
 			Ethernet.SRIOV_SUBTREE: {
 				Ethernet.SRIOV.TOTAL_VFS: 3
@@ -683,12 +685,14 @@ Example:
 ```python
 {
     Interface.KEY: [
-        Interface.NAME: "eth1.101",
-        Interface.TYPE: VLAN.TYPE,
-        Interface.STATE: InterfaceState.UP
-        VLAN.CONFIG_SUBTREE: {
-            VLAN.ID: 101,
-            VLAN.BASE_IFACE: 'eth1'
+        {
+            Interface.NAME: "eth1.101",
+            Interface.TYPE: VLAN.TYPE,
+            Interface.STATE: InterfaceState.UP,
+            VLAN.CONFIG_SUBTREE: {
+                VLAN.ID: 101,
+                VLAN.BASE_IFACE: 'eth1'
+            }
         }
     ]
 }
@@ -773,25 +777,25 @@ Example:
     Interface.KEY: [{
         Interface.NAME: "linux-br0",
         Interface.TYPE: LinuxBridge.TYPE,
-        Interface.STATE: InterfaceState.UP
+        Interface.STATE: InterfaceState.UP,
         LinuxBridge.CONFIG_SUBTREE: {
             LinuxBridge.OPTIONS_SUBTREE: {
                 LinuxBridge.Options.GROUP_FORWARD_MASK: 0,
                 LinuxBridge.Options.MAC_AGEING_TIME: 300,
-                LinuxBridge.Options.MULTICAST_SNOOPING: true,
+                LinuxBridge.Options.MULTICAST_SNOOPING: True,
                 LinuxBridge.STP_SUBTREE: {
-                    LinuxBridge.STP.ENABLED: true,
+                    LinuxBridge.STP.ENABLED: True,
                     LinuxBridge.STP.FORWARD_DELAY: 15,
                     LinuxBridge.STP.HELLO_TIME: 2,
                     LinuxBridge.STP.MAX_AGE: 20,
                     LinuxBridge.STP.PRIORITY: 32768
                 }
             },
-            PORT_SUBTREE: [
+            LinuxBridge.PORT_SUBTREE: [
                 {
                     LinuxBridge.Port.NAME: "eth1",
                     LinuxBridge.Port.STP_PRIORITY: 32,
-                    LinuxBridge.Port.STP_HAIRPIN_MODE: false,
+                    LinuxBridge.Port.STP_HAIRPIN_MODE: False,
                     LinuxBridge.Port.STP_PATH_COST: 100
                 }
             ]
@@ -892,14 +896,16 @@ Example:
 
 {
     Interface.KEY: [
-        Interface.NAME: "bond99",
-        Interface.TYPE: InterfaceType.BOND,
-        Interface.STATE: InterfaceState.UP
-        Bond.CONFIG_SUBTREE: {
-            Bond.MODE: "balance-rr",
-            Bond.OPTIONS: {},
-            Bond.SLAVES: ["eth1"]
-        },
+        {
+            Interface.NAME: "bond99",
+            Interface.TYPE: InterfaceType.BOND,
+            Interface.STATE: InterfaceState.UP,
+            Bond.CONFIG_SUBTREE: {
+                Bond.MODE: "balance-rr",
+                Bond.OPTIONS_SUBTREE: {},
+                Bond.SLAVES: ["eth1"]
+            },
+        }
     ]
 }
 ```
@@ -947,13 +953,13 @@ Example:
     Interface.KEY: [{
         Interface.NAME: "ovs-br0",
         Interface.TYPE: InterfaceType.BOND,
-        Interface.STATE: InterfaceState.UP
+        Interface.STATE: InterfaceState.UP,
         OVSBridge.CONFIG_SUBTREE: {
             OVSBridge.OPTIONS_SUBTREE: {
                 OVSBridge.FAIL_MODE: "",
-                OVSBridge.MCAST_SNOOPING_ENABLE: false,
-                OVSBridge.RSTP: false,
-                OVSBridge.STP: true
+                OVSBridge.MCAST_SNOOPING_ENABLE: False,
+                OVSBridge.RSTP: False,
+                OVSBridge.STP: True
             },
             OVSBridge.PORT_SUBTREE: [
                 {
