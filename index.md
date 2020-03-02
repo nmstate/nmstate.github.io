@@ -47,9 +47,31 @@ sudo systemctl restart NetworkManager
 
 ### View state
 
-The following command will dump the current networking state in json format:
+The following command will dump the current networking state in yaml format:
 
 `nmstatectl show`
+
+```yaml
+interfaces:
+- description: Production Network
+  ethernet:
+    auto-negotiation: true
+    duplex: full
+    speed: 1000
+  ipv4:
+    address:
+    - ip: 192.0.2.142
+      prefix-length: 24
+    enabled: true
+  mtu: 1500
+  name: eth3
+  state: up
+  type: ethernet
+```
+
+To dump the state in json format, use '--json' flag:
+
+`nmstatectl show --json`
 
 ```json
 {
@@ -79,34 +101,12 @@ The following command will dump the current networking state in json format:
 }
 ```
 
-To dump the state in yaml format, use '--yaml' flag:
-
-`nmstatectl show --yaml`
-
-```yaml
-interfaces:
-- description: Production Network
-  ethernet:
-    auto-negotiation: true
-    duplex: full
-    speed: 1000
-  ipv4:
-    address:
-    - ip: 192.0.2.142
-      prefix-length: 24
-    enabled: true
-  mtu: 1500
-  name: eth3
-  state: up
-  type: ethernet
-```
-
 ### Change state
 
-- Use `nmstatectl show > desired_state.json` to dump the current state to a
+- Use `nmstatectl show > desired_state.yaml` to dump the current state to a
 file.
 - Edit the desired state with the new values.
-- Run the set command: `nmstatectl set desired_state.json`
+- Run the set command: `nmstatectl set desired_state.yaml`
 
 ## Demos
 Want to see nmstate in action? Check out the [demos](./demos.md).
