@@ -60,6 +60,7 @@ git clone https://github.com/nmstate/nmstate.git
 cd nmstate
 pip install --user --upgrade .
 ```
+Note: The latest versions work on Fedora 32 and CentOS 8.2
 
 ## setup.py
 

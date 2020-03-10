@@ -24,6 +24,7 @@ git clone https://github.com/nmstate/nmstate.git
 cd nmstate
 pip install --user --upgrade .
 ```
+The latest version works on Fedora 32 and CentOS 8.2. For systems below that use the [version 0.1](https://github.com/nmstate/nmstate/tree/nmstate-0.1) branch  
 
 Note: In order to report current state, installing nmstate as a non-root user
 should be enough. For change support, install the package as root.
