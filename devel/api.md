@@ -46,8 +46,8 @@
     * [`Ethernet.AUTO_NEGOTIATION`](#ethernetauto_negotiation)
     * [`Ethernet.DUPLEX`](#ethernetduplex)
     * [`Ethernet.SPEED`](#ethernetspeed)
-    * [`Ethernet.SRIOV_SUBTREE`](#ethernetsriov)
-	* [`Ethernet.SRIOV.TOTAL_VFS`](#sriovtotal_vfs)
+    * [`Ethernet.SRIOV_SUBTREE`](#ethernetsriov_subtree)
+        * [`Ethernet.SRIOV.TOTAL_VFS`](#ethernetsriovtotal_vfs)
 * [VLAN](#vlan)
     * [`VLAN.ID`](#vlanid)
     * [`VLAN.BASE_IFACE`](#vlanbase_iface)
@@ -57,47 +57,30 @@
     * [`VXLAN.REMOTE`](#vxlanremote)
     * [`VXLAN.DESTINATION_PORT`](#vxlandestination_port)
 * [Linux Bridge](#linux-bridge)
-    * [`LinuxBridge.OPTIONS_SUBTREE`](#linuxbridgeoptions_subtree)
-        * [`LinuxBridge.Options.GROUP_FORWARD_MASK`](#linuxbridgeoptionsgroup_forward_mask)
-        * [`LinuxBridge.Options.MAC_AGEING_TIME`](#linuxbridgeoptionsmac_ageing_time)
-        * [`LinuxBridge.Options.MULTICAST_SNOOPING`](#linuxbridgeoptionsmulticast_snooping)
-    * [`LinuxBridge.STP_SUBTREE`](#linuxbridgestp_subtree)
-        * [`LinuxBridge.STP.ENABLED`](#linuxbridgestp_enabled)
-        * [`LinuxBridge.STP.FORWARD_DELAY`](#linuxbridgestp_forward_delay)
-        * [`LinuxBridge.STP.HELLO_TIME`](#linuxbridgestp_hello_time)
-        * [`LinuxBridge.STP.MAX_AGE`](#linuxbridgestp_max_age)
-        * [`LinuxBridge.STP.PRIORITY`](#linuxbridgestp_priority)
-    * [`LinuxBridge.PORT_SUBTREE`](#linuxbridgeport_subtree)
-        * [`LinuxBridge.Port.NAME`](#linuxbridgeport_name)
-        * [`LinuxBridge.Port.STP_PRIORITY`](#linuxbridgeport_stp_priority)
-        * [`LinuxBridge.Port.STP_HAIRPIN_MODE`](#linuxbridgeport_stp_hairpin_mode)
-        * [`LinuxBridge.Port.STP_PATH_COST`](#linuxbridgeport_stp_path_cost)
-        * [`LinuxBridge.Port.VLAN_SUBTREE`](#linuxbridgeport_vlan_subtree)
-            * [`LinuxBridge.Port.VLAN.ENABLE_NATIVE`](#linuxbridgevlan_enable_native)
-            * [`LinuxBridge.Port.VLAN.MODE`](#linuxbridgevlan_mode)
-            * [`LinuxBridge.Port.VLAN.TAG`](#linuxbridgevlan_tag)
-            * [`LinuxBridge.Port.VLAN.TRUNK_TAGS`](#linuxbridgevlan_trunk_tags)
+    * [`LinuxBridge.Options.GROUP_FORWARD_MASK`](#linuxbridgeoptionsgroup_forward_mask)
+    * [`LinuxBridge.Options.MAC_AGEING_TIME`](#linuxbridgeoptionsmac_ageing_time)
+    * [`LinuxBridge.Options.MULTICAST_SNOOPING`](#linuxbridgeoptionsmulticast_snooping)
+    * [`LinuxBridge.STP.ENABLED`](#linuxbridgestpenabled)
+    * [`LinuxBridge.STP.FORWARD_DELAY`](#linuxbridgestpforward_delay)
+    * [`LinuxBridge.STP.HELLO_TIME`](#linuxbridgestphello_time)
+    * [`LinuxBridge.STP.MAX_AGE`](#linuxbridgestpmax_age)
+    * [`LinuxBridge.STP.PRIORITY`](#linuxbridgestppriority)
+    * [`LinuxBridge.Port.SUBTREE`](#linuxbridgeportsubtree)
+    * [`LinuxBridge.Port.NAME`](#linuxbridgeportname)
+    * [`LinuxBridge.Port.STP_PRIORITY`](#linuxbridgeportstp_priority)
+    * [`LinuxBridge.Port.STP_HAIRPIN_MODE`](#linuxbridgeportstp_hairpin_mode)
+    * [`LinuxBridge.Port.STP_PATH_COST`](#linuxbridgeportstp_path_cost)
 * [Interface -- Bond](#interface----bond)
     * [`Bond.MODE`](#bondmode)
     * [`Bond.OPTIONS`](#bondoptions)
     * [`Bond.SLAVES`](#bondslaves)
 * [Interface -- Open vSwitch(OVS) Bridge](#interface----open-vswitchovs-bridge)
-    * [`OVSBridge.OPTIONS_SUBTREE`](#ovsbridgeoptions_subtree)
-        * [`OVSBridge.Options.FAIL_MODE`](#ovsbridgefail_mode)
-        * [`OVSBridge.Options.MCAST_SNOOPING_ENABLE`](#ovsbridgemcast_snooping_enable)
-        * [`OVSBridge.Options.RSTP`](#ovsbridgerstp)
-        * [`OVSBridge.Options.STP`](#ovsbridgestp)
+    * [`OVSBridge.Options.FAIL_MODE`](#ovsbridgeoptionsfail_mode)
+    * [`OVSBridge.Options.MCAST_SNOOPING_ENABLE`](#ovsbridgeoptionsmcast_snooping_enable)
+    * [`OVSBridge.Options.RSTP`](#ovsbridgeoptionsrstp)
+    * [`OVSBridge.Options.STP`](#ovsbridgeoptionsstp)
     * [`OVSBridge.PORT_SUBTREE`](#ovsbridgeport_subtree)
-        * [`OVSBridge.Port.NAME`](#ovsbridgeport_name)
-        * [`OVSBridge.Port.VLAN_SUBTREE`](#ovsbridgeportvlan_subtree)
-            * [`OVSBridge.Port.Vlan.TRUNK_TAGS`](#ovsbridgevlan_trunk_tags)
-            * [`OVSBridge.Port.Vlan.TAG`](#ovsbridgevlan_tag)
-            * [`OVSBridge.Port.Vlan.ENABLE_NATIVE`](#ovsbridgevlan_enable_native)
-            * [`OVSBridge.Port.Vlan.MODE`](#ovsbridgevlan_mode)
-        * [`OVSBridge.Port.LINK_AGGREGATION_SUBTREE`](#ovsbridgeport_link_aggregation)
-            * [`OVSBridge.Port.LinkAggregation.MODE`](#ovsbridgelink_mode)
-            * [`OVSBridge.Port.LinkAggregation.SLAVES_SUBTREE`](#ovsbridgelink_slave_subtree)
-	        * [`OVSBridge.Port.LinkAggregation.Slave.NAME`](#ovsbridgelink_slave_name)
+    * [`OVSBridge.Port.NAME`](#ovsbridgeportname)
 * [Route](#route)
     * [`Route.TABLE_ID`](#routetable_id)
     * [`Route.DESTINATION`](#routedestination)
@@ -915,14 +898,18 @@ Example:
 Type: `string`
 
 The bond mode in kernel. Possible values are:
- * `balance-rr`
- * `active-backup`
- * `balance-xor`
- * `broadcast`
- * `802.3ad`
- * `balance-alb`
+ * `BondMode.ROUND_ROBIN`
+ * `BondMode.ACTIVE_BACKUP`
+ * `BondMode.XOR`
+ * `BondMode.BROADCAST`
+ * `BondMode.LACP`
+ * `BondMode.TLB`
+ * `BondMode.ALB`
 
 Please refer to [kernel document for detail][bond-kernel-doc].
+
+When changing bond mode, the `Bond.OPTIONS` will not merge from current state.
+User is required to provide full desire bond options when switching bond mode.
 
 ## `Bond.OPTIONS`
 
