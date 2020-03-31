@@ -885,6 +885,63 @@ Type: `integer`
 
 The Spanning Tree Protocol (STP) port cost for destinations via this port.
 
+## `LinuxBridge.Port.VLAN_SUBTREE`
+Each Linux Bridge port also features a subtree to configure the allowed
+VLANs passing through it. If the VLAN subtree is not configured, all the VLANs
+are allowed; when the VLAN subtree is specified, the user needs to provide the
+full list of bridge ports.
+
+Example:
+
+```python
+{
+    LinuxBridge.Port.VLAN_SUBTREE: {
+        LinuxBridge.Port.Vlan.MODE: LinuxBridge.Port.Vlan.Mode.TRUNK,
+        LinuxBridge.Port.Vlan.ENABLE_NATIVE: True,
+        LinuxBridge.Port.Vlan.TAG: 105,
+        LinuxBridge.Port.Vlan.TRUNK_TAGS: [
+            LinuxBridge.Port.TrunkTags.ID: 100,
+            LinuxBridge.Port.TrunkTags.ID_RANGE: {
+                LinuxBridge.Port.TrunkTags.MIN_RANGE: 500,
+                LinuxBridge.Port.TrunkTags.MAX_RANGE: 599,
+            }
+        ]
+    }
+}
+```
+
+### `LinuxBridge.Port.Vlan.MODE`
+
+Type: `string`
+
+The operational mode of the port. Allowed values are:
+* LinuxBridge.Port.Vlan.Mode.ACCESS
+* LinuxBridge.Port.Vlan.Mode.TRUNK
+
+### `LinuxBridge.Port.Vlan.ENABLE_NATIVE`
+
+Type: `bool`
+Default: `false`
+
+Can only be used for trunk ports. When enabled, it configures the VLAN specified by
+[`LinuxBridge.Port.VLAN.TAG`](#linuxbridgevlan_tag) as a native VLAN.
+
+### `LinuxBridge.Port.Vlan.TAG`
+
+Type: `integer`
+
+The access tag of the access port, or the native vlan of the trunk port.
+
+### `LinuxBridge.Port.Vlan.TRUNK_TAGS`
+
+Type: `array of dictionary`.
+
+Defines the white-list of VLANs accepted on this port. It accepts two formats:
+* single tag - a dictionary with a single `id` key, and an integer value (0-4095)
+* tag ranges - a dictionary with a single `id-range` key, whose value is a dict
+  with two keys: `min` and `max`. Both values are integers, in the (0-4095)
+  range.
+
 # Interface -- Bond
 
 Besides basic interface properties, each bond interface state also
