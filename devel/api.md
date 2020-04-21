@@ -912,7 +912,7 @@ Type: `bool`
 Default: `false`
 
 Can only be used for trunk ports. When enabled, it configures the VLAN specified by
-[`LinuxBridge.Port.VLAN.TAG`](#linuxbridgevlan_tag) as a native VLAN.
+[`LinuxBridge.Port.Vlan.TAG`](#linuxbridgevlan_tag) as a native VLAN.
 
 ### `LinuxBridge.Port.Vlan.TAG`
 
