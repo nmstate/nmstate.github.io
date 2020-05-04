@@ -75,11 +75,11 @@
         * [`LinuxBridge.Port.Vlan.ENABLE_NATIVE`](#linuxbridgeportvlanenable_native)
         * [`LinuxBridge.Port.Vlan.TAG`](#linuxbridgeportvlantag)
         * [`LinuxBridge.Port.Vlan.TRUNK_TAGS`](#linuxbridgeportvlantrunk_tags)
-* [Interface -- Bond](#interface--bond)
+* [Interface - Bond](#interface---bond)
     * [`Bond.MODE`](#bondmode)
     * [`Bond.OPTIONS`](#bondoptions)
     * [`Bond.SLAVES`](#bondslaves)
-* [Interface -- Open vSwitch(OVS) Bridge](#interface--open-vswitchovs-bridge)
+* [Interface - Open vSwitch(OVS) Bridge](#interface---open-vswitchovs-bridge)
     * [`OVSBridge.Options.FAIL_MODE`](#ovsbridgeoptionsfail_mode)
     * [`OVSBridge.Options.MCAST_SNOOPING_ENABLE`](#ovsbridgeoptionsmcast_snooping_enable)
     * [`OVSBridge.Options.RSTP`](#ovsbridgeoptionsrstp)
@@ -930,7 +930,7 @@ Defines the white-list of VLANs accepted on this port. It accepts two formats:
   with two keys: `min` and `max`. Both values are integers, in the (0-4095)
   range.
 
-# Interface -- Bond
+# Interface - Bond
 
 Besides basic interface properties, each bond interface state also
 contains a dictionary saved in key `BOND.CONFIG_SUBTREE`.
@@ -989,7 +989,7 @@ The names of bond slave interfaces.
 This property does not support partial editing, full list of salves is required
 in desired state.
 
-# Interface -- Open vSwitch(OVS) Bridge
+# Interface - Open vSwitch(OVS) Bridge
 
 Besides basic interface properties, each OVS bridge interface state also
 contains a dictionary saved in key `OVSBridge.CONFIG_SUBTREE`.
