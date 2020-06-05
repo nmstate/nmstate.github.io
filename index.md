@@ -66,6 +66,7 @@ Visit the [examples page](./examples.md) to see what it can do.
 - [Design](./devel/design/networking-api.md)
 - [API documentation](./devel/api.md)
 - [Plugin Design](./devel/plugin.md)
+- [Varlink support for libnmstate](./devel/varlink-libnmstate.md)
 
 ## Contacts
 - You can find us on #nmstate IRC channel on freenode. The maintainers are
@@ -77,3 +78,4 @@ Visit the [examples page](./examples.md) to see what it can do.
 page](https://lists.fedorahosted.org/admin/lists/nmstate-devel.lists.fedorahosted.org).
 
 - You can also report any issue on our [official Github repository](https://github.com/nmstate/nmstate)
+
