@@ -128,3 +128,4 @@ Want to see nmstate in action? Check out the [demos](./demos.md).
 ## Development
 - [Design](./devel/design/networking-api.md)
 - [API documentation](./devel/api.md)
+- [Varlink support for libnmstate](./devel/varlink-libnmstate.md)
