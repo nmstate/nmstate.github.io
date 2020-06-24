@@ -93,6 +93,7 @@
     * [`Route.NEXT_HOP_ADDRESS`](#routenext_hop_address)
     * [`Route.METRIC`](#routemetric)
 * [DNS client configuration](#dns-client-configuration)
+    * [Limitations of static DNS configuration](#limitations-of-static-dns-configuration)
     * [`DNS.SEARCH`](#dnssearch)
     * [`DNS.SERVER`](#dnsserver)
 
@@ -1188,6 +1189,14 @@ The config DNS is the static configuration saved in configuration files.
 The `libnmstate.apply(desire_state)` copies current DNS config to
 `desire_state` if `DNS.KEY` is missing from `desire_state`. Otherwise, DNS
 config in `desire_state` overrides current DNS configurations.
+
+## Limitations of static DNS configuration
+
+Currently nmstate only support configuring static DNS on any of these
+situations:
+
+ * Has interface configured as static IP address and static default gateway.
+ * Has interface configured as dynamic IP with `InterfaceIP.AUTO_DNS: False`.
 
 ## `DNS.SEARCH`
 
