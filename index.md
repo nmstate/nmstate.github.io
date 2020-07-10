@@ -111,7 +111,7 @@ file.
 ## Demos
 Want to see nmstate in action? Check out the [demos](./demos.md).
 
-## Supported Interfaces:
+## Features
 - [ethernet](./examples.md#interfaces-ethernet)
 - [bond](./examples.md#interfaces-bond)
 - [Vlan](./examples.md#interfaces-vlan)
@@ -119,12 +119,14 @@ Want to see nmstate in action? Check out the [demos](./demos.md).
 - [Linux bridge](./examples.md#interface-linux-bridge)
 - [ovs-bridge](./examples.md#interfaces-ovs-bridge)
 - [dummy](./examples.md#interfaces-dummy)
-
-## Stack support:
 - [IPv4/IPv6 addresses (static)](./examples.md#interfaces-ethernet)
 - [IPv4/IPv6 route](./examples.md#route)
 - [IPv4/IPv6 DNS client configuration](./examples.md#dns)
+- [LLDP](./features/lldp.md)
+- [Open vSwitch Patch Port](./features/ovs_path.md)
+- [Open vSwitch database plugin](./features/ovsdb.md)
 
 ## Development
 - [Design](./devel/design/networking-api.md)
 - [API documentation](./devel/api.md)
+- [Plugin Design](./devel/plugin.md)
