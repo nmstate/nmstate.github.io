@@ -34,7 +34,7 @@ raised, but a warning message.
 
 You may take the [OVS DB plugin][1] as example or below:
 
-```
+```python
 from libnmstate.plugin import NmstatePlugin
 from libnmstate.schema import Interface
 from libnmstate.schema import InterfaceType
