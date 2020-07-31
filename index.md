@@ -123,7 +123,7 @@ Want to see nmstate in action? Check out the [demos](./demos.md).
 - [IPv4/IPv6 route](./examples.md#route)
 - [IPv4/IPv6 DNS client configuration](./examples.md#dns)
 - [LLDP](./features/lldp.md)
-- [Open vSwitch Patch Port](./features/ovs_path.md)
+- [Open vSwitch Patch Port](./features/ovs_patch.md)
 - [Open vSwitch database plugin](./features/ovsdb.md)
 
 ## Development
