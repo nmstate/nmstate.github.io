@@ -14,8 +14,10 @@
         * [NmstateVerificationError](#nmstateverificationerror)
         * [NmstateNotImplementedError](#nmstatenotimplementederror)
         * [NmstateInternalError](#nmstateinternalerror)
+        * [NmstateNotSupportedError](#nmstatenotsupportederror)
+        * [NmstateTimeoutError](#nmstatetimeouterror)
+        * [NmstatePluginError](#nmstatepluginerror)
     * [Schema](#schema)
-* [Limitations](#limitations)
 * [Network State Main layout](#network-state-main-layout)
 * [Basic Interface](#basic-interface)
     * [Basic Interface: Example](#basic-interface-example)
@@ -24,6 +26,7 @@
     * [`Interface.STATE`](#interfacestate)
     * [`Interface.MTU`](#interfacemtu)
     * [`Interface.MAC_ADDRESS`](#interfacemac_address)
+    * [`Interface.DESCRIPTION`](#interfacedescription)
     * [`InterfaceIP`](#interfaceip)
     * [`Interface.IPV4`](#interfaceipv4)
         * [`InterfaceIPv4.ENABLED`](#interfaceipv4enabled)
@@ -34,6 +37,7 @@
         * [`InterfaceIPv4.ADDRESS`](#interfaceipv4address)
             * [`InterfaceIPv4.ADDRESS_IP`](#interfaceipv4address_ip)
             * [`InterfaceIPv4.ADDRESS_PREFIX_LENGTH`](#interfaceipv4address_prefix_length)
+        * [`InterfaceIPv4.AUTO_ROUTE_TABLE_ID`](#interfaceipv4auto_route_table_id)
     * [`Interface.IPV6`](#interfaceipv6)
         * [`InterfaceIPv6.ENABLED`](#interfaceipv6enabled)
         * [`InterfaceIPv6.DHCP`](#interfaceipv6dhcp)
@@ -42,12 +46,22 @@
         * [`InterfaceIPv6.IGNORE_GATEWAY`](#interfaceipv6ignore_gateway)
         * [`InterfaceIPv6.IGNORE_DNS`](#interfaceipv6ignore_dns)
         * [`InterfaceIPv6.ADDRESS`](#interfaceipv6address)
+            * [`InterfaceIPv6.ADDRESS_IP`](#interfaceipv6address_ip)
+            * [`InterfaceIPv6.ADDRESS_PREFIX_LENGTH`](#interfaceipv6address_prefix_length)
+        * [`InterfaceIPv6.AUTO_ROUTE_TABLE_ID`](#interfaceipv6auto_route_table_id)
 * [Ethernet](#ethernet)
     * [`Ethernet.AUTO_NEGOTIATION`](#ethernetauto_negotiation)
     * [`Ethernet.DUPLEX`](#ethernetduplex)
     * [`Ethernet.SPEED`](#ethernetspeed)
     * [`Ethernet.SRIOV_SUBTREE`](#ethernetsriov_subtree)
         * [`Ethernet.SRIOV.TOTAL_VFS`](#ethernetsriovtotal_vfs)
+        * [`Ethernet.SRIOV.VFS_SUBTREE`](#ethernetsriovvfs_subtree)
+            * [`Ethernet.SRIOV.VFS.ID`](#ethernetsriovvfsid)
+            * [`Ethernet.SRIOV.VFS.MAC_ADDRESS`](#ethernetsriovvfsmac_address)
+            * [`Ethernet.SRIOV.VFS.SPOOF_CHECK`](#ethernetsriovvfsspoof_check)
+            * [`Ethernet.SRIOV.VFS.TRUST`](#ethernetsriovvfstrust)
+            * [`Ethernet.SRIOV.VFS.MIN_TX_RATE`](#ethernetsriovvfsmin_tx_rate)
+            * [`Ethernet.SRIOV.VFS.MAX_TX_RATE`](#ethernetsriovvfsmax_tx_rate)
 * [VLAN](#vlan)
     * [`VLAN.ID`](#vlanid)
     * [`VLAN.BASE_IFACE`](#vlanbase_iface)
@@ -60,6 +74,21 @@
     * [`LinuxBridge.Options.GROUP_FORWARD_MASK`](#linuxbridgeoptionsgroup_forward_mask)
     * [`LinuxBridge.Options.MAC_AGEING_TIME`](#linuxbridgeoptionsmac_ageing_time)
     * [`LinuxBridge.Options.MULTICAST_SNOOPING`](#linuxbridgeoptionsmulticast_snooping)
+    * [`LinuxBridge.Options.GROUP_ADDR`](#linuxbridgeoptionsgroup_addr)
+    * [`LinuxBridge.Options.GROUP_FWD_MASK`](#linuxbridgeoptionsgroup_fwd_mask)
+    * [`LinuxBridge.Options.HASH_ELASTICITY`](#linuxbridgeoptionshash_elasticity)
+    * [`LinuxBridge.Options.HASH_MAX`](#linuxbridgeoptionshash_max)
+    * [`LinuxBridge.Options.MULTICAST_ROUTER`](#linuxbridgeoptionsmulticast_router)
+    * [`LinuxBridge.Options.MULTICAST_LAST_MEMBER_COUNT`](#linuxbridgeoptionsmulticast_last_member_count)
+    * [`LinuxBridge.Options.MULTICAST_LAST_MEMBER_INTERVAL`](#linuxbridgeoptionsmulticast_last_member_interval)
+    * [`LinuxBridge.Options.MULTICAST_MEMBERSHIP_INTERVAL`](#linuxbridgeoptionsmulticast_membership_interval)
+    * [`LinuxBridge.Options.MULTICAST_QUERIER`](#linuxbridgeoptionsmulticast_querier)
+    * [`LinuxBridge.Options.MULTICAST_QUERIER_INTERVAL`](#linuxbridgeoptionsmulticast_querier_interval)
+    * [`LinuxBridge.Options.MULTICAST_QUERY_USE_IFADDR`](#linuxbridgeoptionsmulticast_query_use_ifaddr)
+    * [`LinuxBridge.Options.MULTICAST_QUERY_INTERVAL`](#linuxbridgeoptionsmulticast_query_interval)
+    * [`LinuxBridge.Options.MULTICAST_QUERY_RESPONSE_INTERVAL`](#linuxbridgeoptionsmulticast_query_response_interval)
+    * [`LinuxBridge.Options.MULTICAST_STARTUP_QUERY_COUNT`](#linuxbridgeoptionsmulticast_startup_query_count)
+    * [`LinuxBridge.Options.MULTICAST_STARTUP_QUERY_INTERVAL`](#linuxbridgeoptionsmulticast_startup_query_interval)
     * [`LinuxBridge.STP.ENABLED`](#linuxbridgestpenabled)
     * [`LinuxBridge.STP.FORWARD_DELAY`](#linuxbridgestpforward_delay)
     * [`LinuxBridge.STP.HELLO_TIME`](#linuxbridgestphello_time)
@@ -77,7 +106,7 @@
         * [`LinuxBridge.Port.Vlan.TRUNK_TAGS`](#linuxbridgeportvlantrunk_tags)
 * [Interface - Bond](#interface---bond)
     * [`Bond.MODE`](#bondmode)
-    * [`Bond.OPTIONS`](#bondoptions)
+    * [`Bond.OPTIONS_SUBTREE`](#bondoptions_subtree)
     * [`Bond.SLAVES`](#bondslaves)
 * [Interface - Open vSwitch(OVS) Bridge](#interface---open-vswitchovs-bridge)
     * [`OVSBridge.Options.FAIL_MODE`](#ovsbridgeoptionsfail_mode)
@@ -85,13 +114,39 @@
     * [`OVSBridge.Options.RSTP`](#ovsbridgeoptionsrstp)
     * [`OVSBridge.Options.STP`](#ovsbridgeoptionsstp)
     * [`OVSBridge.PORT_SUBTREE`](#ovsbridgeport_subtree)
-    * [`OVSBridge.Port.NAME`](#ovsbridgeportname)
+        * [`OVSBridge.Port.NAME`](#ovsbridgeportname)
+* [Interface - Open vSwitch(OVS) Internal](#interface---open-vswitchovs-internal)
+    * [`OVSInterface.PATCH_CONFIG_SUBTREE`](#ovsinterfacepatch)
+        * [`OVSInterface.Patch.PEER`](#ovsinterfacepatchpeer)
+* [Interface - Team](#nterface---team)
+    * [`Team.CONFIG_SUBTREE`](#teamconfig_subtree)
+    * [`Team.PORT_SUBTREE`](#teamport_subtree)
+        * [`Team.Port.NAME`](#teamportname)
+    * [`Team.RUNNER_SUBTREE`](#teamrunner_subtree)
+        * [Team.Runner.NAME](#teamrunnername)
+        * [Team.Runner.RunnerMode.LOAD_BALANCE](#teamrunnerrunnermodeload_balance)
+* [LLDP](#lldp)
+    * [`LLDP.CONFIG_SUBTREE`](#lldpconfig_subtree)
+    * [`LLDP.ENABLED`](#lldpenabled)
+    * [`LLDP.NEIGHBORS_SUBTREE`](#lldpneighbors_subtree)
+        * [`LLDP.Neighbors.DESCRIPTION`](#lldpneighborsdescription)
+        * [`LLDP.Neighbors.TLV_TYPE`](#lldpneighborstlv_type)
+        * [`LLDP.Neighbors.TLV_SUBTYPE`](#lldpneighborstlv_subtype)
+        * [`LLDP.Neighbors.ORGANIZATION_CODE`](#lldpneighborsorganization_code)
 * [Route](#route)
     * [`Route.TABLE_ID`](#routetable_id)
     * [`Route.DESTINATION`](#routedestination)
     * [`Route.NEXT_HOP_INTERFACE`](#routenext_hop_interface)
     * [`Route.NEXT_HOP_ADDRESS`](#routenext_hop_address)
     * [`Route.METRIC`](#routemetric)
+* [Route Rule](#route-rule)
+    * [`RouteRule.CONFIG`](#routeruleconfig)
+    * [`RouteRule.IP_FROM`](#routeruleip_from)
+    * [`RouteRule.IP_TO`](#routeruleip_to)
+    * [`RouteRule.PRIORITY`](#routerulepriority)
+    * [`RouteRule.ROUTE_TABLE`](#routeruleroute_table)
+    * [`RouteRule.USE_DEFAULT_PRIORITY`](#routeruleuse_default_priority)
+    * [`RouteRule.USE_DEFAULT_ROUTE_TABLE`](#routeruleuse_default_route_table)
 * [DNS client configuration](#dns-client-configuration)
     * [Limitations of static DNS configuration](#limitations-of-static-dns-configuration)
     * [`DNS.SEARCH`](#dnssearch)
@@ -203,17 +258,24 @@ Desired feature is not supported by Nmstate yet.
 
 Unexpected behaviour happened. It is a bug of libnmstate which should be fixed.
 
+### NmstateNotSupportedError
+
+A resource like a device does not support the requested feature.
+
+### NmstateTimeoutError
+
+The transaction execution timed out.
+
+### NmstatePluginError
+
+Unexpected plugin behaviour happens, it is a bug of the plugin.
+
 ## Schema
 
 The YAML schema file is placed at `libnmstate/schemas/operational-state.yaml`.
 
 In stead of using hard coded string, please use constants defined in
-`libnmstate.schmea`.
-
-# Limitations
-
-Please refer to [limitations in code base][limitations]
-
+`libnmstate.schema`.
 
 # Network State Main layout
 
@@ -322,6 +384,12 @@ The MAC address of interface.
 
 Type: `String` in the format of `EA:60:E4:08:17:F1`. Case insensitive.
 
+## `Interface.DESCRIPTION`
+
+The description of the interface.
+
+Type: `String`
+
 ## `InterfaceIP`
 
 The `InterfaceIP` class is holding the share constants between `InterfaceIPv4`
@@ -350,6 +418,7 @@ Example:
         InterfaceIPv4.AUTO_DNS: True,
         InterfaceIPv4.AUTO_GATEWAY: True,
         InterfaceIPv4.AUTO_ROUTES: True,
+        InterfaceIPv4.AUTO_ROUTE_TABLE_ID: 100,
     }
 }
 ```
@@ -438,6 +507,13 @@ when querying.
 This property is ignored when `Interface.IPV4[InterfaceIPv4.DHCP]` is
 `False` when applying.
 
+### `InterfaceIPv4.AUTO_ROUTE_TABLE_ID`
+
+The table where the route will be configured when `InterfaceIPv4.AUTO_ROUTES`
+is enabled.
+
+Type: `integer`
+
 ### `InterfaceIPv4.ADDRESS`
 The static IPv4 addresses.
 This property does not support partial editing, the full list of IP addresses
@@ -486,6 +562,7 @@ Example:
         InterfaceIPv6.AUTO_DNS: True,
         InterfaceIPv6.AUTO_GATEWAY: True,
         InterfaceIPv6.AUTO_ROUTES: True,
+        InterfaceIPv6.AUTO_ROUTE_TABLE_ID: 100,
     }
 }
 ```
@@ -561,6 +638,13 @@ Possible values:
    Ignore DNS client configuration retrieved from IPv6 router advertisement and
    DHCPv6.
 
+### `InterfaceIPv6.AUTO_ROUTE_TABLE_ID`
+
+The table where the route will be configured when `InterfaceIPv6.AUTO_ROUTES`
+is enabled.
+
+Type: `integer`
+
 ### `InterfaceIPv6.ADDRESS`
 The static IPv6 addresses.
 This property does not support partial editing, the full list of IP addresses
@@ -582,6 +666,20 @@ InterfaceIPv6.ADDRESS: [
     }
 ]
 ```
+#### `InterfaceIPv6.ADDRESS_IP`
+
+The static IPv6 address.
+
+Type: `string`
+
+Format: `192.0.2.251`
+
+
+#### `InterfaceIPv6.ADDRESS_PREFIX_LENGTH`
+
+The prefix length of static IPv6 address.
+
+Type: `interger`.
 
 # Ethernet
 
@@ -657,13 +755,64 @@ Example:
 		Interface.STATE: InterfaceState.UP,
 		Ethernet.CONFIG_SUBTREE: {
 			Ethernet.SRIOV_SUBTREE: {
-				Ethernet.SRIOV.TOTAL_VFS: 3
+				Ethernet.SRIOV.TOTAL_VFS: 1,
+				Ethernet.SRIOV.VFS_SUBTREE: [
+					{
+						Ethernet.SRIOV.VFS.ID: 0,
+						Ethernet.SRIOV.VFS.MAC_ADDRESS: 76:A5:0B:F1:8A:C6,
+						Ethernet.SRIOV.VFS.MAX_TX_RATE: 1000,
+						Ethernet.SRIOV.VFS.MIN_TX_RATE: 100,
+						Ethernet.SRIOV.VFS.TRUST: False,
+					}
+				],
 			}
 		}
 	}
     ]
 }
 ```
+
+### `Ethernet.SRIOV.VFS_SUBTREE`
+
+If the ethernet SR-IOV is enabled and the `Ethernet.SRIOV.TOTAL_VFS` is greater
+than  0, this will contain a list of dictionaries that allows to configure each
+VF. Nmstate supports the following options:
+
+#### `Ethernet.SRIOV.VFS.ID`
+
+The VF id. This parameter is read-only.
+
+Type: `integer`
+
+#### `Ethernet.SRIOV.VFS.MAC_ADDRESS`
+
+The MAC address of the VF.
+
+Type: `string` in the format of `EA:60:E4:08:17:F1`. Case insensitive.
+
+#### `Ethernet.SRIOV.VFS.SPOOF_CHECK`
+
+Enable or disable spoof check in the VF.
+
+Type: `bool`
+
+#### `Ethernet.SRIOV.VFS.TRUST`
+
+Enable or disable trust in the VF.
+
+Type: `bool`
+
+#### `Ethernet.SRIOV.VFS.MIN_TX_RATE`
+
+The minimum TX rate. Please, note that not all the NICs support this option.
+
+Type: `integer`
+
+#### `Ethernet.SRIOV.VFS.MAX_TX_RATE`
+
+The maximum TX rate.
+
+Type: `integer`
 
 # VLAN
 Besides basic interface properties, each VLAN interface state also contains
@@ -811,6 +960,102 @@ Type: `bool`
 
 Whether IGMP snooping is enabled for this bridge.
 
+## `LinuxBridge.Options.GROUP_ADDR`
+
+Type: `string` in the format of `01:80:C2:00:00:00`.
+
+The MAC address of the multicast group this bridge uses for STP.
+
+## `LinuxBridge.Options.GROUP_FWD_MASK`
+
+Type: `integer`
+
+A mask of group addresses to forward.
+
+## `LinuxBridge.Options.HASH_ELASTICITY`
+
+Type: `integer`
+
+## `LinuxBridge.Options.HASH_MAX`
+
+Type: `integer`
+
+## `LinuxBridge.Options.MULTICAST_ROUTER`
+
+Type: `string`
+
+Sets bridge’s multicast router. Multicast-snooping must be enabled for this
+option to work.
+
+## `LinuxBridge.Options.MULTICAST_LAST_MEMBER_COUNT`
+
+Type: `integer`
+
+Set the number of queries the bridge will send before stopping forwarding a
+multicast group after a “leave” message has been received.
+
+## `LinuxBridge.Options.MULTICAST_LAST_MEMBER_INTERVAL`
+
+Type: `integer`
+
+Set interval (in deciseconds) between queries to find remaining members of a
+group, after a “leave” message is received.
+
+## `LinuxBridge.Options.MULTICAST_MEMBERSHIP_INTERVAL`
+
+Type: `integer`
+
+Set delay (in deciseconds) after which the bridge will leave a group, if no
+membership reports for this group are received.
+
+## `LinuxBridge.Options.MULTICAST_QUERIER`
+
+Type: `bool`
+
+Enable or disable sending of multicast queries by the bridge. If not specified
+the option is disabled.
+
+## `LinuxBridge.Options.MULTICAST_QUERIER_INTERVAL`
+
+Type: `integer`
+
+If no queries are seen after this delay (in deciseconds) has passed, the bridge
+will start to send its own queries.
+
+## `LinuxBridge.Options.MULTICAST_QUERY_USE_IFADDR`
+
+Type: `bool`
+
+If enabled the bridge’s own IP address is used as the source address for IGMP
+queries otherwise the default of 0.0.0.0 is used.
+
+## `LinuxBridge.Options.MULTICAST_QUERY_INTERVAL`
+
+Type: `integer`
+
+Interval (in deciseconds) between queries sent by the bridge after the end of
+the startup phase.
+
+## `LinuxBridge.Options.MULTICAST_QUERY_RESPONSE_INTERVAL`
+
+Type: `integer`
+
+Set the Max Response Time/Max Response Delay (in deciseconds) for IGMP/MLD
+queries sent by the bridge.
+
+## `LinuxBridge.Options.MULTICAST_STARTUP_QUERY_COUNT`
+
+Type: `integer`
+
+Set the number of IGMP queries to send during startup phase.
+
+## `LinuxBridge.Options.MULTICAST_STARTUP_QUERY_INTERVAL`
+
+Type: `integer`
+
+Sets the time (in deciseconds) between queries sent out at startup to determine
+membership information.
+
 ## `LinuxBridge.STP.ENABLED`
 
 Type: `bool`
@@ -939,7 +1184,6 @@ contains a dictionary saved in key `BOND.CONFIG_SUBTREE`.
 Example:
 
 ```python
-
 {
     Interface.KEY: [
         {
@@ -974,7 +1218,7 @@ Please refer to [kernel document for detail][bond-kernel-doc].
 When changing bond mode, the `Bond.OPTIONS` will not merge from current state.
 User is required to provide full desire bond options when switching bond mode.
 
-## `Bond.OPTIONS`
+## `Bond.OPTIONS_SUBTREE`
 
 Type: `dictionary`
 
@@ -1006,17 +1250,17 @@ Example:
         Interface.STATE: InterfaceState.UP,
         OVSBridge.CONFIG_SUBTREE: {
             OVSBridge.OPTIONS_SUBTREE: {
-                OVSBridge.FAIL_MODE: "",
-                OVSBridge.MCAST_SNOOPING_ENABLE: False,
-                OVSBridge.RSTP: False,
-                OVSBridge.STP: True
+                OVSBridge.Options.FAIL_MODE: "",
+                OVSBridge.Options.MCAST_SNOOPING_ENABLE: False,
+                OVSBridge.Options.RSTP: False,
+                OVSBridge.Options.STP: True
             },
             OVSBridge.PORT_SUBTREE: [
                 {
-                    OVSBridge.PORT_NAME: "ovs0",
+                    OVSBridge.Port.NAME: "ovs0",
                 },
                 {
-                    OVSBridge.PORT_NAME: "eth1",
+                    OVSBridge.Port.NAME: "eth1",
                 }
             ]
         },
@@ -1056,11 +1300,111 @@ This property does not support partial editing, the full list of ports is
 required in desired state.
 
 
-## `OVSBridge.Port.NAME`
+### `OVSBridge.Port.NAME`
 
 Type: `string`
 
 The OVS bridge port name.
+
+# Interface - Open vSwitch(OVS) Internal
+
+Each OVS internal interface state contains a dictionary saved in key
+`OVSInterface.PATCH_CONFIG_SUBTREE`.
+
+## `OVSInterface.Patch.PEER`
+
+Type: `string`
+
+Interface patch peer name.
+
+# Team
+
+Besides basic interface properties, each Team interface state also contains a
+dictionary saved in key `Team.CONFIG_SUBTREE`. In addition, this dictionary
+contains a list of dictionaries saved in key `Team.PORT_SUBTREE` and a
+dictionary saved in key `Team.RUNNER_SUBTREE`.
+
+Example:
+
+```python
+{
+    Interface.KEY : [
+        Interface.NAME: "team0",
+        Interface.TYPE: InterfaceType.TEAM,
+        Interface.STATE: InterfaceState.UP,
+        Team.CONFIG_SUBTREE: {
+            Team.PORT_SUBTREE: [
+                {
+                    Team.Port.NAME: "eth1"
+                },
+                {
+                    Team.Port.NAME: "eth2"
+                }
+            ],
+            Team.RUNNER_SUBTREE: {
+                Team.Runner.NAME: Team.Runner.RunnerMode.LOAD_BALANCE
+            }
+        }
+    ]
+}
+```
+
+These values are based on the teamd JSON API. For further information please
+refer to [teamd manual
+page](https://github.com/jpirko/libteam/blob/master/man/teamd.conf.5)
+
+## `Team.Port.NAME`
+
+Type: `string`
+
+The interface name of the port.
+
+## `Team.Runner.NAME`
+
+Type: `string`
+
+The mode in which the interface is operating. Currently we are supporting the
+following values:
+
+ * `Team.Runner.RunnedMode.LOAD_BALANCE`
+
+# LLDP
+
+Nmstate provides Link Layer Discovery Protocol information for each interface.
+
+## `LLDP.CONFIG_SUBTREE`
+
+It contains the option to enable LLDP and the neighbors information.
+
+### `LLDP.ENABLED`
+
+Type: `bool`
+
+Enable or disable LLDP on the interface.
+
+### `LLDP.NEIGHBORS_SUBTREE`
+
+Contains a list of lists. Each element of the list is a neighbor announced by
+LLDP and each element of the neighbor is a dictionary containing the TLV
+information.
+
+### `LLDP.Nieghbors.DESCRIPTION`
+
+Type: `string`
+
+Description of the TLV.
+
+### `LLDP.Neighbors.TLV_TYPE`
+
+Type: `integer`
+
+### `LLDP.Neighbors.TLV_SUBTYPE`
+
+Type: `integer`
+
+### `LLDP.Neighbors.ORGANIZATION_CODE`
+
+Type: `string` in the format 00:80:c2
 
 # Route
 
@@ -1153,6 +1497,59 @@ Type: `integer`
 The route metric.
 If not define, set to `Route.USE_DEFAULT_METRIC` for the default metric.
 
+# Route Rule
+
+## `RouteRule.CONFIG`
+
+Nmstate provides routes rules via `libnmstate.show()`.
+Example:
+
+```python
+{
+	RouteRule.KEY: {
+		RouteRule.CONFIG: [
+			{
+				RouteRule.IP_TO: 192.0.2.0/24,
+				RouteRule.PRIORITY: 1000,
+				RouteRule.ROUTE_TABLE: 50,
+			},
+		],
+	},
+}
+```
+
+## `RouteRule.CONFIG`
+
+A list containing the multiple rule configurations.
+
+## `RouteRule.IP_FROM`
+
+Type: `string` in the format 192.0.2.1/24
+
+## `RouteRule.IP_TO`
+
+Type: `string` in the format 192.0.2.1/24
+
+## `RouteRule.PRIORITY`
+
+Type: `integer`
+
+The priority of the rule over the others.
+
+## `RouteRule.ROUTE_TABLE`
+
+Type: `integer`
+
+The table id where the rule should be applied.
+
+## `RouteRule.USE_DEFAULT_PRIORITY`
+
+Type: `integer`
+
+## `RouteRule.USE_DEFAULT_ROUTE_TABLE`
+
+Type: `integer`
+
 # DNS client configuration
 
 Nmstate provides both running and in-config DNS client configuration via
@@ -1219,4 +1616,3 @@ Name server IP addresses.
 [error]: ./api.md#error-handling
 [bond-kernel-doc]: https://www.kernel.org/doc/Documentation/networking/bonding.txt
 [hairpin]: https://lwn.net/Articles/347344/
-[limitations]: https://github.com/nmstate/nmstate/blob/master/LIMITATIONS.md

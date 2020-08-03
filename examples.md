@@ -207,6 +207,22 @@ interfaces:
           stp-priority: 32
 ```
 
+## Interfaces: Team
+
+```yaml
+---
+interfaces:
+- name: team0
+  type: team
+  state: up
+  team:
+    ports:
+    - name: eth1
+    - name: eth2
+    runner:
+      name: loadbalance
+```
+
 ## Route
 
 ```yaml
