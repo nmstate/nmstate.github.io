@@ -1,0 +1,23 @@
+#!/bin/bash -x
+PYTEST='pytest-3'
+SUDO='sudo'
+
+if [ $HOSTNAME == 'Gris-Laptop' ] || [ $HOSTNAME == 'Gris-WS' ];then
+    exit 1
+fi
+
+which $PYTEST 1>/dev/null 2>/dev/null
+if [ $? -ne 0 ];then
+    PYTEST='pytest'
+fi
+
+ip link show eth1 2>/dev/null
+if [ $? -ne 0 ];then
+    ci_env
+fi
+ct
+
+$SUDO $PYTEST --log-level=DEBUG --verbose --verbose \
+    --log-format="%(asctime)s [%(levelname)8s] %(message)s (%(filename)s:%(lineno)s)" \
+    --log-date-format="%Y-%m-%d %H:%M:%S" \
+    "$@"

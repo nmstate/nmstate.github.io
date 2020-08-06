@@ -1,0 +1,7 @@
+#!/usr/bin/python3
+import sys
+
+sys.path.append('/home/fge/Source/nmstate')
+
+import nmstatectl.nmstatectl
+sys.exit(nmstatectl.nmstatectl.main())

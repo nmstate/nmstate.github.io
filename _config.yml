@@ -6,6 +6,7 @@ github:
   repository_url: https://github.com/nmstate/nmstate
 include:
  - nmstate.gpg
+ - utils
 markdown: kramdown
 kramdown:
   input: GFM

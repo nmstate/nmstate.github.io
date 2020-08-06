@@ -1,0 +1,30 @@
+#!/bin/bash -x
+: ${IMAGE:="nmstate/centos8-nmstate-dev"}
+NAME="centos8-nmstate"
+if [ "CHK$1" == "CHK1" ];then
+    IMAGE="nmstate/fedora-nmstate-dev"
+    NAME="fedora-nmstate"
+fi
+
+CONTAINER_ID=`
+    sudo docker run --privileged -d \
+        --cpus 0.1 \
+        --hostname $NAME \
+        -v /sys/fs/cgroup:/sys/fs/cgroup:ro \
+        -v /home/fge/Source/nmstate:/home/fge/Source/nmstate \
+        $IMAGE `
+
+sudo docker exec -i $CONTAINER_ID \
+    /bin/bash -c  \
+        'while ! systemctl is-active dbus; do sleep 1; done'
+sudo docker exec -i $CONTAINER_ID \
+    /bin/bash -c  \
+        'systemctl start systemd-udevd;
+        while ! systemctl is-active systemd-udevd; do sleep 1; done'
+sudo docker exec -i $CONTAINER_ID \
+    /bin/bash -c  \
+        'systemctl restart NetworkManager;
+         while ! systemctl is-active NetworkManager; do sleep 1; done'
+
+sudo docker exec -it $CONTAINER_ID /bin/bash
+sudo docker rm $CONTAINER_ID -f

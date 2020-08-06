@@ -1,0 +1,22 @@
+#!/bin/bash -x
+
+if [[ $1 ]]; then
+    sudo ip link del eth1
+    sudo ip link del eth2
+    sudo nmcli c delete eth1 eth2
+    sudo ip netns del tmp
+    exit
+fi
+
+sudo ip netns add tmp
+sudo ip link add eth1 type veth peer name eth1peer
+sudo ip link add eth2 type veth peer name eth2peer
+sudo ip link set eth1 up
+sudo ip link set eth2 up
+sudo ip link set eth1peer netns tmp
+sudo ip link set eth2peer netns tmp
+sudo ip netns exec tmp ip link set eth1peer up
+sudo ip netns exec tmp ip link set eth2peer up
+
+sudo nmcli device set eth1 managed yes
+sudo nmcli device set eth2 managed yes

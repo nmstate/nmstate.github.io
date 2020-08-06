@@ -1,0 +1,31 @@
+export PYTHONPATH=/home/fge/Source/nmstate
+
+cat > /usr/bin/nmstatectl << "END"
+#!/usr/bin/python3
+import sys
+
+sys.path.append('/home/fge/Source/nmstate')
+
+import nmstatectl.nmstatectl
+sys.exit(nmstatectl.nmstatectl.main())
+END
+
+chmod +x /usr/bin/nmstatectl
+ln -s /usr/bin/nmstatectl /usr/bin/ncl
+
+ip netns add tmp
+ip link add eth1 type veth peer name eth1peer
+ip link add eth2 type veth peer name eth2peer
+ip link set eth1 up
+ip link set eth2 up
+ip link set eth1peer netns tmp
+ip link set eth2peer netns tmp
+ip netns exec tmp ip link set eth1peer up
+ip netns exec tmp ip link set eth2peer up
+
+nmcli device set eth1 managed yes
+nmcli device set eth2 managed yes
+
+
+alias pt='pytest --log-level=DEBUG --verbose --verbose'
+cd /home/fge/Source/nmstate/tests/integration/

@@ -1,0 +1,12 @@
+#!/bin/bash
+if [ "CHK$(git branch|grep master)" == "CHK" ];then
+    BASE_BRANCH="base"
+else
+    BASE_BRANCH="master"
+fi
+git commit  -m'wip' -a
+git fetch || exit 1
+git fetch upstream || exit 1
+git checkout $BASE_BRANCH || exit 1
+git reset --hard upstream/$BASE_BRANCH
+git push origin +$BASE_BRANCH

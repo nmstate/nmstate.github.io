@@ -128,6 +128,7 @@ Want to see nmstate in action? Check out the [demos](./demos.md).
 - [Open vSwitch database plugin](./features/ovsdb.md)
 
 ## Development
+- [Nmstate Developer Guide](./devel/dev_guide.md)
 - [Design](./devel/design/networking-api.md)
 - [API documentation](./devel/api.md)
 - [Plugin Design](./devel/plugin.md)

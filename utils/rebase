@@ -1,0 +1,18 @@
+#!/bin/bash -e
+
+CUR_BRANCH=`git rev-parse --abbrev-ref HEAD`
+if [ "CHK$(git branch|grep master)" == "CHK" ];then
+    BASE_BRANCH="base"
+else
+    BASE_BRANCH="master"
+fi
+
+if [ "CHK$CUR_BRANCH" == "CHK" ];then
+    echo "Failed to get current branch name"
+    exit 1
+fi
+
+git_sync_upstream
+git checkout $CUR_BRANCH
+git rebase $BASE_BRANCH
+git push --force

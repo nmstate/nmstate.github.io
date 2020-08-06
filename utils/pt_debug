@@ -1,0 +1,8 @@
+#!/bin/bash
+ip link show eth1 2>/dev/null || ci_env
+
+sudo pytest-3 -o log_cli=true --log-level=DEBUG --verbose --verbose \
+    --log-cli-level=DEBUG \
+    --log-cli-format="%(asctime)s [%(levelname)8s] %(message)s (%(filename)s:%(lineno)s)" \
+    --log-cli-date-format="%Y-%m-%d %H:%M:%S" \
+    "$@"

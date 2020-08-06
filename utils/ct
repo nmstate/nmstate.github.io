@@ -1,0 +1,20 @@
+#!/bin/bash
+
+NIC="enp1s0"
+PODMAN_NIC="cni-podman0"
+TO_DELETE=""
+
+if [ $HOSTNAME == 'Gris-Laptop' ];then
+    exit
+fi
+
+for CON in `nmcli -g NAME c show`;do
+    if [ $CON != $NIC ] && [ $CON != $PODMAN_NIC ];then
+        TO_DELETE="$TO_DELETE $CON"
+    fi
+done
+
+if [ "CHK$TO_DELETE" != "CHK" ];then
+    sudo nmcli c del $TO_DELETE
+fi
+sudo ncl set ~/os.yml 1>/dev/null 2>/dev/null
