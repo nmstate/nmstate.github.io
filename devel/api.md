@@ -672,7 +672,7 @@ The static IPv6 address.
 
 Type: `string`
 
-Format: `192.0.2.251`
+Format: `2001:db8:1::f`
 
 
 #### `InterfaceIPv6.ADDRESS_PREFIX_LENGTH`
