@@ -16,9 +16,7 @@ Visit the [demos page](./demos.md) and the [examples page](./examples.md)
 to see what it can do.
 
 ## Quick Start Guide
-### Install
-In the first few development cycles, it is recomended to install nmstate from
-sources.
+### Install from source
 ```bash
 git clone https://github.com/nmstate/nmstate.git
 cd nmstate
@@ -33,17 +31,15 @@ For installing stable release or other installation methods, please refer to
 
 ### Dependencies
 
-Nmstate requires NetworkManager 1.12 or later version installed and started.
+Nmstate requires NetworkManager 1.26 or later version installed and started.
 
 In order to support specific capabilities, additional packages are required:
 - OpenVSwitch support through the NM provider requires `NetworkManager-ovs`.
-Installing it on Centos/RHEL, use:
 
-```bash
-sudo yum install NetworkManager-ovs openvswitch
-sudo systemctl restart openvswitch
-sudo systemctl restart NetworkManager
-```
+- Extended ovsdb support requires `openvswitch-2.11` and
+`python3-openvswitch2.11` or greater.
+
+- Team interface support through the NM provider requires `NetworkManager-team`
 
 ### View state
 
@@ -101,15 +97,20 @@ To dump the state in json format, use '--json' flag:
 }
 ```
 
-### Change state
+### Modify a state
+
+- Use `nmstatectl edit <interface_name>` to enter in your preferred editor with
+  the current state of the interface.
+- Modify the state.
+- Save and close the editor.
+- The desired state will be applied.
+
+### Set a state
 
 - Use `nmstatectl show > desired_state.yaml` to dump the current state to a
 file.
 - Edit the desired state with the new values.
 - Run the set command: `nmstatectl set desired_state.yaml`
-
-## Demos
-Want to see nmstate in action? Check out the [demos](./demos.md).
 
 ## Features
 - [ethernet](./examples.md#interfaces-ethernet)

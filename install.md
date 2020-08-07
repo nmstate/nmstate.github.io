@@ -23,6 +23,7 @@ Nmstate is in Fedora and EPEL 7 testing, you may install it using below
 commands.
 
  * Fedora 31+
+
 ```bash
 sudo dnf install nmstate
 ```
