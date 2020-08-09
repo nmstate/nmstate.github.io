@@ -14,6 +14,24 @@ NetworkManager acts as the main (and currently the only) provider supported.
 
 Visit the [examples page](./examples.md) to see what it can do.
 
+## Features
+- [ethernet](./examples.md#interfaces-ethernet)
+- [bond](./examples.md#interfaces-bond)
+- [Vlan](./examples.md#interfaces-vlan)
+- [Vxlan](./examples.md#interfaces-vxlan)
+- [Linux bridge](./examples.md#interface-linux-bridge)
+- [ovs-bridge](./examples.md#interfaces-ovs-bridge)
+- [dummy](./examples.md#interfaces-dummy)
+- [team](./examples.md#interfaces-team)
+- [IPv4/IPv6 addresses (static)](./examples.md#interfaces-ethernet)
+- [IPv4/IPv6 route](./examples.md#route)
+- [IPv4/IPv6 DNS client configuration](./examples.md#dns)
+- [LLDP](./features/lldp.md)
+- [Open vSwitch Patch Port](./features/ovs_patch.md)
+- [Open vSwitch database plugin](./features/ovsdb.md)
+
+## Example output
+
 ```json
 {
     "interfaces": [
@@ -42,25 +60,20 @@ Visit the [examples page](./examples.md) to see what it can do.
 }
 ```
 
-## Features
-- [ethernet](./examples.md#interfaces-ethernet)
-- [bond](./examples.md#interfaces-bond)
-- [Vlan](./examples.md#interfaces-vlan)
-- [Vxlan](./examples.md#interfaces-vxlan)
-- [Linux bridge](./examples.md#interface-linux-bridge)
-- [ovs-bridge](./examples.md#interfaces-ovs-bridge)
-- [dummy](./examples.md#interfaces-dummy)
-- [team](./examples.md#interfaces-team)
-- [IPv4/IPv6 addresses (static)](./examples.md#interfaces-ethernet)
-- [IPv4/IPv6 route](./examples.md#route)
-- [IPv4/IPv6 DNS client configuration](./examples.md#dns)
-- [LLDP](./features/lldp.md)
-- [Open vSwitch Patch Port](./features/ovs_patch.md)
-- [Open vSwitch database plugin](./features/ovsdb.md)
-
 ## Documentation
 - [Nmstate Quick Start Guide](./user/quick_guide.md)
 - [Nmstate Developer Guide](./devel/dev_guide.md)
 - [Design](./devel/design/networking-api.md)
 - [API documentation](./devel/api.md)
 - [Plugin Design](./devel/plugin.md)
+
+## Contacts
+- You can find us on #nmstate IRC channel on freenode. The maintainers are
+  Gris, edwardh and ffmancera, please feel free to ask whatever you need!
+
+- Nmstate uses the nmstate-devel@lists.fedorahosted.org for discussions. To
+  subscribe you can send an email with 'subscribe' in the subject to
+  nmstate-devel-join@lists.fedorahosted.org or visit the [mailing list
+page](https://lists.fedorahosted.org/admin/lists/nmstate-devel.lists.fedorahosted.org).
+
+- You can also report any issue on our [official Github repository](https://github.com/nmstate/nmstate)
