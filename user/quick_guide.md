@@ -4,7 +4,7 @@
 
 This guide is helpful to install Nmstate from source, for installing stable
 release or other installation methods, pleaser refer to [Nmstate installation
-guide](../install.md)
+guide](./install.md)
 
 ### Dependencies
 
