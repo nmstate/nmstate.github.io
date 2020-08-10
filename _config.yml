@@ -7,6 +7,7 @@ github:
 include:
  - nmstate.gpg
  - utils
+ - LICENSE.md
 markdown: kramdown
 kramdown:
   input: GFM
