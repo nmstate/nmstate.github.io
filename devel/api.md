@@ -34,10 +34,10 @@
         * [`InterfaceIPv4.AUTO_ROUTES`](#interfaceipv4auto_routes)
         * [`InterfaceIPv4.AUTO_GATEWAY`](#interfaceipv4auto_gateway)
         * [`InterfaceIPv4.AUTO_DNS`](#interfaceipv4auto_dns)
+        * [`InterfaceIPv4.AUTO_ROUTE_TABLE_ID`](#interfaceipv4auto_route_table_id)
         * [`InterfaceIPv4.ADDRESS`](#interfaceipv4address)
             * [`InterfaceIPv4.ADDRESS_IP`](#interfaceipv4address_ip)
             * [`InterfaceIPv4.ADDRESS_PREFIX_LENGTH`](#interfaceipv4address_prefix_length)
-        * [`InterfaceIPv4.AUTO_ROUTE_TABLE_ID`](#interfaceipv4auto_route_table_id)
     * [`Interface.IPV6`](#interfaceipv6)
         * [`InterfaceIPv6.ENABLED`](#interfaceipv6enabled)
         * [`InterfaceIPv6.DHCP`](#interfaceipv6dhcp)
@@ -45,10 +45,10 @@
         * [`InterfaceIPv6.AUTO_ROUTES`](#interfaceipv6auto_routes)
         * [`InterfaceIPv6.IGNORE_GATEWAY`](#interfaceipv6ignore_gateway)
         * [`InterfaceIPv6.IGNORE_DNS`](#interfaceipv6ignore_dns)
+        * [`InterfaceIPv6.AUTO_ROUTE_TABLE_ID`](#interfaceipv6auto_route_table_id)
         * [`InterfaceIPv6.ADDRESS`](#interfaceipv6address)
             * [`InterfaceIPv6.ADDRESS_IP`](#interfaceipv6address_ip)
             * [`InterfaceIPv6.ADDRESS_PREFIX_LENGTH`](#interfaceipv6address_prefix_length)
-        * [`InterfaceIPv6.AUTO_ROUTE_TABLE_ID`](#interfaceipv6auto_route_table_id)
 * [Ethernet](#ethernet)
     * [`Ethernet.AUTO_NEGOTIATION`](#ethernetauto_negotiation)
     * [`Ethernet.DUPLEX`](#ethernetduplex)
@@ -71,6 +71,7 @@
     * [`VXLAN.REMOTE`](#vxlanremote)
     * [`VXLAN.DESTINATION_PORT`](#vxlandestination_port)
 * [Linux Bridge](#linux-bridge)
+    * [Limitations of Linux Bridge Interface](#limitations-of-linux-bridge-interface)
     * [`LinuxBridge.Options.GROUP_FORWARD_MASK`](#linuxbridgeoptionsgroup_forward_mask)
     * [`LinuxBridge.Options.MAC_AGEING_TIME`](#linuxbridgeoptionsmac_ageing_time)
     * [`LinuxBridge.Options.MULTICAST_SNOOPING`](#linuxbridgeoptionsmulticast_snooping)
@@ -116,20 +117,15 @@
     * [`OVSBridge.PORT_SUBTREE`](#ovsbridgeport_subtree)
         * [`OVSBridge.Port.NAME`](#ovsbridgeportname)
 * [Interface - Open vSwitch(OVS) Internal](#interface---open-vswitchovs-internal)
-    * [`OVSInterface.PATCH_CONFIG_SUBTREE`](#ovsinterfacepatch)
-        * [`OVSInterface.Patch.PEER`](#ovsinterfacepatchpeer)
-* [Interface - Team](#nterface---team)
-    * [`Team.CONFIG_SUBTREE`](#teamconfig_subtree)
-    * [`Team.PORT_SUBTREE`](#teamport_subtree)
-        * [`Team.Port.NAME`](#teamportname)
-    * [`Team.RUNNER_SUBTREE`](#teamrunner_subtree)
-        * [Team.Runner.NAME](#teamrunnername)
-        * [Team.Runner.RunnerMode.LOAD_BALANCE](#teamrunnerrunnermodeload_balance)
+    * [`OVSInterface.Patch.PEER`](#ovsinterfacepatchpeer)
+* [Team](#team)
+    * [`Team.Port.NAME`](#teamportname)
+    * [`Team.Runner.NAME`](#teamrunnername)
 * [LLDP](#lldp)
     * [`LLDP.CONFIG_SUBTREE`](#lldpconfig_subtree)
-    * [`LLDP.ENABLED`](#lldpenabled)
-    * [`LLDP.NEIGHBORS_SUBTREE`](#lldpneighbors_subtree)
-        * [`LLDP.Neighbors.DESCRIPTION`](#lldpneighborsdescription)
+        * [`LLDP.ENABLED`](#lldpenabled)
+        * [`LLDP.NEIGHBORS_SUBTREE`](#lldpneighbors_subtree)
+        * [`LLDP.Nieghbors.DESCRIPTION`](#lldpnieghborsdescription)
         * [`LLDP.Neighbors.TLV_TYPE`](#lldpneighborstlv_type)
         * [`LLDP.Neighbors.TLV_SUBTYPE`](#lldpneighborstlv_subtype)
         * [`LLDP.Neighbors.ORGANIZATION_CODE`](#lldpneighborsorganization_code)
@@ -141,6 +137,7 @@
     * [`Route.METRIC`](#routemetric)
 * [Route Rule](#route-rule)
     * [`RouteRule.CONFIG`](#routeruleconfig)
+    * [`RouteRule.CONFIG`](#routeruleconfig-1)
     * [`RouteRule.IP_FROM`](#routeruleip_from)
     * [`RouteRule.IP_TO`](#routeruleip_to)
     * [`RouteRule.PRIORITY`](#routerulepriority)
@@ -908,6 +905,7 @@ Default: 4789
 Besides basic interface properties, each Linux Bridge interface state also
 contains a dictionary saved in key `LinuxBridge.CONFIG_SUBTREE`.
 
+
 Example:
 
 ```python
@@ -941,6 +939,30 @@ Example:
     }]
 }
 ```
+## Limitations of Linux Bridge Interface
+
+If `Interface.MAC_ADDRESS` is not defined in desire state of Linux Bridge,
+nmstate will trust kernel and systemd to determine the MAC address of this
+bridge:
+
+ * For RHEL/CentOS 8, the MAC of first attached port will be used.
+ * For Fedora 31+ or other distribution with systemd 242+, systemd will
+   generate random MAC address with interface name as seed.
+
+If you want to enforcing bridge to use MAC address of first attached port,
+you may create `/etc/systemd/network/98-bridge-inherit-mac.link` with below
+contents:
+
+```
+[Match]
+Type=bridge
+
+[Link]
+MACAddressPolicy=none
+```
+
+Of course, you can always explicitly define assign a MAC address to a bridge
+without worrying above.
 
 ## `LinuxBridge.Options.GROUP_FORWARD_MASK`
 
