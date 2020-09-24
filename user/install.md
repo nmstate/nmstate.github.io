@@ -42,7 +42,7 @@ git master branch. Only for develop use.
  * Fedora 31+, CentOS/RHEL 8
 
 ```bash
-sudo dnf copr enable nmstate/nmstate-git-fedora
+sudo dnf copr enable nmstate/nmstate-git
 sudo dnf install nmstate
 ```
 
