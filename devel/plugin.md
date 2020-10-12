@@ -14,6 +14,9 @@
 The nmstate-0.3.2 release brings the plugin support which allows user to
 managing the network via their own plugin.
 
+Since nmstate-0.4, the nispor project is used for kernel network information
+query, plugin should fill the user space informations only and perform.
+
 ### How to Install and Load the Plugin
 
 If `NMSTATE_PLUGIN_DIR` is defined as system environment variable in the
@@ -64,6 +67,18 @@ class FooPlugin(NmstatePlugin):
                 "foo": {"a": 1, "b": 2},
             }
         ]
+    def apply_changes(self, net_state, save_to_disk):
+        pass
+
+    def create_checkpoint(self, timeout=60):
+        return "string_for_checkpoint"
+
+    def rollback_checkpoint(self, checkpoint=None):
+        pass
+
+    def destroy_checkpoint(self, checkpoint=None):
+        pass
+
 
 NMSTATE_PLUGIN = FooPlugin
 ```
@@ -79,9 +94,10 @@ the plugin will be.
  * The apply and checkpoint actions of each loaded plugins are invoked in the
    order of priority from low to high.
 
- * Only the highest priority plugin with
-   `NmstatePlugin.PLUGIN_CAPABILITY_ROUTE` capability will be used for
-   route querying and modifying.
+ * All routes provided by plugin with
+   `NmstatePlugin.PLUGIN_CAPABILITY_ROUTE` capability will be included on
+   showing. Any plugin want to handle route modification should do it in
+   `apply_changes()` function.
 
  * Only the highest priority plugin with
    `NmstatePlugin.PLUGIN_CAPABILITY_DNS` capability will be used for
