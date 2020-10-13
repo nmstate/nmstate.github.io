@@ -108,7 +108,7 @@
 * [Interface - Bond](#interface---bond)
     * [`Bond.MODE`](#bondmode)
     * [`Bond.OPTIONS_SUBTREE`](#bondoptions_subtree)
-    * [`Bond.SLAVES`](#bondslaves)
+    * [`Bond.PORT`](#bondport)
 * [Interface - Open vSwitch(OVS) Bridge](#interface---open-vswitchovs-bridge)
     * [`OVSBridge.Options.FAIL_MODE`](#ovsbridgeoptionsfail_mode)
     * [`OVSBridge.Options.MCAST_SNOOPING_ENABLE`](#ovsbridgeoptionsmcast_snooping_enable)
@@ -1215,7 +1215,7 @@ Example:
             Bond.CONFIG_SUBTREE: {
                 Bond.MODE: "balance-rr",
                 Bond.OPTIONS_SUBTREE: {},
-                Bond.SLAVES: ["eth1"]
+                Bond.PORT: ["eth1"]
             },
         }
     ]
@@ -1237,8 +1237,9 @@ The bond mode in kernel. Possible values are:
 
 Please refer to [kernel document for detail][bond-kernel-doc].
 
-When changing bond mode, the `Bond.OPTIONS` will not merge from current state.
-User is required to provide full desire bond options when switching bond mode.
+When changing bond mode, the `Bond.OPTIONS_SUBTREE` will not merge from current
+state.  User is required to provide full desire bond options when switching
+bond mode.
 
 ## `Bond.OPTIONS_SUBTREE`
 
@@ -1247,13 +1248,15 @@ Type: `dictionary`
 The dictionary of bond options.
 Please refer to [kernel document for detail][bond-kernel-doc].
 
+Set to `Bond.OPTIONS_SUBTREE: {}` will revert all bond options back to kernel
+defaults.
 
-## `Bond.SLAVES`
+## `Bond.PORT`
 
 Type: list of string
 
-The names of bond slave interfaces.
-This property does not support partial editing, full list of salves is required
+The names of bond port interfaces.
+This property does not support partial editing, full list of ports is required
 in desired state.
 
 # Interface - Open vSwitch(OVS) Bridge
