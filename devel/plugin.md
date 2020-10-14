@@ -79,6 +79,10 @@ class FooPlugin(NmstatePlugin):
     def destroy_checkpoint(self, checkpoint=None):
         pass
 
+    @property
+    def is_supplemental_only(self):
+        return True  # If your plugin does not introduce user space interfaces
+
 
 NMSTATE_PLUGIN = FooPlugin
 ```
