@@ -87,7 +87,7 @@ interfaces:
   state: up
   ipv4:
     address:
-    - ip: 10.10.10.10
+    - ip: 192.0.2.0
       prefix-length: 24
     enabled: true
   link-aggregation:
