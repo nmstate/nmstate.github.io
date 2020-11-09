@@ -110,6 +110,7 @@
     * [`Bond.OPTIONS_SUBTREE`](#bondoptions_subtree)
     * [`Bond.PORT`](#bondport)
 * [Interface - Open vSwitch(OVS) Bridge](#interface---open-vswitchovs-bridge)
+    * [Limitations of OpenvSwitch Interfaces](#limitations-of-openvswitch-interfaces)
     * [`OVSBridge.Options.FAIL_MODE`](#ovsbridgeoptionsfail_mode)
     * [`OVSBridge.Options.MCAST_SNOOPING_ENABLE`](#ovsbridgeoptionsmcast_snooping_enable)
     * [`OVSBridge.Options.RSTP`](#ovsbridgeoptionsrstp)
@@ -119,6 +120,7 @@
 * [Interface - Open vSwitch(OVS) Internal](#interface---open-vswitchovs-internal)
     * [`OVSInterface.Patch.PEER`](#ovsinterfacepatchpeer)
 * [Team](#team)
+    * [Limitations of Team interface](#limitations-of-team-interface)
     * [`Team.Port.NAME`](#teamportname)
     * [`Team.Runner.NAME`](#teamrunnername)
 * [LLDP](#lldp)
@@ -1292,6 +1294,11 @@ Example:
     }]
 }
 ```
+## Limitations of OpenvSwitch Interfaces
+
+When certain OVS interfaces interface is not created by NetworkManager or
+nmstate, the `libnmstate.show()` might showing the incorrect running state of
+it.
 
 ## `OVSBridge.Options.FAIL_MODE`
 
@@ -1377,6 +1384,11 @@ Example:
 These values are based on the teamd JSON API. For further information please
 refer to [teamd manual
 page](https://github.com/jpirko/libteam/blob/master/man/teamd.conf.5)
+
+## Limitations of Team interface
+
+When certain team interface is not created by NetworkManager or nmstate,
+the `libnmstate.show()` might showing the incorrect running state of it.
 
 ## `Team.Port.NAME`
 
