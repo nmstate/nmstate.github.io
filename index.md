@@ -23,7 +23,7 @@ Visit the [examples page](./examples.md) to see what it can do.
 - [ovs-bridge](./examples.md#interfaces-ovs-bridge)
 - [dummy](./examples.md#interfaces-dummy)
 - [team](./examples.md#interfaces-team)
-- [veth](./examples.md#interfaces-veth)
+- [veth](./features/veth.md)
 - [IPv4/IPv6 addresses (static)](./examples.md#interfaces-ethernet)
 - [IPv4/IPv6 route](./examples.md#route)
 - [IPv4/IPv6 DNS client configuration](./examples.md#dns)
