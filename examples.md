@@ -223,6 +223,52 @@ interfaces:
       name: loadbalance
 ```
 
+## Interfaces: Veth
+
+Create a veth interface and a peer with link-up:
+
+```yaml
+---
+interfaces:
+- name: veth1
+  type: veth
+  state: up
+  veth:
+    peer: veth2
+```
+
+To create a veth with the peers being hold by an ovs bridge and a linux bridge,
+the peer must be defined in the desired state too.
+
+```yaml
+---
+interfaces:
+- name: veth1
+  type: veth
+  state: up
+  veth:
+    peer: veth2
+- name: veth2
+  type: veth
+  state: up
+  veth:
+    peer: veth1
+- name: ovs-br0
+  type: ovs-bridge
+  state: up
+  bridge:
+    options:
+      stp: true
+    port:
+      - name: veth1
+- name: linux-br0
+  type: linux-bridge
+  state: up
+  bridge:
+    port:
+      - name: veth2
+```
+
 ## Route
 
 ```yaml
