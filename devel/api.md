@@ -123,6 +123,9 @@
     * [Limitations of Team interface](#limitations-of-team-interface)
     * [`Team.Port.NAME`](#teamportname)
     * [`Team.Runner.NAME`](#teamrunnername)
+* [Veth](#veth)
+    * [`Veth.CONFIG_SUBTREE`](#vethconfig_subtreee)
+        * [`Veth.PEER`](#vethpeer)
 * [LLDP](#lldp)
     * [`LLDP.CONFIG_SUBTREE`](#lldpconfig_subtree)
         * [`LLDP.ENABLED`](#lldpenabled)
@@ -1404,6 +1407,37 @@ The mode in which the interface is operating. Currently we are supporting the
 following values:
 
  * `Team.Runner.RunnedMode.LOAD_BALANCE`
+
+# Veth
+
+Besides basic interface properties, each Veth interface state also contains a
+dictionary saved in key `Veth.CONFIG_SUBTREE`. In addition, this dictionary
+contains a property named `Veth.PEER`.
+
+Example:
+
+```python
+{
+    Interface.KEY : [
+        Interface.NAME: "veth0",
+        Interface.TYPE: InterfaceType.VETH,
+        Interface.STATE: InterfaceState.UP,
+        Veth.CONFIG_SUBTREE: {
+	    Veth.PEER: "veth1"
+        }
+    ]
+}
+```
+
+## `Veth.CONFIG_SUBTREE`
+
+It contains the option to set the veth peer.
+
+### `Veth.PEER`
+
+Type: `string`
+
+Set the veth interface peer.
 
 # LLDP
 
