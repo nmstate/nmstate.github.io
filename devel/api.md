@@ -26,6 +26,7 @@
     * [`Interface.STATE`](#interfacestate)
     * [`Interface.MTU`](#interfacemtu)
     * [`Interface.MAC_ADDRESS`](#interfacemac_address)
+    * [`Interface.COPY_MAC_FROM`](#interfacecopy_mac_from)
     * [`Interface.DESCRIPTION`](#interfacedescription)
     * [`InterfaceIP`](#interfaceip)
     * [`Interface.IPV4`](#interfaceipv4)
@@ -124,7 +125,7 @@
     * [`Team.Port.NAME`](#teamportname)
     * [`Team.Runner.NAME`](#teamrunnername)
 * [Veth](#veth)
-    * [`Veth.CONFIG_SUBTREE`](#vethconfig_subtreee)
+    * [`Veth.CONFIG_SUBTREE`](#vethconfig_subtree)
         * [`Veth.PEER`](#vethpeer)
 * [LLDP](#lldp)
     * [`LLDP.CONFIG_SUBTREE`](#lldpconfig_subtree)
@@ -385,6 +386,30 @@ Type: `interger`
 The MAC address of interface.
 
 Type: `String` in the format of `EA:60:E4:08:17:F1`. Case insensitive.
+
+## `Interface.COPY_MAC_FROM`
+
+New in 1.0.2.
+
+Only valid fro `InterfaceType.BOND` and `InterfaceType.LINUX_BRIDGE`.
+The `Interface.COPY_MAC_FROM` could hold the name of port which you
+want this controller interface to use the same MAC with.
+
+For example, below yaml state will create/change linux bridge `br0` to
+use the MAC address of `eth2`.
+
+```yaml
+---
+interfaces:
+  - name: br0
+    type: linux-bridge
+    state: up
+    copy-mac-from: eth2
+    bridge:
+      port:
+      - name: eth2
+      - name: eth1
+```
 
 ## `Interface.DESCRIPTION`
 
