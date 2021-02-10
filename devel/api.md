@@ -391,7 +391,7 @@ Type: `String` in the format of `EA:60:E4:08:17:F1`. Case insensitive.
 
 New in 1.0.2.
 
-Only valid fro `InterfaceType.BOND` and `InterfaceType.LINUX_BRIDGE`.
+Only valid for `InterfaceType.BOND` and `InterfaceType.LINUX_BRIDGE`.
 The `Interface.COPY_MAC_FROM` could hold the name of port which you
 want this controller interface to use the same MAC with.
 
