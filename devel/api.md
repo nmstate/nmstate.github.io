@@ -135,15 +135,13 @@
 * [Virtual Routing and Forwarding (VRF)](#virtual-routing-and-forwarding-vrf)
     * [`VRF.ROUTE_TABLE_ID`](#vrfroute_table_id)
     * [`VRF.PORT_SUBTREE`](#vrfport_subtree)
-* [Linux Virtual Ethernet(veth)](#linux-virtual-ethernetveth)
-    * [`Veth.PEER`](#vethpeer)
 * [Team](#team)
     * [Limitations of Team interface](#limitations-of-team-interface)
     * [`Team.Port.NAME`](#teamportname)
     * [`Team.Runner.NAME`](#teamrunnername)
-* [Veth](#veth)
+* [Linux Virtual Ethernet(veth)](#linux-virtual-ethernetveth)
     * [`Veth.CONFIG_SUBTREE`](#vethconfig_subtree)
-        * [`Veth.PEER`](#vethpeer-1)
+        * [`Veth.PEER`](#vethpeer)
 * [LLDP](#lldp)
     * [`LLDP.CONFIG_SUBTREE`](#lldpconfig_subtree)
         * [`LLDP.ENABLED`](#lldpenabled)
@@ -1495,18 +1493,6 @@ Integer, the route table id this VRF is assigned to.
 
 List of string, the name of interfaces assigned to this VRF interface.
 
-# Linux Virtual Ethernet(veth)
-
-New in version 1.0.1.
-
-Besides basic interface properties, each veth interface state
-also contains a dictionary saved in key `Veth.CONFIG_SUBTREE` holding
-information for `Veth.PEER`.
-
-## `Veth.PEER`
-
-String, the interface name for this veth peer.
-
 # Team
 
 Besides basic interface properties, each Team interface state also contains a
@@ -1563,7 +1549,9 @@ following values:
 
  * `Team.Runner.RunnedMode.LOAD_BALANCE`
 
-# Veth
+# Linux Virtual Ethernet(veth)
+
+New in version 1.0.1.
 
 Besides basic interface properties, each Veth interface state also contains a
 dictionary saved in key `Veth.CONFIG_SUBTREE`. In addition, this dictionary
