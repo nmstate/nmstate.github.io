@@ -120,13 +120,30 @@
         * [`OVSBridge.Port.NAME`](#ovsbridgeportname)
 * [Interface - Open vSwitch(OVS) Internal](#interface---open-vswitchovs-internal)
     * [`OVSInterface.Patch.PEER`](#ovsinterfacepatchpeer)
+* [MAC VTAP](#mac-vtap)
+    * [`MacVtap.BASE_IFACE`](#macvtapbase_iface)
+    * [`MacVtap.MODE`](#macvtapmode)
+    * [`MacVtap.PROMISCUOUS`](#macvtappromiscuous)
+* [MAC VLAN](#mac-vlan)
+    * [`MacVlan.BASE_IFACE`](#macvlanbase_iface)
+    * [`MacVlan.MODE`](#macvlanmode)
+    * [`MacVlan.PROMISCUOUS`](#macvlanpromiscuous)
+* [IP over InfiniBand(IPoIB)](#ip-over-infinibandipoib)
+    * [`InfiniBand.BASE_IFACE`](#infinibandbase_iface)
+    * [`InfiniBand.MODE`](#infinibandmode)
+    * [`InfiniBand.PKEY`](#infinibandpkey)
+* [Virtual Routing and Forwarding (VRF)](#virtual-routing-and-forwarding-vrf)
+    * [`VRF.ROUTE_TABLE_ID`](#vrfroute_table_id)
+    * [`VRF.PORT_SUBTREE`](#vrfport_subtree)
+* [Linux Virtual Ethernet(veth)](#linux-virtual-ethernetveth)
+    * [`Veth.PEER`](#vethpeer)
 * [Team](#team)
     * [Limitations of Team interface](#limitations-of-team-interface)
     * [`Team.Port.NAME`](#teamportname)
     * [`Team.Runner.NAME`](#teamrunnername)
 * [Veth](#veth)
     * [`Veth.CONFIG_SUBTREE`](#vethconfig_subtree)
-        * [`Veth.PEER`](#vethpeer)
+        * [`Veth.PEER`](#vethpeer-1)
 * [LLDP](#lldp)
     * [`LLDP.CONFIG_SUBTREE`](#lldpconfig_subtree)
         * [`LLDP.ENABLED`](#lldpenabled)
@@ -171,6 +188,9 @@ The `libnmstate` package exposes the following API::
  * Submodules:
      * `error` -- [Exceptions][error]
      * `schema` -- Schema Constants
+
+All constants and functions are available since version 1.0.0 unless state
+explicitly.
 
 ## Query network state
 
@@ -352,6 +372,12 @@ Possible values:
  * `InterfaceType.OVS_INTERFACE`
  * `InterfaceType.VLAN`
  * `InterfaceType.VXLAN`
+ * `InterfaceType.TEAM`
+ * `InterfaceType.VRF`
+ * `InterfaceType.INFINIBAND`
+ * `InterfaceType.MAC_VLAN`
+ * `InterfaceType.MAC_VTAP`
+ * `InterfaceType.VETH`     (new in 1.0.1)
 
 ## `Interface.STATE`
 
@@ -367,12 +393,15 @@ Possible values:
 
  * `InterfaceState.DOWN`
 
-   Remove interface. Might change to bring interface link down in future
-   release.
+   Deactivate the interface but keep the configure.
+   Software based interface will be removed from kernel.
+   You may reactivate the interface with old config again by using
+   `InterfaceState.UP`.
+   The interface will be activated again after reboot.
 
  * `InterfaceState.ABSENT`
 
-   Remove interface.
+   Deactivate the interface and remove its persisted configurations.
 
 
 ## `Interface.MTU`
@@ -776,25 +805,25 @@ Example:
 ```python
 {
     Interface.KEY: [
-	{
-		Interface.NAME: "eth1",
-		Interface.TYPE: InterfaceType.ETHERNET,
-		Interface.STATE: InterfaceState.UP,
-		Ethernet.CONFIG_SUBTREE: {
-			Ethernet.SRIOV_SUBTREE: {
-				Ethernet.SRIOV.TOTAL_VFS: 1,
-				Ethernet.SRIOV.VFS_SUBTREE: [
-					{
-						Ethernet.SRIOV.VFS.ID: 0,
-						Ethernet.SRIOV.VFS.MAC_ADDRESS: 76:A5:0B:F1:8A:C6,
-						Ethernet.SRIOV.VFS.MAX_TX_RATE: 1000,
-						Ethernet.SRIOV.VFS.MIN_TX_RATE: 100,
-						Ethernet.SRIOV.VFS.TRUST: False,
-					}
-				],
-			}
-		}
-	}
+    {
+        Interface.NAME: "eth1",
+        Interface.TYPE: InterfaceType.ETHERNET,
+        Interface.STATE: InterfaceState.UP,
+        Ethernet.CONFIG_SUBTREE: {
+            Ethernet.SRIOV_SUBTREE: {
+                Ethernet.SRIOV.TOTAL_VFS: 1,
+                Ethernet.SRIOV.VFS_SUBTREE: [
+                    {
+                        Ethernet.SRIOV.VFS.ID: 0,
+                        Ethernet.SRIOV.VFS.MAC_ADDRESS: 76:A5:0B:F1:8A:C6,
+                        Ethernet.SRIOV.VFS.MAX_TX_RATE: 1000,
+                        Ethernet.SRIOV.VFS.MIN_TX_RATE: 100,
+                        Ethernet.SRIOV.VFS.TRUST: False,
+                    }
+                ],
+            }
+        }
+    }
     ]
 }
 ```
@@ -1281,13 +1310,18 @@ Please refer to [kernel document for detail][bond-kernel-doc].
 Set to `Bond.OPTIONS_SUBTREE: {}` will revert all bond options back to kernel
 defaults.
 
+Nmstate will not perform verification on whether desired bond options is
+applied to kernel due to complexity of it, please verify the bond options by
+yourself.
+
 ## `Bond.PORT`
 
 Type: list of string
 
 The names of bond port interfaces.
 This property does not support partial editing, full list of ports is required
-in desired state.
+in desired state. If not defined in desire state, current status will be
+preserved.
 
 # Interface - Open vSwitch(OVS) Bridge
 
@@ -1377,6 +1411,102 @@ Type: `string`
 
 Interface patch peer name.
 
+# MAC VTAP
+
+Besides basic interface properties, each Macvtap interface state also contains
+a dictionary saved in key `MacVtap.CONFIG_SUBTREE` holding information
+for `MacVtap.BASE_IFACE`, `MacVtap.MODE` and `MacVtap.PROMISCUOUS`.
+
+## `MacVtap.BASE_IFACE`
+
+The interface name which current Macvtap is based on.
+
+## `MacVtap.MODE`
+
+The mode of Macvtap interface. Possible values are:
+ * `MacVtap.Mode.VEPA`
+ * `MacVtap.Mode.BRIDGE`
+ * `MacVtap.Mode.PRIVATE`
+ * `MacVtap.Mode.PASSTHRU`
+ * `MacVtap.Mode.SOURCE`
+
+## `MacVtap.PROMISCUOUS`
+
+Bool. Whether promiscuous mode is enabled or not.
+
+# MAC VLAN
+
+Besides basic interface properties, each Macvvlan interface state also contains
+a dictionary saved in key `MacVlan.CONFIG_SUBTREE` holding information
+for `MacVlan.BASE_IFACE`, `MacVlan.MODE` and `MacVlan.PROMISCUOUS`.
+
+## `MacVlan.BASE_IFACE`
+
+The interface name which current Macvvlan is based on.
+
+## `MacVlan.MODE`
+
+The mode of Macvvlan interface. Possible values are:
+ * `MacVlan.Mode.VEPA`
+ * `MacVlan.Mode.BRIDGE`
+ * `MacVlan.Mode.PRIVATE`
+ * `MacVlan.Mode.PASSTHRU`
+ * `MacVlan.Mode.SOURCE`
+
+## `MacVlan.PROMISCUOUS`
+
+Bool. Whether promiscuous mode is enabled or not.
+
+# IP over InfiniBand(IPoIB)
+
+Besides basic interface properties, each IP over InfiniBand interface state
+also contains a dictionary saved in key `InfiniBand.CONFIG_SUBTREE` holding
+information for `InfiniBand.BASE_IFACE`, `InfiniBand.MODE` and
+`InfiniBand.PKEY`.
+
+## `InfiniBand.BASE_IFACE`
+
+The parent interface current IPoIB interface is based on.
+
+## `InfiniBand.MODE`
+
+IPoIB can run in two modes of operation: Connected
+mode(`InfiniBand.Mode.CONNECTED`) and Datagram
+mode(`InfiniBand.Mode.DATAGRAM`).
+
+## `InfiniBand.PKEY`
+
+The Partition Keys (PKeys) used to partition IPoIB communication. You may
+use integer or hex string.
+The `InfiniBand.DEFAULT_PKEY` indicating this IPoIB interface is not using
+pkey partitioning.
+
+# Virtual Routing and Forwarding (VRF)
+
+Besides basic interface properties, each VRF interface state
+also contains a dictionary saved in key `VRF.CONFIG_SUBTREE` holding
+information for `VRF.ROUTE_TABLE_ID`, `VRF.PORT_SUBTREE`.
+
+## `VRF.ROUTE_TABLE_ID`
+
+Integer, the route table id this VRF is assigned to.
+
+## `VRF.PORT_SUBTREE`
+
+List of string, the name of interfaces assigned to this VRF interface.
+
+# Linux Virtual Ethernet(veth)
+
+New in version 1.0.1.
+
+Besides basic interface properties, each veth interface state
+also contains a dictionary saved in key `Veth.CONFIG_SUBTREE` holding
+information for `Veth.PEER`.
+
+## `Veth.PEER`
+
+String, the interface name for this veth peer.
+
 # Team
 
 Besides basic interface properties, each Team interface state also contains a
@@ -1448,7 +1578,7 @@ Example:
         Interface.TYPE: InterfaceType.VETH,
         Interface.STATE: InterfaceState.UP,
         Veth.CONFIG_SUBTREE: {
-	    Veth.PEER: "veth1"
+            Veth.PEER: "veth1"
         }
     ]
 }
@@ -1602,15 +1732,15 @@ Example:
 
 ```python
 {
-	RouteRule.KEY: {
-		RouteRule.CONFIG: [
-			{
-				RouteRule.IP_TO: 192.0.2.0/24,
-				RouteRule.PRIORITY: 1000,
-				RouteRule.ROUTE_TABLE: 50,
-			},
-		],
-	},
+    RouteRule.KEY: {
+        RouteRule.CONFIG: [
+            {
+                RouteRule.IP_TO: 192.0.2.0/24,
+                RouteRule.PRIORITY: 1000,
+                RouteRule.ROUTE_TABLE: 50,
+            },
+        ],
+    },
 }
 ```
 
