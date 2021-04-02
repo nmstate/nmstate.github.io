@@ -30,6 +30,7 @@ Visit the [examples page](./examples.md) to see what it can do.
 - [LLDP](./features/lldp.md)
 - [Open vSwitch Patch Port](./features/ovs_patch.md)
 - [Open vSwitch database plugin](./features/ovsdb.md)
+- [Generate Network Configuration](./features/gen_conf.md)
 
 ## Example output
 
