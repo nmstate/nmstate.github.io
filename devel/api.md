@@ -788,7 +788,22 @@ Ethernet speed in the unit of Mbps.
 ## `Ethernet.SRIOV_SUBTREE`
 
 If the ethernet interface supports SR-IOV, the `Ethernet.SRIOV_SUBTREE`
-dictionary allows to configure it.  Nmstate supports the following options:
+dictionary allows to configure it.
+
+### Limitations of SR-IOV configuration
+
+* Some NICs don't use the standard kernel API to create VF or change the number
+ of VF, such as mlx4_en, cxgb4 etc. Try running
+ `echo 1 > /sys/class/net/${interface}/device/sriov_numvfs` to create a VF, if
+ fails, then nmstate might not support manipulating SR-IOV on these NICs.
+* For some NICs, the MAC address of a VF might vary automatically even though
+you have specified it by nmstate, because PF enforces a MAC override. For such
+NICs, configuring MAC on the corresponding interface of a VF, instead of on the
+VF itself, is recommended.
+* Not all the SR-IOV options listed below can be configured, it depends on a
+NIC's SR-IOV capabilities.
+
+Nmstate supports the following options:
 
 ### `Ethernet.SRIOV.TOTAL_VFS`
 
