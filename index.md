@@ -71,8 +71,9 @@ Visit the [examples page](./examples.md) to see what it can do.
 - [Varlink support for libnmstate](./devel/varlink-libnmstate.md)
 
 ## Contacts
-- You can find us on #nmstate IRC channel on freenode. The maintainers are
-  Gris, edwardh and ffmancera, please feel free to ask whatever you need!
+- You can find us on #nmstate IRC channel on [Libera](https://libera.chat/).
+  The maintainers are Gris, edwardh and ffmancera, please feel free to ask
+  whatever you need!
 
 - Nmstate uses the nmstate-devel@lists.fedorahosted.org for discussions. To
   subscribe you can send an email with 'subscribe' in the subject to
