@@ -306,3 +306,26 @@ dns-resolver:
     - 2001:4860:4860::8888
     - 8.8.8.8
 ```
+
+## Dynamic IP Configuration
+
+```yaml
+---
+interfaces:
+  - name: eth1
+    type: ethernet
+    state: up
+    ipv4:
+      enabled: true
+      dhcp: true
+      auto-dns: true
+      auto-gateway: true
+      auto-routes: true
+    ipv6:
+      enabled: true
+      autoconf: true
+      dhcp: true
+      auto-dns: true
+      auto-gateway: true
+      auto-routes: true
+```
