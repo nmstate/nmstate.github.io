@@ -1,3 +1,25 @@
+<!-- vim-markdown-toc GFM -->
+
+* [NMState state examples](#nmstate-state-examples)
+    * [Interfaces: Generic state manipulation](#interfaces-generic-state-manipulation)
+        * [Setting the iface up:](#setting-the-iface-up)
+        * [Setting the iface down](#setting-the-iface-down)
+        * [Removing an iface:](#removing-an-iface)
+    * [Interfaces: ethernet](#interfaces-ethernet)
+    * [Interfaces: bond](#interfaces-bond)
+    * [Interfaces: ovs-bridge](#interfaces-ovs-bridge)
+    * [Interfaces: dummy](#interfaces-dummy)
+    * [Interfaces: VLAN](#interfaces-vlan)
+    * [Interfaces: VXLAN](#interfaces-vxlan)
+    * [Interface: Linux Bridge](#interface-linux-bridge)
+    * [Interfaces: Team](#interfaces-team)
+    * [Interfaces: Veth](#interfaces-veth)
+    * [Route](#route)
+    * [DNS](#dns)
+    * [Dynamic IP Configuration](#dynamic-ip-configuration)
+
+<!-- vim-markdown-toc -->
+
 # NMState state examples
 This page includes various configuration state examples of various entities.
 For readability, the examples are shown in yaml format.
