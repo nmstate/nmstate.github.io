@@ -23,7 +23,7 @@ In order to support specific capabilities, additional packages are required:
 ```bash
 git clone https://github.com/nmstate/nmstate.git
 cd nmstate
-pip install --user --upgrade
+pip install --user --upgrade .
 ```
 
 Note: In order to report current state, installing Nmstate as a non-root user
