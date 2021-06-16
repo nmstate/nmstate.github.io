@@ -44,8 +44,8 @@
         * [`InterfaceIPv6.DHCP`](#interfaceipv6dhcp)
         * [`InterfaceIPv6.AUTOCONF`](#interfaceipv6autoconf)
         * [`InterfaceIPv6.AUTO_ROUTES`](#interfaceipv6auto_routes)
-        * [`InterfaceIPv6.IGNORE_GATEWAY`](#interfaceipv6ignore_gateway)
-        * [`InterfaceIPv6.IGNORE_DNS`](#interfaceipv6ignore_dns)
+        * [`InterfaceIPv6.AUTO_GATEWAY`](#interfaceipv6auto_gateway)
+        * [`InterfaceIPv6.AUTO_DNS`](#interfaceipv6auto_dns)
         * [`InterfaceIPv6.AUTO_ROUTE_TABLE_ID`](#interfaceipv6auto_route_table_id)
         * [`InterfaceIPv6.ADDRESS`](#interfaceipv6address)
             * [`InterfaceIPv6.ADDRESS_IP`](#interfaceipv6address_ip)
@@ -55,6 +55,7 @@
     * [`Ethernet.DUPLEX`](#ethernetduplex)
     * [`Ethernet.SPEED`](#ethernetspeed)
     * [`Ethernet.SRIOV_SUBTREE`](#ethernetsriov_subtree)
+        * [Limitations of SR-IOV configuration](#limitations-of-sr-iov-configuration)
         * [`Ethernet.SRIOV.TOTAL_VFS`](#ethernetsriovtotal_vfs)
         * [`Ethernet.SRIOV.VFS_SUBTREE`](#ethernetsriovvfs_subtree)
             * [`Ethernet.SRIOV.VFS.ID`](#ethernetsriovvfsid)
@@ -666,7 +667,7 @@ Possible values:
 
    Ignore routes(including gateway) retrieved from IPv6 router advertisement.
 
-### `InterfaceIPv6.IGNORE_GATEWAY`
+### `InterfaceIPv6.AUTO_GATEWAY`
 
 Type: `bool`
 
@@ -676,7 +677,7 @@ Possible values:
 
  * `False` - Ignore gateway retrieved from IPv6 router advertisement.
 
-### `InterfaceIPv6.IGNORE_DNS`
+### `InterfaceIPv6.AUTO_DNS`
 
 Type: `bool`
 
@@ -684,12 +685,12 @@ Possible values:
 
  * `True`
 
-   Apply DNS client configuration retrieved from IPv6 router advertisement and
+   Ignore DNS client configuration retrieved from IPv6 router advertisement and
    DHCPv6.
 
  * `False`
 
-   Ignore DNS client configuration retrieved from IPv6 router advertisement and
+   Apply DNS client configuration retrieved from IPv6 router advertisement and
    DHCPv6.
 
 ### `InterfaceIPv6.AUTO_ROUTE_TABLE_ID`
