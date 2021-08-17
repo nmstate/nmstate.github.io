@@ -24,7 +24,7 @@ sudo ip link add eth1 type veth peer name eth1peer
 sudo ip link set eth1 up
 sudo ip link set eth1peer up
 sudo nmcli device set eth1 managed yes
-cat | sudo nmstatectl set - << EOL
+cat | sudo nmstatectl apply - << EOL
 interfaces:
   - name: eth1
     type: ethernet
@@ -42,7 +42,7 @@ sudo tcpreplay --intf1=eth1peer /tmp/lldp.pcap
 ### Enable LLDP
 
 ```bash
-cat | sudo nmstatectl set - << EOL
+cat | sudo nmstatectl apply - << EOL
 interfaces:
   - name: eth1
     type: ethernet

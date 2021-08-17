@@ -1825,6 +1825,7 @@ situations:
  * Has interface configured as static IP address and static default gateway.
  * Has interface configured as dynamic IP with `InterfaceIP.AUTO_DNS: False`.
 
+
 ## `DNS.SEARCH`
 
 Type: list of string
@@ -1837,6 +1838,8 @@ Type: list of string
 
 Name server IP addresses.
 
+Placing IPv4/IPv6 name server in the middle of IPv6/IPv4 name servers is not
+supported yet.
 
 [py_example]: ./py_example.md
 [rfc-dhcpv4-classless-route]: https://tools.ietf.org/html/rfc3442

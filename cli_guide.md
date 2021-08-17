@@ -55,13 +55,13 @@ The network state may be changed interactively or by file:
   The `nmstatectl` will invoke the text editor defined by environment
   variable `EDITOR` for editing the network state in [YAML][yaml] format.
   Once the text editor quit, `nmstatectl` will try to apply it using
-  `nmstatectl set`.
+  `nmstatectl apply`.
   If there is any syntax error, you will be asked to edit again.
   Multiple interfaces are supported, check [`nmstatctl show`][ncl_show]
   for detail.
 
-* File-based: `nmstatectl set <state_file_path>`
-  `nmstatectl set` apply the network state from specifed file in YAML
+* File-based: `nmstatectl apply <state_file_path>`
+  `nmstatectl apply` apply the network state from specifed file in YAML
   or JSON format.
 
 By default, if the network state after state applied is not identical to the
@@ -71,13 +71,13 @@ Use the `--no-verify` argument to skip the verification.
 ## Manual Transaction Control
 
 The `nmstatectl` supports manual transaction control which allows user to
-decide whether rollback to previous(before `nmstatectl set`) state.
+decide whether rollback to previous(before `nmstatectl apply`) state.
 
 This command will create a checkpoint which later could be used for rollback
 or commit.
 
 ```bash
-nmstatectl set --no-commit [--timeout <TIMEOUT>]
+nmstatectl apply --no-commit [--timeout <TIMEOUT>]
 ```
 
 The checkpoint string will be the last line of `nmstatectl` output, example:

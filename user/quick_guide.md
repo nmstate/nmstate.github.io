@@ -140,7 +140,7 @@ And generates the following output:
 - Use `nmstatectl show > desired_state.yaml` to dump the current state to a
 file.
 - Edit the desired state with the new values.
-- Run the set command: `nmstatectl set desired_state.yaml`
+- Run the set command: `nmstatectl apply desired_state.yaml`
 
 ### Using libnmstate
 
