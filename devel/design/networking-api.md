@@ -1,5 +1,9 @@
 # Linux Networking API
 
+This document was created over the year 2018, much before this git repository
+and web site were a reality. It presents the original design of Nmstate and
+provides the motiviation for its existence.
+
 ## OVERVIEW
 Networking has always been a major subsystem in the Linux ecosystem. Its
 functionality is used broadly across domains, from connecting a local host to
