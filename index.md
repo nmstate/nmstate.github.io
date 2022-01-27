@@ -70,6 +70,10 @@ Visit the [examples page](./examples.md) to see what it can do.
 - [Plugin Design](./devel/plugin.md)
 - [Varlink support for libnmstate](./devel/varlink-libnmstate.md)
 
+## Related projects
+- [kubernetes-nmstate](https://nmstate.io/kubernetes-nmstate)
+- [nmpolicy](https://nmstate.io/nmpolicy)
+
 ## Contacts
 - You can find us on #nmstate IRC channel on [Libera](https://libera.chat/).
   The maintainers are Gris, edwardh and ffmancera, please feel free to ask
