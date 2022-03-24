@@ -34,7 +34,7 @@ EOL
 
 URL_BASE="https://github.com/nmstate/nmstate"
 
-wget ${URL_BASE}/raw/master/tests/integration/test_captures/lldp.pcap \
+wget ${URL_BASE}/raw/base/tests/integration/test_captures/lldp.pcap \
     -O /tmp/lldp.pcap
 sudo tcpreplay --intf1=eth1peer /tmp/lldp.pcap
 ```

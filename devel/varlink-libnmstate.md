@@ -6,7 +6,7 @@ programming language for examples, please refer [language binding document](ttps
 
 * [Varlink documentation]()
 * [libnmstate API documentation](https://www.nmstate.io/devel/api.html)
-* [Github Repository](https://github.com/nmstate/nmstate/tree/master/libnmstate/ifaces)
+* [Github Repository](https://github.com/nmstate/nmstate/)
 
 ## Installation of varlink
 Pypi:

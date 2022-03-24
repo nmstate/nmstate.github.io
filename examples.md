@@ -97,7 +97,7 @@ interfaces:
 ```
 
 ## Interfaces: bond
-The example defines a bond with two slaves and an IPv4 static address.
+The example defines a bond with two ports and an IPv4 static address.
 
 The bond mode is specified to be `balance-rr` and the `miimon` options is
 specified.
@@ -116,7 +116,7 @@ interfaces:
     mode: balance-rr
     options:
       miimon: '140'
-    slaves:
+    ports:
     - eth3
     - eth2
 

@@ -13,7 +13,7 @@ List all links on the node and control the links (admin) state.
 ## Demo-2: Bonds and Static IPv4
 Date: 13 Jun 2018
 
-Create a bond over several slaves and define an IPv4 static address.
+Create a bond over several ports and define an IPv4 static address.
 
 [![asciicast](https://asciinema.org/a/xZNpB6Pl7Vo0yyDlSpAduYEuE.png)](https://asciinema.org/a/xZNpB6Pl7Vo0yyDlSpAduYEuE)
 

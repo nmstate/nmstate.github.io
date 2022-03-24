@@ -408,7 +408,7 @@ libnmstate.apply(
             Interface.TYPE: InterfaceType.BOND
             Interface.STATE: InterfaceState.UP,
             Bond.CONFIG_SUBTREE: {
-                Bond.SLAVES: ['eth1', 'eth2', 'eth3']
+                Bond.PORT: ['eth1', 'eth2', 'eth3']
             }
         }
     ]
