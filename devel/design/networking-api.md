@@ -320,7 +320,7 @@ Phasing recommendations:
 1. PoC: Implement a minimalistic nmstate, use the proposed schema and commands
    to run it all from Ansible with the unified network modules.
 
-User Story: Setup an IPv4 address on a bond with two slaves, supporting the
+User Story: Setup an IPv4 address on a bond with two ports, supporting the
 concept of transaction.
 
 2. Introduce basic configuration capabilities for bonds, bridges, vlans and
@@ -356,7 +356,7 @@ types. It attempts to describe the general idea.
            +--rw mtu
            +--rw link-aggregation (appears when type is bond or team)
               +--rw mode
-              +--rw slaves
+              +--rw ports
                  +--rw iface-ref
               +--rw/ro options (per mode)
            +--rw bridge (appears when type is linux-bridge or OVS)
@@ -506,7 +506,7 @@ interfaces:
 ```
 
 #### Bond
-The example defines a bond with two slaves and an IPv4 static address.
+The example defines a bond with two ports and an IPv4 static address.
 
 The bond mode is specified to be `balance-rr` and the `miimon` options is
 specified.
@@ -525,7 +525,7 @@ interfaces:
     mode: balance-rr
     options:
       miimon: '140'
-    slaves:
+    ports:
     - eth3
     - eth2
 

@@ -249,7 +249,7 @@ Exception happens at pre-apply check, user should resubmit the amended
 desired state. Example:
     * JSON/YAML syntax issue.
     * Nmstate schema issue.
-    * Invalid value of desired property, like bond missing slave.
+    * Invalid value of desired property, like bond missing port.
 
 ### NmstatePermissionError
 
@@ -1450,7 +1450,7 @@ The mode of Macvtap interface. Possible values are:
 
 ## `MacVtap.PROMISCUOUS`
 
-Bool. Whether promiscuous mode is enabled or not.
+Bool. Whether accept all mac addresses mode is enabled or not.
 
 # MAC VLAN
 
@@ -1473,7 +1473,7 @@ The mode of Macvvlan interface. Possible values are:
 
 ## `MacVlan.PROMISCUOUS`
 
-Bool. Whether promiscuous mode is enabled or not.
+Bool. Whether accept all mac addresses mode is enabled or not.
 
 # IP over InfiniBand(IPoIB)
 

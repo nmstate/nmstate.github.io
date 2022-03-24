@@ -37,7 +37,7 @@ sudo dnf install nmstate
 
 ### Developer Branch
 We have copr repos which automatically build whenever a patch goes into
-git master branch. Only for develop use.
+git base branch. Only for develop use.
 
  * Fedora 31+, CentOS/RHEL 8
 

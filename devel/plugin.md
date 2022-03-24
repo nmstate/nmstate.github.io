@@ -132,4 +132,4 @@ indicating the ability of this plugin:
  * For any interface type not defined in current schema,
    please use `InterfaceType.OTHER`/`"other"`.
 
-[1]: https://github.com/nmstate/nmstate/blob/master/libnmstate/plugins/nmstate_plugin_ovsdb.py
+[1]: https://github.com/nmstate/nmstate/blob/base/libnmstate/plugins/nmstate_plugin_ovsdb.py
