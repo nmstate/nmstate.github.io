@@ -34,32 +34,32 @@ Visit the [examples page](./examples.md) to see what it can do.
 
 ## Example output
 
-```json
-{
-    "interfaces": [
-        {
-            "description": "Production Network",
-            "ethernet": {
-                "auto-negotiation": true,
-                "duplex": "full",
-                "speed": 1000
-            },
-            "ipv4": {
-                "address": [
-                    {
-                        "ip": "192.0.2.142",
-                        "prefix-length": 24
-                    }
-                ],
-                "enabled": true
-            },
-            "mtu": 1500,
-            "name": "eth3",
-            "state": "up",
-            "type": "ethernet"
-        }
-    ]
-}
+```yaml
+---
+dns:
+  config:
+    server:
+      - 192.0.2.1
+    search:
+      - example.org
+routes:
+  config:
+    - destination: 0.0.0.0/0
+      next-hop-interface: eth1
+      next-hop-address: 192.0.2.1
+interfaces:
+  - name: eth1
+    type: ethernet
+    description: Main-NIC
+    state: up
+    ipv4:
+      enabled: true
+      dhcp: false
+      address:
+        - ip: 192.0.2.9
+          prefix-length: 24
+    ipv6:
+      enabled: false
 ```
 
 ## Documentation
