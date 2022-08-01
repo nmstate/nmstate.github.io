@@ -116,7 +116,7 @@ interfaces:
     mode: balance-rr
     options:
       miimon: '140'
-    ports:
+    port:
     - eth3
     - eth2
 
