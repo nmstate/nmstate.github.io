@@ -35,7 +35,7 @@ should be enough. For change support, install the package as root.
 There are two ways of using Nmstate. The first one is using nmstatectl command
 line tool and the other one is using the libnmstate python library.
 
-### Using nmstatecl
+### Using nmstatectl
 
 The following command will dump the current networking state in yaml format:
 
