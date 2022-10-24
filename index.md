@@ -1,14 +1,16 @@
-# We are NMState!
+# Declarative Network API
+
 A declarative network manager API for hosts.
 
 ## What is it?
-NMState is a library with an accompanying command line tool that manages
+
+Nmstate is a library with an accompanying command line tool that manages
 host networking settings in a declarative manner.
 The networking state is described by a pre-defined schema.
 Reporting of current state and changes to it (desired state) both conform to
 the schema.
 
-NMState is aimed to satisfy enterprise needs to manage host networking through
+Nmstate is aimed to satisfy enterprise needs to manage host networking through
 a northbound declarative API and multi provider support on the southbound.
 NetworkManager acts as the main (and currently the only) provider supported.
 
@@ -31,6 +33,7 @@ Visit the [examples page](./examples.md) to see what it can do.
 - [Open vSwitch Patch Port](./features/ovs_patch.md)
 - [Open vSwitch database plugin](./features/ovsdb.md)
 - [Generate Network Configuration](./features/gen_conf.md)
+- [MultiPath TCP](./features/mptcp.md)
 
 ## Example output
 
@@ -67,8 +70,8 @@ interfaces:
 - [Nmstate Developer Guide](./devel/dev_guide.md)
 - [Design](./devel/design/networking-api.md)
 - [API documentation](./devel/api.md)
-- [Plugin Design](./devel/plugin.md)
-- [Varlink support for libnmstate](./devel/varlink-libnmstate.md)
+- [Nmstate 1.x: Plugin Design](./devel/plugin.md)
+- [Nmstate 1.x: Varlink support for libnmstate](./devel/varlink-libnmstate.md)
 
 ## Related projects
 - [kubernetes-nmstate](https://nmstate.io/kubernetes-nmstate)
@@ -79,10 +82,7 @@ interfaces:
   The maintainers are Gris, edwardh and ffmancera, please feel free to ask
   whatever you need!
 
-- Nmstate uses the nmstate-devel@lists.fedorahosted.org for discussions. To
-  subscribe you can send an email with 'subscribe' in the subject to
-  nmstate-devel-join@lists.fedorahosted.org or visit the [mailing list
-page](https://lists.fedorahosted.org/admin/lists/nmstate-devel.lists.fedorahosted.org).
+- Nmstate uses the [github issue][github_issue_url] for discussion or bug
+  report.
 
-- You can also report any issue on our [official Github repository](https://github.com/nmstate/nmstate)
-
+[github_issue_url]: https://github.com/nmstate/nmstate/issues

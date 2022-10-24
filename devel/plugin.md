@@ -11,11 +11,16 @@
 
 ## Nmstate Plugin Interface
 
+** Plugin support is removed in 2.x **
+
 The nmstate-0.3.2 release brings the plugin support which allows user to
 managing the network via their own plugin.
 
 Since nmstate-0.4, the nispor project is used for kernel network information
 query, plugin should fill the user space informations only and perform.
+
+Since nmstate-2.1, the plugin interface is removed. The ovsdb plugin is merged
+into nmstate as embedded.
 
 ### How to Install and Load the Plugin
 

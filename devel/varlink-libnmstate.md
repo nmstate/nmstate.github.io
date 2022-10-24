@@ -1,8 +1,18 @@
-# Varlink support for libnmstate
+# DEPRECATED: Varlink support for libnmstate
 
 ## Introduction
-This documentation details the varlink protocol support for libnmstate functions. Varlink protocol encodes all the messages as JSON objects and communicates via unix and tcp socket connections. Using the varlink, libnmstate is accessible via varlink stdin/out and varlink client implementation. This documentation uses python
-programming language for examples, please refer [language binding document](ttps://varlink.org/Language-Bindings#how-to-test-new-language-bindings) for other existing varlink programming languages binding. Libnmstate service is defined as `io.nmstate` in varlink interface.
+
+** Varlink interface is DEPRECATED in 1.x and removed in 2.x **
+
+This documentation details the varlink protocol support for libnmstate
+functions. Varlink protocol encodes all the messages as JSON objects and
+communicates via unix and tcp socket connections. Using the varlink, libnmstate
+is accessible via varlink stdin/out and varlink client implementation. This
+documentation uses python programming language for examples, please refer
+[language binding
+document](ttps://varlink.org/Language-Bindings#how-to-test-new-language-bindings)
+for other existing varlink programming languages binding. Libnmstate service is
+defined as `io.nmstate` in varlink interface.
 
 * [Varlink documentation]()
 * [libnmstate API documentation](https://www.nmstate.io/devel/api.html)
