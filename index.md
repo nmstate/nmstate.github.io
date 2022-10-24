@@ -33,6 +33,7 @@ Visit the [examples page](./examples.md) to see what it can do.
 - [Generate Network Configuration](./features/gen_conf.md)
 - [MultiPath TCP](./features/mptcp.md)
 - [Conditional compiling](./features/conditional_compile.md)
+- [Refer SR-IOV VF via PF name and VF ID](./features/iface_vf_id.md)
 
 ## Example output
 
