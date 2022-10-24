@@ -1,7 +1,5 @@
 # Declarative Network API
 
-A declarative network manager API for hosts.
-
 ## What is it?
 
 Nmstate is a library with an accompanying command line tool that manages
