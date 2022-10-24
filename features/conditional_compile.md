@@ -17,4 +17,7 @@ cd rust && cargo build --no-default-features --features gen_conf
 ```
 
 You may also download pre-compiled `nmstatectl` binary at
-[Nmstate release page][https://github.com/nmstate/nmstate/releases].
+[Nmstate release page][release_url].
+
+
+[release_url]: https://github.com/nmstate/nmstate/releases
