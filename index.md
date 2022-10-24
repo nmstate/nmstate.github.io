@@ -32,6 +32,7 @@ Visit the [examples page](./examples.md) to see what it can do.
 - [Open vSwitch database plugin](./features/ovsdb.md)
 - [Generate Network Configuration](./features/gen_conf.md)
 - [MultiPath TCP](./features/mptcp.md)
+- [Conditional compiling](./features/conditional_compile.md)
 
 ## Example output
 
