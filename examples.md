@@ -231,6 +231,8 @@ interfaces:
 
 ## Interfaces: Team
 
+The support of Team interface is DEPRECATED by nmstate 1.x and REMOVED in 2.x.
+
 ```yaml
 ---
 interfaces:

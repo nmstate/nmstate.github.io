@@ -12,21 +12,18 @@ Nmstate is aimed to satisfy enterprise needs to manage host networking through
 a northbound declarative API and multi provider support on the southbound.
 NetworkManager acts as the main (and currently the only) provider supported.
 
-Visit the [examples page](./examples.md) to see what it can do.
-
 ## Features
-- [ethernet](./examples.md#interfaces-ethernet)
-- [bond](./examples.md#interfaces-bond)
+- [Ethernet](./examples.md#interfaces-ethernet)
+- [Bond](./examples.md#interfaces-bond)
 - [Vlan](./examples.md#interfaces-vlan)
 - [Vxlan](./examples.md#interfaces-vxlan)
-- [Linux bridge](./examples.md#interface-linux-bridge)
-- [ovs-bridge](./examples.md#interfaces-ovs-bridge)
-- [dummy](./examples.md#interfaces-dummy)
-- [team](./examples.md#interfaces-team)
-- [veth](./features/veth.md)
-- [IPv4/IPv6 addresses (static)](./examples.md#interfaces-ethernet)
-- [IPv4/IPv6 route](./examples.md#route)
-- [IPv4/IPv6 DNS client configuration](./examples.md#dns)
+- [Linux Bridge](./examples.md#interface-linux-bridge)
+- [OpenvSwitch Bridge](./examples.md#interfaces-ovs-bridge)
+- [Dummy](./examples.md#interfaces-dummy)
+- [Veth](./features/veth.md)
+- [Static IP Addresses](./examples.md#interfaces-ethernet)
+- [IP Route](./examples.md#route)
+- [DNS Client Configuration](./examples.md#dns)
 - [LLDP](./features/lldp.md)
 - [Open vSwitch Patch Port](./features/ovs_patch.md)
 - [Open vSwitch database plugin](./features/ovsdb.md)
@@ -38,6 +35,7 @@ Visit the [examples page](./examples.md) to see what it can do.
 ## Example output
 
 ```yaml
+$ sudo nmstatectl show
 ---
 dns:
   config:
