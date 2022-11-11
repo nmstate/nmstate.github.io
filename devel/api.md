@@ -166,6 +166,11 @@
     * [`RouteRule.ROUTE_TABLE`](#routeruleroute_table)
     * [`RouteRule.USE_DEFAULT_PRIORITY`](#routeruleuse_default_priority)
     * [`RouteRule.USE_DEFAULT_ROUTE_TABLE`](#routeruleuse_default_route_table)
+    * [`RouteRule.FWMARK`](#routerulefwmark)
+    * [`RouteRule.FWMASK`](#routerulefwmask)
+    * [`RouteRule.FAMILY`](#routerulefamily)
+    * [`RouteRule.FAMILY_IPV4`](#routerulefamily_ipv4)
+    * [`RouteRule.FAMILY_IPV6`](#routerulefamily_ipv6)
 * [DNS client configuration](#dns-client-configuration)
     * [Limitations of static DNS configuration](#limitations-of-static-dns-configuration)
     * [`DNS.SEARCH`](#dnssearch)
@@ -1783,6 +1788,37 @@ Type: `integer`
 ## `RouteRule.USE_DEFAULT_ROUTE_TABLE`
 
 Type: `integer`
+
+## `RouteRule.FWMARK`
+
+Type: `integer`
+
+The fwmark value used. The format reported by Nmstate is hexadecimal as `0x30`
+and it is also supported for applying the state.
+
+## `RouteRule.FWMASK`
+
+Type: `integer`
+
+The fwmask value used. The format reported by Nmstate is hexadecimal as `0x30`
+and it is also supported for applying the state. In addition, notice that this
+value is optional and only valid when `fwmark` is set.
+
+## `RouteRule.FAMILY`
+
+Type: `string`
+
+The address family for this route rule. This option is specially useful when
+configuring `from all to all` routing policy. The supported values are `ipv4`
+and `ipv6`.
+
+## `RouteRule.FAMILY_IPV4`
+
+Type: `string`
+
+## `RouteRule.FAMILY_IPV6`
+
+Type: `string`
 
 # DNS client configuration
 
