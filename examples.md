@@ -317,6 +317,66 @@ routes:
     table-id: 254
 ```
 
+## Route Rule
+
+```yaml
+---
+interfaces:
+  - name: eth1
+    type: ethernet
+    state: up
+    ipv4:
+      address:
+        - ip: 192.0.2.251
+          prefix-length: 24
+      dhcp: false
+      enabled: true
+routes:
+  config:
+    - destination: 198.51.100.0/24
+      metric: 150
+      next-hop-address: 192.0.2.1
+      next-hop-interface: eth1
+      table-id: 254
+route-rules:
+  config:
+    - ip-to: 192.0.2.0/24
+      ip-from: 198.51.100.0/24
+      priority: 100
+      route-table: 254
+      fwmark: 0x30
+      fwmask: 0x10
+```
+
+Please, notice that it is also possible to configure `from all to all` routing
+policy. In order to do that, do not set `ip-from` and `ip-to`.
+
+```yaml
+---
+interfaces:
+  - name: eth1
+    type: ethernet
+    state: up
+    ipv4:
+      address:
+        - ip: 192.0.2.251
+          prefix-length: 24
+      dhcp: false
+      enabled: true
+routes:
+  config:
+    - destination: 198.51.100.0/24
+      metric: 150
+      next-hop-address: 192.0.2.1
+      next-hop-interface: eth1
+      table-id: 254
+route-rules:
+  config:
+    - priority: 100
+      route-table: 254
+      family: ipv4
+```
+
 ## DNS
 
 ```yaml
