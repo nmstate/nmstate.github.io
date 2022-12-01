@@ -36,6 +36,7 @@
         * [`InterfaceIPv4.AUTO_GATEWAY`](#interfaceipv4auto_gateway)
         * [`InterfaceIPv4.AUTO_DNS`](#interfaceipv4auto_dns)
         * [`InterfaceIPv4.AUTO_ROUTE_TABLE_ID`](#interfaceipv4auto_route_table_id)
+        * [`InterfaceIPv4.AUTO_ROUTE_METRIC`](#interfaceipv4auto_route_metric)
         * [`InterfaceIPv4.ADDRESS`](#interfaceipv4address)
             * [`InterfaceIPv4.ADDRESS_IP`](#interfaceipv4address_ip)
             * [`InterfaceIPv4.ADDRESS_PREFIX_LENGTH`](#interfaceipv4address_prefix_length)
@@ -47,6 +48,7 @@
         * [`InterfaceIPv6.AUTO_GATEWAY`](#interfaceipv6auto_gateway)
         * [`InterfaceIPv6.AUTO_DNS`](#interfaceipv6auto_dns)
         * [`InterfaceIPv6.AUTO_ROUTE_TABLE_ID`](#interfaceipv6auto_route_table_id)
+        * [`InterfaceIPv6.AUTO_ROUTE_METRIC`](#interfaceipv6auto_route_metric)
         * [`InterfaceIPv6.ADDRESS`](#interfaceipv6address)
             * [`InterfaceIPv6.ADDRESS_IP`](#interfaceipv6address_ip)
             * [`InterfaceIPv6.ADDRESS_PREFIX_LENGTH`](#interfaceipv6address_prefix_length)
@@ -63,7 +65,8 @@
             * [`Ethernet.SRIOV.VFS.SPOOF_CHECK`](#ethernetsriovvfsspoof_check)
             * [`Ethernet.SRIOV.VFS.TRUST`](#ethernetsriovvfstrust)
             * [`Ethernet.SRIOV.VFS.MIN_TX_RATE`](#ethernetsriovvfsmin_tx_rate)
-            * [`Ethernet.SRIOV.VFS.MAX_TX_RATE`](#ethernetsriovvfsmax_tx_rate)
+            * [`Ethernet.SRIOV.VFS.VLAN_ID`](#ethernetsriovvfsvlan_id)
+            * [`Ethernet.SRIOV.VFS.QOS`](#ethernetsriovvfsqos)
 * [VLAN](#vlan)
     * [`VLAN.ID`](#vlanid)
     * [`VLAN.BASE_IFACE`](#vlanbase_iface)
@@ -175,12 +178,15 @@
     * [Limitations of static DNS configuration](#limitations-of-static-dns-configuration)
     * [`DNS.SEARCH`](#dnssearch)
     * [`DNS.SERVER`](#dnsserver)
+* [Multipath TCP](#multipath-tcp)
 
 <!-- vim-markdown-toc -->
 
 # Introduction
 
 This document holds all the API detail of the `libnmstate` Python module.
+For rust crate API, please refer to [our doc in docs.rs][docs_rs_url]
+
 For quick start, you may refer to [Python code examples][py_example]
 
 The `libnmstate` package exposes the following API::
@@ -195,6 +201,12 @@ The `libnmstate` package exposes the following API::
 
 All constants and functions are available since version 1.0.0 unless state
 explicitly.
+
+Besides using python dictionary with constants in `libnmstate.schema` as desire
+state for `libnmstate.apply()`, you may also use `yaml.load()` or
+`json.loads()` to convert desire state from YAML/JSON to dictionary
+`libnmstate.apply()` needs. Please use [YAML API document][yaml_api_doc]
+if you prefer do show/apply the state in YAML format.
 
 ## Query network state
 
@@ -237,7 +249,6 @@ libnmstate.apply({
 ## Change Network State with Manual Transaction Control
 
 ## Error handling
-
 
 ### NmstateError
 
@@ -376,7 +387,7 @@ Possible values:
  * `InterfaceType.OVS_INTERFACE`
  * `InterfaceType.VLAN`
  * `InterfaceType.VXLAN`
- * `InterfaceType.TEAM`
+ * `InterfaceType.TEAM`     (deprecated since 1.3 and removed since 2.0)
  * `InterfaceType.VRF`
  * `InterfaceType.INFINIBAND`
  * `InterfaceType.MAC_VLAN`
@@ -467,6 +478,7 @@ and `InterfaceIPv6`:
  * `InterfaceIP.ADDRESS`
  * `InterfaceIP.ADDRESS_IP`
  * `InterfaceIP.ADDRESS_PREFIX_LENGTH`
+ * `InterfaceIP.AUTO_ROUTE_METRIC` (new in 1.4+ and 2.2+)
 
 ## `Interface.IPV4`
 
@@ -575,6 +587,14 @@ This property is ignored when `Interface.IPV4[InterfaceIPv4.DHCP]` is
 
 The table where the route will be configured when `InterfaceIPv4.AUTO_ROUTES`
 is enabled.
+
+Type: `integer`
+
+### `InterfaceIPv4.AUTO_ROUTE_METRIC`
+
+New in 1.4 and 2.2.
+
+The metric number assigned to routes retried from DHCPv4 or IPv6 autoconf.
 
 Type: `integer`
 
@@ -706,6 +726,14 @@ Possible values:
 
 The table where the route will be configured when `InterfaceIPv6.AUTO_ROUTES`
 is enabled.
+
+Type: `integer`
+
+### `InterfaceIPv6.AUTO_ROUTE_METRIC`
+
+New in 1.4 and 2.2.
+
+The metric number assigned to routes retried from DHCPv4 or IPv6 autoconf.
 
 Type: `integer`
 
@@ -887,9 +915,19 @@ The minimum TX rate. Please, note that not all the NICs support this option.
 
 Type: `integer`
 
-#### `Ethernet.SRIOV.VFS.MAX_TX_RATE`
+#### `Ethernet.SRIOV.VFS.VLAN_ID`
 
-The maximum TX rate.
+Available since 1.2.1
+
+The VLAN ID of SRIOV VF.
+
+Type: `integer`
+
+#### `Ethernet.SRIOV.VFS.QOS`
+
+Available since 1.2.1
+
+The QoS value of SRIOV VF.
 
 Type: `integer`
 
@@ -1881,6 +1919,57 @@ Name server IP addresses.
 Placing IPv4/IPv6 name server in the middle of IPv6/IPv4 name servers is not
 supported yet.
 
+
+# Multipath TCP
+
+Available since 2.2.0.
+
+The `Interface.MPTCP` section of interface holds the Multipath TCP interface
+level flags, it will apply flags to all valid IP addresses(both static and
+dynamic).  Network backend might has its own rule on excusing special scope of
+IP address, e.g. IPv6 multicast address.
+
+Example:
+
+```python
+desired_state = {
+    Interface.KEY: [
+        {
+            Interface.NAME: "eth1",
+            Interface.TYPE: InterfaceType.ETHERNET,
+            Interface.STATE: InterfaceState.UP,
+            Interface.MPTCP: {
+                Mptcp.ADDRESS_FLAGS: [
+                    Mptcp.FLAG_SIGNAL,
+                    Mptcp.FLAG_BACKUP,
+                ]
+            },
+        }
+    ]
+}
+libnmstate.apply(desired_state)
+```
+
+Supported MPTCP flags are:
+
+ * `Mptcp.FLAG_FULLMESH`
+ * `Mptcp.FLAG_SUBFLOW`
+ * `Mptcp.FLAG_BACKUP`
+ * `Mptcp.FLAG_SIGNAL`
+
+Limitations:
+ * Per IP address MPTCP flags is ignored with an warning message when
+   different from interface level MPTCP flags.
+ * Cannot set `signal` along with `fullmesh` due to kernel restriction.
+ * If sysctl has `net.mptcp.enabled` set to 0, NetworkManager cannot
+   apply MPTCP flags. User will get an failure suggest them to use
+   third-party tools.
+ * Cannot reapply on MPTCP changes, full activation will invoked when
+   MPTCP flags changed.
+ * When MPTCP not supported by NetworkManager, the query will hide
+   interface level MPTCP flags even it been enabled by third party
+   tool.
+
 [py_example]: ./py_example.md
 [rfc-dhcpv4-classless-route]: https://tools.ietf.org/html/rfc3442
 [show]: ./api.md#query-network-state
@@ -1889,3 +1978,5 @@ supported yet.
 [error]: ./api.md#error-handling
 [bond-kernel-doc]: https://www.kernel.org/doc/Documentation/networking/bonding.txt
 [hairpin]: https://lwn.net/Articles/347344/
+[docs_rs_url]: https://docs.rs/nmstate/
+[yaml_api_doc]: ./yaml_api.md
