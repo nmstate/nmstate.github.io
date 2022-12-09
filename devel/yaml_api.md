@@ -45,6 +45,9 @@
         * [VLAN Interface](#vlan-interface)
         * [VxLAN Interface](#vxlan-interface)
         * [Linux Bridge Interface](#linux-bridge-interface)
+            * [Linux Bridge Options](#linux-bridge-options)
+        * [Linux Bridge Ports](#linux-bridge-ports)
+        * [Linux Bridge Port VLAN](#linux-bridge-port-vlan)
         * [OpenvSwitch Bridge Interface](#openvswitch-bridge-interface)
         * [OpenvSwitch Internal Interface](#openvswitch-internal-interface)
         * [OpenvSwitch Bridge Patch Interface](#openvswitch-bridge-patch-interface)
@@ -808,9 +811,188 @@ You may use `ports` also for applying since 2.1.4.
 
 ### VLAN Interface
 
+The `vlan` section of interface holds the parameters of VLAN specific
+configurations. For example:
+
+```yml
+---
+interfaces:
+  - name: eth1.101
+    type: vlan
+    state: up
+    vlan:
+      base-iface: eth1
+      id: 101
+```
+
+The `vlan` sections contains two parameters:
+ * `base-iface`: The parent interface name.
+ * `id`: VLAN ID integer.
+
+Currently, we only support VLAN based on IEEE 802.1Q protocol.
+
 ### VxLAN Interface
 
+The `vxlan` section of interface holds the parameters of VxLAN specific
+configurations. For example:
+
+```yml
+interfaces:
+- name: eth1.102
+  type: vxlan
+  state: up
+  ipv6:
+    enabled: true
+  vxlan:
+    base-iface: eth1
+    id: 102
+    remote: 192.0.2.251
+    destination-port: 1235
+```
+
+The `vxlan` sections contains two parameters:
+ * `base-iface`: The parent interface name.
+ * `id`: VLAN ID integer.
+ * `remote`: The destination IP address to use in outgoing packages when the
+   destination link layer address is not known in the VxLAN device forwarding
+   database. Could be unicast IP or multicast IP.
+ * `destination-port`: The UDP destination port.
+
+Currently, we only support VxLAN based on IEEE 802.1Q protocol.
+
 ### Linux Bridge Interface
+
+The `bridge` section of interface could hold parameters of Linux Bridge
+specific configurations. For example:
+
+```yml
+interfaces:
+- name: br0
+  type: linux-bridge
+  state: up
+  bridge:
+    options:
+      gc-timer: 29657
+      group-addr: 01:80:C2:00:00:00
+      group-forward-mask: 0
+      group-fwd-mask: 0
+      hash-max: 4096
+      hello-timer: 0
+      mac-ageing-time: 300
+      multicast-last-member-count: 2
+      multicast-last-member-interval: 100
+      multicast-membership-interval: 26000
+      multicast-querier: false
+      multicast-querier-interval: 25500
+      multicast-query-interval: 12500
+      multicast-query-response-interval: 1000
+      multicast-query-use-ifaddr: false
+      multicast-router: auto
+      multicast-snooping: true
+      multicast-startup-query-count: 2
+      multicast-startup-query-interval: 3125
+      stp:
+        enabled: false
+        forward-delay: 15
+        hello-time: 2
+        max-age: 20
+        priority: 32768
+      vlan-protocol: 802.1q
+    port:
+    - name: eth1
+      stp-hairpin-mode: false
+      stp-path-cost: 100
+      stp-priority: 32
+```
+
+#### Linux Bridge Options
+
+The `options` subsection of Linux bridge interface `bridge` section holds these
+options:
+
+ * `gc_timer`: Integer. Ignored when applying.
+ * `group-addr`: String.
+ * `group-forward-mask`: Integer.
+ * `group-fwd-mask`: alias of `group-forward-mask`.
+ * `hash-max`: Integer.
+ * `hello-timer`: Integer. Ignored when applying.
+ * `mac-ageing-time`: Integer.
+ * `multicast-last-member-count`: Integer.
+ * `multicast-last-member-interval`: Integer.
+ * `multicast-membership-interval`: Integer.
+ * `multicast-querier`: Boolean.
+ * `multicast-querier-interval`: Integer.
+ * `multicast-query-interval`: Integer.
+ * `multicast-query-response-interval`: Integer.
+ * `multicast-query-use-ifaddr`: Boolean.
+ * `multicast-router`: `auto`, `disabled` or `enabled`.
+ * `multicast-snooping`: Boolean.
+ * `multicast-startup-query-count`: Integer.
+ * `multicast-startup-query-interval`: Integer.
+ * `stp`:
+    * `enabled`: Boolean. Other STP options will be ignored if set `false`.
+    * `forward-delay`: Integer
+    * `hello-time`: Integer
+    * `max-age`: Integer
+    * `priority`: Integer
+ * `vlan-protocol`: `802.1q`(default) or `802.1ad`
+
+### Linux Bridge Ports
+
+The `port` subsection of `bridge` section defines a list of linux bridge ports.
+
+Each linux bridge port contains these properties:
+ * `name`: Interface name.
+ * `stp-hairpin-mode`: Boolean.
+ * `stp-path-cost`: Integer.
+ * `stp-priority`: Integer.
+ * `vlan`: Please check `Linux Bridge Port VLAN` section.
+
+### Linux Bridge Port VLAN
+
+The `vlan` subsection of `port` section of linux bridge holds the VLAN
+filtering of linux bridge. For example:
+
+```yml
+---
+interfaces:
+  - name: br0
+    type: linux-bridge
+    state: up
+    bridge:
+      port:
+        - name: eth1
+          vlan:
+            mode: trunk
+            trunk-tags:
+            - id: 101
+            - id-range:
+                min: 500
+                max: 599
+            tag: 100
+            enable-native: true
+        - name: eth2
+          vlan:
+            mode: trunk
+            trunk-tags:
+            - id: 500
+```
+
+The `vlan` subsection holds these parameters:
+
+ * `mode`: `access` or `trunk`
+ * `tag`: Integer. VLAN Tag for native VLAN.
+ * `enable-native`: Boolean. Enable native VLAN or not.
+ * `trunk-tags`: List of VLAN IDs or ID ranges:
+    * `id`: Integer.
+    * `id-range`:
+        * `min`: Minimum VLAN ID(inclusive).
+        * `max`: Maximum VLAN ID(inclusive).
+
+If `vlan` section not defined in desire state when applying, current VLAN
+filtering settings will be preserved for specified interface, once defined,
+nmstate will override all VLAN filter settings of specified interface with
+desired without merging from current.
 
 ### OpenvSwitch Bridge Interface
 
