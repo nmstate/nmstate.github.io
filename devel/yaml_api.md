@@ -49,6 +49,9 @@
         * [Linux Bridge Ports](#linux-bridge-ports)
         * [Linux Bridge Port VLAN](#linux-bridge-port-vlan)
         * [OpenvSwitch Bridge Interface](#openvswitch-bridge-interface)
+            * [OpenvSwitch Bridge Options](#openvswitch-bridge-options)
+        * [OpenvSwitch Bridge Ports](#openvswitch-bridge-ports)
+            * [OpenvSwitch DPDK](#openvswitch-dpdk)
         * [OpenvSwitch Internal Interface](#openvswitch-internal-interface)
         * [OpenvSwitch Bridge Patch Interface](#openvswitch-bridge-patch-interface)
         * [Mac VTAP Interface](#mac-vtap-interface)
@@ -60,7 +63,7 @@
     * [Route Rules](#route-rules)
     * [DNS Resolver](#dns-resolver)
     * [Hostname](#hostname)
-    * [OVS Database](#ovs-database)
+    * [OpenvSwitch Database](#openvswitch-database)
 
 <!-- vim-markdown-toc -->
 
@@ -69,7 +72,7 @@
 Nmstate provides a set of bindings for querying and applying the network state
 in the format of YAML.
 
-For properties not mentioned desired state, nmstate will try to preserve 
+For properties not mentioned desired state, nmstate will try to preserve
 current configuration unless changes required by other desired property.
 
 For example, to create an OpenvSwitch bridge:
@@ -989,31 +992,497 @@ The `vlan` subsection holds these parameters:
         * `min`: Minimum VLAN ID(inclusive).
         * `max`: Maximum VLAN ID(inclusive).
 
-If `vlan` section not defined in desire state when applying, current VLAN
+When `vlan` section not defined in desire state when applying, current VLAN
 filtering settings will be preserved for specified interface, once defined,
 nmstate will override all VLAN filter settings of specified interface with
 desired without merging from current.
 
 ### OpenvSwitch Bridge Interface
 
+The `bridge` section of could hold parameters of
+OpenvSwitch(Short to OVS below) Bridge specific configurations. For example:
+
+```yml
+interfaces:
+- name: br0
+  type: ovs-bridge
+  state: up
+  wait-ip: any
+  bridge:
+    options:
+      stp: false
+      rstp: false
+      mcast-snooping-enable: false
+    port:
+    - name: ovs0
+    - name: eth1
+```
+
+#### OpenvSwitch Bridge Options
+
+The `options` subsection of OVS bridge interface `bridge` section holds these
+options:
+
+ * `stp`: Boolean.
+ * `rstp`: Boolean.
+ * `mcast-snooping-enable`: String.
+ * `fail-mode`: String.
+ * `datapath`: String. Only for DPDK.
+
+### OpenvSwitch Bridge Ports
+
+The `port` subsection of `bridge` section defines a list of OVS bridge
+interfaces.
+
+There are three type of OVS interfaces:
+ * `internal`: Represent the bridge itself in kernel.
+ * `system`: Interface exists in kernel and attached to this bridge.
+ * `bond`: OVS bond interface.
+
+This is the example YAML contains these three OVS interface types.
+
+```yml
+- name: br0
+  type: ovs-bridge
+  state: up
+  bridge:
+    port:
+    - name: veth1
+    - name: ovs0
+    - name: bond1
+      link-aggregation:
+        mode: balance-slb
+        port:
+          - name: eth2
+          - name: eth1
+      vlan:
+        mode: access
+        tag: 100
+```
+
+Each OVS interface config could have:
+ * `name`: String
+ * `link-aggregation`: Bond config.
+ * `vlan`: Vlan config. Please check `Linux Bridge Port VLAN` section.
+
+Limitations:
+ * Only support access mode VLAN for now.
+
+#### OpenvSwitch DPDK
+
+Below yaml could be used to enable DPDK using PCI device `0000:af:00.1`:
+
+```yml
+---
+interfaces:
+- name: ovs0
+  type: ovs-interface
+  state: up
+  dpdk:
+    devargs: "0000:af:00.1"
+    rx-queue: 100
+- name: br0
+  type: ovs-bridge
+  state: up
+  bridge:
+    options:
+      datapath: "netdev"
+    port:
+    - name: ovs0
+ovs-db:
+  other_config:
+    dpdk-init: "true"
+```
+
+Please refer to OpenvSwitch document for technical details.
+
 ### OpenvSwitch Internal Interface
+
+The OVS internal interface is the virtual interface representing the OVS bridge
+in kernel. For example:
+
+```yml
+- name: ovs0
+  type: ovs-interface
+  state: up
+  mac-address: 92:7C:8B:BF:AA:D8
+  mtu: 1500
+  min-mtu: 68
+  max-mtu: 65535
+  wait-ip: any
+  ipv4:
+    enabled: false
+  ipv6:
+    enabled: false
+```
+
+There is no special config for OVS internal interface.
 
 ### OpenvSwitch Bridge Patch Interface
 
+The `patch` section of `ovs-interface` could be used for OVS bridge patching.
+
+This is the example on using OVS patch interface to connect two OVS bridges:
+
+```yml
+---
+interfaces:
+- name: patch0
+  type: ovs-interface
+  state: up
+  patch:
+    peer: patch1
+- name: ovs-br0
+  type: ovs-bridge
+  state: up
+  bridge:
+    port:
+    - name: patch0
+- name: patch1
+  type: ovs-interface
+  state: up
+  patch:
+    peer: patch0
+- name: ovs-br1
+  type: ovs-bridge
+  state: up
+  bridge:
+    port:
+    - name: patch1
+```
+
 ### Mac VTAP Interface
+
+The `mac-vtap` section of `mac-vtap` interface defines configurations of
+MAC VTAP interface.
+
+For example:
+
+```yml
+interfaces:
+- name: mac0
+  type: mac-vtap
+  state: up
+  mac-vtap:
+    base-iface: eth1
+    mode: passthru
+    promiscuous: true
+```
+
+The `mac-vtap` section contains these parameters:
+ * `base-iface`: String. Parent interface name.
+ * `mode`: String. Should be `vepa`, `bridge`, `private`, `passthru` or
+   `source`.
+ * `promiscuous`: Boolean.
 
 ### Mac VLAN Interface
 
+The `mac-vlan` section of `mac-vlan` interface defines configurations of
+MAC VLAN interface.
+
+For example:
+
+```yml
+interfaces:
+- name: mac0
+  type: mac-vlan
+  state: up
+  mac-vlan:
+    base-iface: eth1
+    mode: passthru
+    promiscuous: true
+```
+
+The `mac-vlan` section contains these parameters:
+ * `base-iface`: String. Parent interface name.
+ * `mode`: String. Should be `vepa`, `bridge`, `private`, `passthru` or
+   `source`.
+ * `promiscuous`: Boolean.
+
 ### IP over InfiniBand Interface
+
+The `infiniband` section of `infiniband` interface defines configurations of
+IP over InfiniBand Interface.
+
+For example:
+
+```yml
+---
+interfaces:
+  - name: ib2.8001
+    type: infiniband
+    state: up
+    mtu: 1280
+    infiniband:
+      pkey: "0x8001"
+      mode: "connected"
+      base-iface: "ib2"
+```
+
+The `infiniband` sections contains these parameters:
+ * `pkey`: String or integer. P-key of sub-interface. None and `0xffff` both
+   indicate the base interface.
+ * `base-iface`: Base interface name. Empty for base interface itself.
+ * `mode`: `connected` or `datagram`.
 
 ### Virtual Routing and Forwarding (VRF) Interface
 
+The `vrf` section of `vrf` interface contains configurations of Linux kernel
+Virtual Routing and Forwarding(VRF) interface. For example:
+
+```yml
+- name: vrf0
+  type: vrf
+  state: up
+  vrf:
+    port:
+    - eth1
+    - eth2
+    route-table-id: 100
+```
+
+The `vrf` section contains:
+ * `port`: List of String. VRF Ports.
+ * `route-table-id`: Which route table ID should this VRF attach to.
+
 ### Linux Virtual Ethernet(veth) Interface
 
+Besides holding configurations of Ethernet interface, the `veth` interface
+could also hold `veth` section. For example:
+
+```yml
+---
+interfaces:
+- name: veth1
+  type: veth
+  state: up
+  veth:
+    peer: veth1peer
+```
+
 ## Routes
+
+The `routes` top section of network state contains two type routes:
+ * `running`: Running effected routes containing route from universe or link scope,
+    and only from these protocols:
+    * boot (often used by `iproute` command)
+    * static
+    * ra
+    * dhcp
+    * mrouted
+    * keepalived
+    * babel
+
+ * `config`: Static routes containing route from universe or link scope,
+    and only from these protocols:
+     * boot (often used by `iproute` command)
+     * static
+
+For example:
+
+```yml
+routes:
+  running:
+  - destination: 0.0.0.0/0
+    next-hop-interface: eth1
+    next-hop-address: 192.0.2.1
+    table-id: 254
+  config:
+  - destination: 0.0.0.0/0
+    next-hop-interface: eth1
+    next-hop-address: 192.0.2.1
+    table-id: 254
+```
+
+When applying, the `running` routes are ignored, the `config` routes in desire
+state is **appended** to existing routes. To change or override existing
+routes, you need to delete old route entry and add new one(could in single
+desire state). For example, to change default gateway of `eth1`:
+
+```yml
+routes:
+  config:
+  - destination: 0.0.0.0/0
+    next-hop-interface: eth1
+    state: absent
+  - destination: 0.0.0.0/0
+    next-hop-address: 192.0.2.1
+    next-hop-interface: eth1
+```
+
+The `state: absent` is used to delete all matching route entry. Below route
+will delete all routes with `next-hop-interface: eth1`:
+
+```yml
+routes:
+  config:
+  - destination: 0.0.0.0/0
+    next-hop-interface: eth1
+    state: absent
+```
+
+Each route entry could have these parameters:
+
+ * `state`: Only set to `absent` for deleting matching routes when applying.
+ * `destination`: String.
+ * `next-hop-interface`: String.
+ * `next-hop-address`: String.
+ * `metric`: Integer. Set to -1 for let backend decide.
+ * `table-id`: Integer. Set to 0 for main table id 254.
+
 ## Route Rules
+
+This is the example of IP route rule:
+
+```yml
+route-rules:
+  config:
+  - ip-from: 192.168.3.2/32
+    priority: 1000
+    route-table: 200
+  - ip-from: 2001:db8:b::/64
+    priority: 1000
+    route-table: 200
+routes:
+  config:
+  - destination: 192.168.2.0/24
+    next-hop-interface: eth1
+    next-hop-address: 192.168.1.3
+    metric: 108
+    table-id: 200
+  - destination: 2001:db8:a::/64
+    next-hop-interface: eth1
+    next-hop-address: 2001:db8:1::2
+    metric: 108
+    table-id: 200
+```
+
+Like `routes`, the `route-rules` is also using `state: absent` for partial
+editing. For example:
+
+```yml
+---
+route-rules:
+  config:
+    - ip-from: 192.168.3.2/32
+      route-table: 200
+      state: absent
+```
+
+Each route rule entry could contains these parameters:
+ * `family`: `ipv4` or `ipv6`. Only used when you would like to do
+   `from any to any` matching.
+ * `state`: Only set to `absent` for deleting matching route rules.
+ * `ip-from`: String. Empty means `any`.
+ * `ip-to`: String. Empty means `any`.
+ * `priority`: Integer. Strongly suggested user to manually set priority
+   to make sure route rule acting in desired order. If not defined, nmstate
+   will add desired routes __after__ existing route rules.
+ * `route-table`: Integer. Redirect matching packages to route table ID. Unset
+   or 0 will be changed to main table ID 254.
+ * `fwmark`: Integer or hex string. Set the `fwmark` on matching packages.
+ * `fwmask`: Integer or hex string. Set the `fwmask` on matching packages.
+
 ## DNS Resolver
+
+The `dns-resolver` sections contains two sub-sections:
+ * `running`: The running effective state. The DNS server might be from DHCP(IPv6
+   autoconf) or manual setup.
+ * `config`:  The static saved DNS resolver config.  When applying, if this not
+   mentioned, current static DNS config will be preserved as it was. If
+   defined, will override current static DNS config.
+
+For example:
+
+```yaml
+dns-resolver:
+  running:
+    server:
+    - 2001:4860:4860::8888
+    - 2001:4860:4860::8844
+    - 8.8.4.4
+    search:
+    - example.com
+    - example.org
+  config:
+    server:
+    - 2001:4860:4860::8888
+    - 2001:4860:4860::8844
+    - 8.8.4.4
+    search:
+    - example.com
+    - example.org
+```
+
+Due to NetworkManager limitations, when using NetworkManager backend, nmstate
+is required to find a interface to hold DNS settings in the order of:
+ * First interface in desire state with static IP or auto IP with
+   `auto-dns: false`.
+ * First unchanged interface in current state with static IP or auto IP with
+   `auto-dns: false`.
+
 ## Hostname
-## OVS Database
+
+Only available on nmstate version 2.1.1+.
+The `hostname` section contains these parameters:
+
+ * `running`: The running active hostname.
+ * `config`: The saved static hostname.
+
+
+For example:
+
+```yml
+hostname:
+  running: "c9sr"
+  config: "c9ss"
+```
+
+To remove static hostname, please set `running` or `config` as empty string.
+
+
+## OpenvSwitch Database
+
+Nmstate supports two types of OpenvSwitch Database modification:
+ * Interface level
+ * Global level.
+
+For Interface level, only `external_ids` is supported. For example:
+
+```yml
+---
+interfaces:
+- name: br0
+  type: ovs-bridge
+  state: up
+  bridge:
+    port:
+    - name: ovs0
+    - name: eth1
+  ovs-db:
+    external_ids:
+      gris: 10
+- name: ovs0
+  type: ovs-interface
+  state: up
+  ovs-db:
+    external_ids:
+      gris: abc
+- name: eth1
+  ovs-db:
+    external_ids:
+      gris: xyz
+```
+
+For global config, both `external_ids` and `other_config` are supported.
+For example:
+
+```yml
+ovs-db:
+  other_config:
+    stats-update-interval: "1000"
+  external_ids:
+    ovn-localnet-bridge-mappings: "ovn-external:breth0"
+```
 
 [sriov_vf_name]: ../feature/iface_vf_id.md
