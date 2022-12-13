@@ -1380,8 +1380,8 @@ Each route rule entry could contains these parameters:
    will add desired routes __after__ existing route rules.
  * `route-table`: Integer. Redirect matching packages to route table ID. Unset
    or 0 will be changed to main table ID 254.
- * `fwmark`: Integer or hex string. Set the `fwmark` on matching packages.
- * `fwmask`: Integer or hex string. Set the `fwmask` on matching packages.
+ * `fwmark`: Integer or hex string. Select the `fwmark` value to match.
+ * `fwmask`: Integer or hex string. Select the `fwmask` value to match.
 
 ## DNS Resolver
 
