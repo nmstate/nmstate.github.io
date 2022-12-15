@@ -1382,6 +1382,9 @@ Each route rule entry could contains these parameters:
    or 0 will be changed to main table ID 254.
  * `fwmark`: Integer or hex string. Select the `fwmark` value to match.
  * `fwmask`: Integer or hex string. Select the `fwmask` value to match.
+ * `iif`: String. New in version 2.2.2. Incoming interface name.
+ * `action`: New in version 2.2.2. `blackhole` or `unreachable` or `prohibit`
+   or undefined.
 
 ## DNS Resolver
 
