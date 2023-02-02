@@ -1324,9 +1324,10 @@ routes:
 Each route entry could have these parameters:
 
  * `state`: Only set to `absent` for deleting matching routes when applying.
- * `destination`: String.
- * `next-hop-interface`: String.
- * `next-hop-address`: String.
+ * `destination`: String. Mandatory for every non-absent routes.
+ * `next-hop-interface`: String. Mandatory for every non-absent routes
+ * `next-hop-address`: String. When setting this as empty string for absent
+   route, it will only delete routes __without__ `next-hop-address`.
  * `metric`: Integer. Set to -1 for let backend decide.
  * `table-id`: Integer. Set to 0 for main table id 254.
 
@@ -1373,8 +1374,10 @@ Each route rule entry could contains these parameters:
  * `family`: `ipv4` or `ipv6`. Only used when you would like to do
    `from any to any` matching.
  * `state`: Only set to `absent` for deleting matching route rules.
- * `ip-from`: String. Empty means `any`.
- * `ip-to`: String. Empty means `any`.
+ * `ip-from`: String. When setting to empty string in absent route rule, it
+   will only delete route rule __without__ `ip-from`.
+ * `ip-to`: String. When setting to empty string in absent route rule, it will
+   only delete route rule __without__ `ip-to`.
  * `priority`: Integer. Strongly suggested user to manually set priority
    to make sure route rule acting in desired order. If not defined, nmstate
    will add desired routes __after__ existing route rules.
