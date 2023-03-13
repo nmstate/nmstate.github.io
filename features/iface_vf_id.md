@@ -18,7 +18,7 @@ interfaces:
   - name: sriov:eth1:1
     type: ethernet
     state: up
-    mtu: 150
+    mtu: 1500
 ```
 
 You may also use this naming format in bond, Linux bridge or OVS bridge as port

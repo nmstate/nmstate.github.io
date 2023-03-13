@@ -1491,4 +1491,4 @@ ovs-db:
     ovn-localnet-bridge-mappings: "ovn-external:breth0"
 ```
 
-[sriov_vf_name]: ../feature/iface_vf_id.md
+[sriov_vf_name]: ../features/iface_vf_id.md
