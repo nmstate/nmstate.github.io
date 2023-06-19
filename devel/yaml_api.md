@@ -932,6 +932,7 @@ options:
  * `multicast-snooping`: Boolean.
  * `multicast-startup-query-count`: Integer.
  * `multicast-startup-query-interval`: Integer.
+ * `vlan-default-pvid`: Integer.
  * `stp`:
     * `enabled`: Boolean. Other STP options will be ignored if set `false`.
     * `forward-delay`: Integer
