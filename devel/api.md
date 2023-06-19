@@ -95,6 +95,7 @@
     * [`LinuxBridge.Options.MULTICAST_QUERY_RESPONSE_INTERVAL`](#linuxbridgeoptionsmulticast_query_response_interval)
     * [`LinuxBridge.Options.MULTICAST_STARTUP_QUERY_COUNT`](#linuxbridgeoptionsmulticast_startup_query_count)
     * [`LinuxBridge.Options.MULTICAST_STARTUP_QUERY_INTERVAL`](#linuxbridgeoptionsmulticast_startup_query_interval)
+    * [`LinuxBridge.Options.VLAN_DEFAULT_PVID`](#linuxbridgeoptionsvlan_default_pvid)
     * [`LinuxBridge.STP.ENABLED`](#linuxbridgestpenabled)
     * [`LinuxBridge.STP.FORWARD_DELAY`](#linuxbridgestpforward_delay)
     * [`LinuxBridge.STP.HELLO_TIME`](#linuxbridgestphello_time)
@@ -1197,6 +1198,13 @@ Type: `integer`
 
 Sets the time (in deciseconds) between queries sent out at startup to determine
 membership information.
+
+## `LinuxBridge.Options.VLAN_DEFAULT_PVID`
+
+Type: `integer`
+
+The drfault PVID for the ports of the bridge, that is the VLAN id assigned to
+incoming untagged frames.
 
 ## `LinuxBridge.STP.ENABLED`
 
