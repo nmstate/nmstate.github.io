@@ -6,6 +6,8 @@
             * [Name](#name)
             * [Type](#type)
             * [State](#state)
+            * [Profile Name](#profile-name)
+            * [Interface Identifier](#interface-identifier)
             * [MAC Address](#mac-address)
             * [Permanent MAC Address](#permanent-mac-address)
             * [MTU](#mtu)
@@ -148,6 +150,7 @@ only:
 ```yml
 interfaces:
 - name: eth1
+  profile-name: wan0
   type: ethernet
   state: up
   mac-address: 1C:FF:EE:DD:3B:D3
@@ -200,6 +203,31 @@ All possible states of interface are:
     configuration of specified interface, this might or might not lead to
     the deletion in kernel.
 
+#### Profile Name
+
+The profile name used by network backend. For example:
+
+
+```yml
+---
+interfaces:
+- name: eth1
+  profile-name: wan0
+  type: veth
+  state: up
+  identifier: mac-address
+  mac-address: 8A:8C:92:1A:F6:98
+```
+
+#### Interface Identifier
+
+The `identifier` property is only valid for applying or generating
+configurations. The valid values are:
+ * `name`: Default value. Specified configuration is applied to interface
+   holding the specified interface name.
+ * `mac-address`: Specified configuration is applied to interface holding
+   the specified MAC address.
+
 #### MAC Address
 
 The `mac-address` property holds the MAC address of this interface. Please be
@@ -214,6 +242,12 @@ The loopback interface will hold MAC address as `00:00:00:00:00:00`.
 
 When showing, nmstate use upper case string. When applying, it is
 case-insensitive.
+
+For applying or generating configurations:
+ * `identifier` is undefined or `identifier: name`, interface will be changed
+   to hold the specified MAC address
+ * `identifier: mac-address`, interface holding the specified MAC address
+   will be used instead of interface name.
 
 #### Permanent MAC Address
 
