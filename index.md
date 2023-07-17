@@ -31,6 +31,7 @@ NetworkManager acts as the main (and currently the only) provider supported.
 - [MultiPath TCP](./features/mptcp.md)
 - [Conditional compiling](./features/conditional_compile.md)
 - [Refer SR-IOV VF via PF name and VF ID](./features/iface_vf_id.md)
+- [Refer Interface using MAC Address](./features/mac_identifier.md)
 
 ## Example output
 
