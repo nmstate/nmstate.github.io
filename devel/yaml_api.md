@@ -6,6 +6,7 @@
             * [Name](#name)
             * [Type](#type)
             * [State](#state)
+            * [Description](#description)
             * [Profile Name](#profile-name)
             * [Interface Identifier](#interface-identifier)
             * [MAC Address](#mac-address)
@@ -33,6 +34,11 @@
         * [Ethtool coalesce](#ethtool-coalesce)
         * [Ethtool ring](#ethtool-ring)
         * [LLDP](#lldp)
+            * [Enabled](#lldp-enabled)
+            * [Neighbors](#neighbors)
+                * [TLV Type](#tlv-type)
+                * [TLV Subtype](#tlv-subtype)
+                * [Organization code](#organization-code)
         * [Ethernet Interface](#ethernet-interface)
             * [Ethernet speed](#ethernet-speed)
             * [Ethernet duplex](#ethernet-duplex)
@@ -202,6 +208,19 @@ All possible states of interface are:
  * `absent`: Only used when applying to instruct network backend to delete
     configuration of specified interface, this might or might not lead to
     the deletion in kernel.
+
+#### Description
+
+The `description` of the interface. This value can be configured to any string. For example:
+
+```yaml
+---
+interfaces:
+- name: eth1
+  type: ethernet
+  state: up
+  description: "Main interface connected to switch S1"
+```
 
 #### Profile Name
 
@@ -613,10 +632,20 @@ interfaces:
       tx-max: 4096
 ```
 
-#### Ethtool feature
+### Ethtool feature
 
 The `feature` subsection of `ethtool` holds the __changeable__ features of
 specified interface using feature name as key string and boolean as value.
+
+The subsection supports these parameters:
+
+ * `rx-gro`: boolean
+ * `tx-nocache-copy`: boolean
+ * `hw-tc-offload`: boolean
+ * `rx-udp_tunnel-port-oflload`: boolean
+ * `tx-generic-segmentation`: boolean
+ * `rx-udp-gro-forwarding`: boolean
+ * `rx-gro-list`: boolean
 
 ### Ethtool coalesce
 
@@ -660,7 +689,30 @@ All of them are 32 bits unsigned integer.
 
 ### LLDP
 
-Query only. TODO
+#### LLDP Enabled
+
+Indicate whether LLDP listener is enabled for the interface or not. The
+property type is `boolean`.
+
+#### Neighbors
+
+The `neighbors` section of LLDP holds the parameter of each neighbor reported
+by the LLDP listener. This parameters are read-only.
+
+##### TLV Type
+
+This is the TLV type reported as described in IEEE 802.1AB. The property type
+is `integer`.
+
+##### TLV Subtype
+
+This is the TLV subtype reported as described in IEEE 802.1AB. The property
+type is `integer`.
+
+##### Organization code
+
+This is the organization code or `oui` as described in IEEE 802.1AB. The property
+type is `integer`.
 
 ### Ethernet Interface
 
