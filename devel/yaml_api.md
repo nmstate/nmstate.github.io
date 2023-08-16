@@ -317,7 +317,7 @@ It supports these values:
 
 Available since 2.2.2.
 
-The `controller` properties defined the controller of specified interface.
+The `controller` property defines the controller of the specified interface.
 This property is hidden when querying and only used for controller attaching
 and detaching. Setting as `controller: ''` means detaching from current
 controller.
