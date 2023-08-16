@@ -293,7 +293,7 @@ This is query only property and will be ignored when applying.
 
 Available since 2.2.0.
 
-The minimum MTU supported by specified interface.
+The maximum MTU supported by specified interface.
 
 This is query only property and will be ignored when applying.
 
