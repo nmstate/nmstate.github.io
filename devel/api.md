@@ -25,7 +25,9 @@
     * [`Interface.TYPE`](#interfacetype)
     * [`Interface.STATE`](#interfacestate)
     * [`Interface.MTU`](#interfacemtu)
-    * [`Interface.MAC_ADDRESS`](#interfacemac_address)
+    * [`Interface.MAC`](#interfacemac)
+    * [`Interface.MIN_MTU`](#interfacemin_mtu)
+    * [`Interface.MAX_MTU`](#interfacemax_mtu)
     * [`Interface.COPY_MAC_FROM`](#interfacecopy_mac_from)
     * [`Interface.DESCRIPTION`](#interfacedescription)
     * [`InterfaceIP`](#interfaceip)
@@ -52,6 +54,13 @@
         * [`InterfaceIPv6.ADDRESS`](#interfaceipv6address)
             * [`InterfaceIPv6.ADDRESS_IP`](#interfaceipv6address_ip)
             * [`InterfaceIPv6.ADDRESS_PREFIX_LENGTH`](#interfaceipv6address_prefix_length)
+    * [`Interface.ACCEPT_ALL_MAC_ADDRESSES`](#interfaceaccept_all_mac_addresses)
+    * [`Interface.WAIT_IP`](#interfacewait_ip)
+    * [`Interface.CONTROLLER`](#interfacecontroller)
+    * [`Interface.PROFILE_NAME`](#interfaceprofile_name)
+    * [`Interface.IDENTIFIER`](#interfaceidentifier)
+    * [`Interface.IDENTIFIER_NAME`](#interfaceidentifier_name)
+    * [`Interface.IDENTIFIER_MAC`](#interfaceidentifier_mac)
 * [Ethernet](#ethernet)
     * [`Ethernet.AUTO_NEGOTIATION`](#ethernetauto_negotiation)
     * [`Ethernet.DUPLEX`](#ethernetduplex)
@@ -426,7 +435,21 @@ The maximum transmission unit of interface.
 
 Type: `interger`
 
-## `Interface.MAC_ADDRESS`
+## `Interface.MIN_MTU`
+
+The minimum MTU supported by specified interface. This is a query only property
+and will be ignored when applying.
+
+Type: `integer`
+
+## `Interface.MAX_MTU`
+
+The maximum MTU supported by specified interface. This is a query only property
+and will be ignored when applying.
+
+Type: `integer`
+
+## `Interface.MAC`
 
 The MAC address of interface.
 
@@ -800,6 +823,49 @@ Example:
     ]
 }
 ```
+
+## `Interface.ACCEPT_ALL_MAC_ADDRESSES`
+
+Type: `bool`
+
+The `Interface.ACCEPT_ALL_MAC_ADDRESSES` causes the kernel to accept ethernet
+packages even its destination MAC address is not for current interface.
+
+## `Interface.WAIT_IP`
+
+Type: `string`
+
+The `Interface.WAIT_IP`property defines which IP stack should network backend
+wait before considering the interface activation finished.
+
+It supports these values: `any`, `ipv4`, `ipv6` and `ipv4+ipv6`. For more
+details please check the [YAML API
+documentation](https://nmstate.io/devel/yaml_api.html#wait-ip)
+
+## `Interface.CONTROLLER`
+
+Type: `string`
+
+The `Interface.CONTROLLER` property defines the controller of the specified
+interface. This property is hidden when querying and only used for controller
+attaching and detaching. Setting as empty means deatching from current
+controller.
+
+## `Interface.PROFILE_NAME`
+
+Type: `string`
+
+The profile name used by network backed.
+
+## `Interface.IDENTIFIER`
+
+Type: `string`
+
+The `Interface.IDENTIFIER` property is only valid for applying or generating
+configurations. The valid values are: `Interface.IDENTIFIER_NAME` or
+`Interface.IDENTIFIER_MAC`. For further information, please read the [YAML API
+documentation](https://nmstate.io/devel/yaml_api.html#interface-identifier).
+
 ## `Ethernet.AUTO_NEGOTIATION`
 
 Type: `bool`
