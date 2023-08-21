@@ -170,9 +170,9 @@
     * [`Route.NEXT_HOP_INTERFACE`](#routenext_hop_interface)
     * [`Route.NEXT_HOP_ADDRESS`](#routenext_hop_address)
     * [`Route.METRIC`](#routemetric)
+    * [`Route.WEIGHT`](#routeweight)
 * [Route Rule](#route-rule)
     * [`RouteRule.CONFIG`](#routeruleconfig)
-    * [`RouteRule.CONFIG`](#routeruleconfig-1)
     * [`RouteRule.IP_FROM`](#routeruleip_from)
     * [`RouteRule.IP_TO`](#routeruleip_to)
     * [`RouteRule.PRIORITY`](#routerulepriority)
@@ -184,6 +184,8 @@
     * [`RouteRule.FAMILY`](#routerulefamily)
     * [`RouteRule.FAMILY_IPV4`](#routerulefamily_ipv4)
     * [`RouteRule.FAMILY_IPV6`](#routerulefamily_ipv6)
+    * [`RouteRule.IFF`](#routeruleiff)
+    * [`RouteRule.ACTION`](#routeruleaction)
 * [DNS client configuration](#dns-client-configuration)
     * [Limitations of static DNS configuration](#limitations-of-static-dns-configuration)
     * [`DNS.SEARCH`](#dnssearch)
@@ -1848,9 +1850,14 @@ Type: `integer`
 The route metric.
 If not define, set to `Route.USE_DEFAULT_METRIC` for the default metric.
 
-# Route Rule
+## `Route.WEIGHT`
 
-## `RouteRule.CONFIG`
+Type: `integer`
+
+The route weight. Please, notice that this property is only effective on ECMP
+route. Nmstate will configure ECMP route when possible on kernel.
+
+# Route Rule
 
 Nmstate provides routes rules via `libnmstate.show()`.
 Example:
@@ -1931,6 +1938,20 @@ Type: `string`
 ## `RouteRule.FAMILY_IPV6`
 
 Type: `string`
+
+## `RouteRule.IIF`
+
+Type: `string`
+
+This property defines the matching on incoming interface name.
+
+## `RouteRule.ACTION`
+
+Type: `string`
+
+This property defines the action for the routing policy. The supported values
+are: `RouteRule.ACTION_BLACKHOLE`, `RouteRule.ACTION_UNREACHABLE` and
+`RouteRule.ACTION_PROHIBIT`
 
 # DNS client configuration
 
