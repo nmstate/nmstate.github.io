@@ -405,6 +405,7 @@ Possible values:
  * `InterfaceType.MAC_VLAN`
  * `InterfaceType.MAC_VTAP`
  * `InterfaceType.VETH`     (new in 1.0.1)
+ * `InterfaceType.LOOPBACK`
 
 ## `Interface.STATE`
 
