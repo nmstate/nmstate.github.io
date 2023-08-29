@@ -203,6 +203,7 @@ interfaces:
       id: 101
       remote: 192.0.2.2
       local: 192.0.2.3
+      learning: true
 ```
 
 ## Interface: Linux Bridge
