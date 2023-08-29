@@ -15,6 +15,7 @@
     * [Interfaces: Team](#interfaces-team)
     * [Interfaces: Veth](#interfaces-veth)
     * [Route](#route)
+    * [Route Rule](#route-rule)
     * [DNS](#dns)
     * [Dynamic IP Configuration](#dynamic-ip-configuration)
 
@@ -201,6 +202,7 @@ interfaces:
       base-iface: eth1
       id: 101
       remote: 192.0.2.2
+      local: 192.0.2.3
 ```
 
 ## Interface: Linux Bridge

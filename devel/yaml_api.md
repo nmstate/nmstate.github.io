@@ -30,11 +30,11 @@
             * [Auto Route Metric](#auto-route-metric)
         * [Multipath TCP](#multipath-tcp)
         * [Ethtool](#ethtool)
-            * [Ethtool feature](#ethtool-feature)
+        * [Ethtool feature](#ethtool-feature)
         * [Ethtool coalesce](#ethtool-coalesce)
         * [Ethtool ring](#ethtool-ring)
         * [LLDP](#lldp)
-            * [Enabled](#lldp-enabled)
+            * [LLDP Enabled](#lldp-enabled)
             * [Neighbors](#neighbors)
                 * [TLV Type](#tlv-type)
                 * [TLV Subtype](#tlv-subtype)
@@ -936,6 +936,8 @@ interfaces:
     base-iface: eth1
     id: 102
     remote: 192.0.2.251
+    local: 192.0.2.252
+    learning: false
     destination-port: 1235
 ```
 
@@ -946,6 +948,8 @@ The `vxlan` sections contains two parameters:
    destination link layer address is not known in the VxLAN device forwarding
    database. Could be unicast IP or multicast IP.
  * `destination-port`: The UDP destination port.
+ * `local`: The source IP address for outgoing packages.
+ * `learning`: Whether store unknown link-layer address to forward database.
 
 Currently, we only support VxLAN based on IEEE 802.1Q protocol.
 

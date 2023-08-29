@@ -25,9 +25,9 @@
     * [`Interface.TYPE`](#interfacetype)
     * [`Interface.STATE`](#interfacestate)
     * [`Interface.MTU`](#interfacemtu)
-    * [`Interface.MAC`](#interfacemac)
     * [`Interface.MIN_MTU`](#interfacemin_mtu)
     * [`Interface.MAX_MTU`](#interfacemax_mtu)
+    * [`Interface.MAC`](#interfacemac)
     * [`Interface.COPY_MAC_FROM`](#interfacecopy_mac_from)
     * [`Interface.DESCRIPTION`](#interfacedescription)
     * [`InterfaceIP`](#interfaceip)
@@ -54,14 +54,12 @@
         * [`InterfaceIPv6.ADDRESS`](#interfaceipv6address)
             * [`InterfaceIPv6.ADDRESS_IP`](#interfaceipv6address_ip)
             * [`InterfaceIPv6.ADDRESS_PREFIX_LENGTH`](#interfaceipv6address_prefix_length)
+* [Ethernet](#ethernet)
     * [`Interface.ACCEPT_ALL_MAC_ADDRESSES`](#interfaceaccept_all_mac_addresses)
     * [`Interface.WAIT_IP`](#interfacewait_ip)
     * [`Interface.CONTROLLER`](#interfacecontroller)
     * [`Interface.PROFILE_NAME`](#interfaceprofile_name)
     * [`Interface.IDENTIFIER`](#interfaceidentifier)
-    * [`Interface.IDENTIFIER_NAME`](#interfaceidentifier_name)
-    * [`Interface.IDENTIFIER_MAC`](#interfaceidentifier_mac)
-* [Ethernet](#ethernet)
     * [`Ethernet.AUTO_NEGOTIATION`](#ethernetauto_negotiation)
     * [`Ethernet.DUPLEX`](#ethernetduplex)
     * [`Ethernet.SPEED`](#ethernetspeed)
@@ -84,6 +82,8 @@
     * [`VXLAN.BASE_IFACE`](#vxlanbase_iface)
     * [`VXLAN.REMOTE`](#vxlanremote)
     * [`VXLAN.DESTINATION_PORT`](#vxlandestination_port)
+    * [`VXLAN.LOCAL`](#vxlanlocal)
+    * [`VXLAN.LEARNING`](#vxlanlearning)
 * [Linux Bridge](#linux-bridge)
     * [Limitations of Linux Bridge Interface](#limitations-of-linux-bridge-interface)
     * [`LinuxBridge.Options.GROUP_FORWARD_MASK`](#linuxbridgeoptionsgroup_forward_mask)
@@ -184,7 +184,7 @@
     * [`RouteRule.FAMILY`](#routerulefamily)
     * [`RouteRule.FAMILY_IPV4`](#routerulefamily_ipv4)
     * [`RouteRule.FAMILY_IPV6`](#routerulefamily_ipv6)
-    * [`RouteRule.IFF`](#routeruleiff)
+    * [`RouteRule.IIF`](#routeruleiif)
     * [`RouteRule.ACTION`](#routeruleaction)
 * [DNS client configuration](#dns-client-configuration)
     * [Limitations of static DNS configuration](#limitations-of-static-dns-configuration)
@@ -1090,6 +1090,17 @@ Type: `integer`
 The UDP destination port to communicate to the remote VXLAN tunnel endpoint.
 Default: 4789
 
+## `VXLAN.LOCAL`
+
+Type: `string`
+
+The source IP address for out-going package of VxLAN tunnel.
+
+## `VXLAN.LEARNING`
+
+Type: `bool`
+
+Whether to learn link layer address for forward database.
 
 # Linux Bridge
 Besides basic interface properties, each Linux Bridge interface state also
