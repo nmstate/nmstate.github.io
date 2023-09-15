@@ -912,13 +912,13 @@ interfaces:
     vlan:
       base-iface: eth1
       id: 101
+      protocol: 802.1q
 ```
 
 The `vlan` sections contains two parameters:
  * `base-iface`: The parent interface name.
  * `id`: VLAN ID integer.
-
-Currently, we only support VLAN based on IEEE 802.1Q protocol.
+ * `protocol`: `802.1q` (default) or `802.1ad`
 
 ### VxLAN Interface
 
@@ -1029,7 +1029,7 @@ options:
     * `hello-time`: Integer
     * `max-age`: Integer
     * `priority`: Integer
- * `vlan-protocol`: `802.1q`(default) or `802.1ad`
+ * `vlan-protocol`: `802.1q` (default) or `802.1ad`
 
 ### Linux Bridge Ports
 
