@@ -67,6 +67,7 @@
         * [IP over InfiniBand Interface](#ip-over-infiniband-interface)
         * [Virtual Routing and Forwarding (VRF) Interface](#virtual-routing-and-forwarding-vrf-interface)
         * [Linux Virtual Ethernet(veth) Interface](#linux-virtual-ethernetveth-interface)
+        * [IPsec Encryption](#ipsec-encryption)
     * [Routes](#routes)
     * [Route Rules](#route-rules)
     * [DNS Resolver](#dns-resolver)
@@ -1350,6 +1351,70 @@ interfaces:
   veth:
     peer: veth1peer
 ```
+
+### IPsec Encryption
+
+New feature in 2.2.21
+
+Nmstate is using [Libreswan][libreswan_url] daemon and
+`NetworkManager-libreswan` for IPsec encryption communication.
+
+This is an example of X509 based authentication IPsec connection:
+
+```yml
+---
+interfaces:
+- name: hosta_conn
+  type: ipsec
+  ipv4:
+    enabled: true
+    dhcp: true
+  libreswan:
+    right: 192.0.2.252
+    rightid: '@hostb.example.org'
+    left: 192.0.2.251
+    leftid: '%fromcert'
+    leftcert: hosta.example.org
+    ikev2: insist
+```
+
+The `libreswan` section, nmstate provides these properties:
+ * `ipsec-interface`: String 'yes' or 'no' or unsigned integer.
+ * `authby`: Authentication method. Normally you don't need to set it.
+ * `dpddelay`: Integer.
+ * `dpdtimeout`: Integer.
+ * `dpdaction`: String.
+ * `ikelifetime`: String.
+ * `salifetime`: String.
+ * `ikev2`: String.
+ * `ike`: String.
+ * `esp`: String.
+ * `right`: String.
+ * `rightid`: String.
+ * `rightrsasigkey`: String.
+ * `left`: String.
+ * `leftid`: String.
+ * `leftrsasigkey`: String.
+ * `leftcert`: String.
+ * `ikev2`: String.
+ * `psk`: String. The Pre-Shared-Key. Please consider to use x509/PKI
+   authentication in production system. In query, this property will be
+   shown as `<_password_hid_by_nmstate>` for security concern.
+
+Except the `psk` property, all other properties are libreswan specific options,
+please refer to the manpage of `ipsec.conf` for detail meaning of them.
+
+By default, nmstate will not create any virtual NIC representing the encrypted
+communication, they can be check via `ip xfrm policy` command. The IP provided
+by IPsec remote will be assigned the interface hosting the underneath network
+flow.
+
+If you prefer a logical interface holding encrypted communication, please set
+`ipsec-interface` to `'yes'` or a unsigned integer number, then a xfrm logical
+interface named `ipsec<number` will be created holding the IP retrieved from
+IPsec remote.
+
+You may also check [IPsec example page](../features/ipsec.md) for use cases.
 
 ## Routes
 
