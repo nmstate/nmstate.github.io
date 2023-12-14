@@ -1,12 +1,12 @@
 <!-- vim-markdown-toc GFM -->
 
-    * [IPsec x509/PKI authentication example](#ipsec-x509pki-authentication-example)
+* [IPsec x509/PKI authentication example](#ipsec-x509pki-authentication-example)
 * [IPsec RSA authentication example](#ipsec-rsa-authentication-example)
 * [IPsec PSK authentication example](#ipsec-psk-authentication-example)
 
 <!-- vim-markdown-toc -->
 
-#### IPsec x509/PKI authentication example
+# IPsec x509/PKI authentication example
 
 ```yml
 ---
@@ -30,7 +30,7 @@ interfaces:
 
 The PKI key should be imported by `ipsec import` command or other NSS tools.
 
-### IPsec RSA authentication example
+# IPsec RSA authentication example
 
 
 ```yml
@@ -55,7 +55,7 @@ interfaces:
 The `rightrsasigkey` and `leftrsasigkey` could be retrieved by
 `ipsec showhostkey --right --ckaid <CKAID>` command.
 
-### IPsec PSK authentication example
+# IPsec PSK authentication example
 
 ```yml
 ---
