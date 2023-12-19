@@ -1583,6 +1583,13 @@ is required to find a interface to hold DNS settings in the order of:
  * First unchanged interface in current state with static IP or auto IP with
    `auto-dns: false`.
 
+To purge the static DNS configure, please use
+
+```yml
+dns-resolver:
+  config: {}
+```
+
 ## Hostname
 
 Only available on nmstate version 2.1.1+.
