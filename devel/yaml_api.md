@@ -1400,6 +1400,10 @@ The `libreswan` section, nmstate provides these properties:
  * `psk`: String. The Pre-Shared-Key. Please consider to use x509/PKI
    authentication in production system. In query, this property will be
    shown as `<_password_hid_by_nmstate>` for security concern.
+ * `rightsubnet`: String. Please explicitly set it when using in host-to-host
+   mode.
+ * `leftmodecfgclient`: yes|no. Please explicitly set it to `no` when using in
+   host-to-host mode.
 
 Except the `psk` property, all other properties are libreswan specific options,
 please refer to the manpage of `ipsec.conf` for detail meaning of them.
