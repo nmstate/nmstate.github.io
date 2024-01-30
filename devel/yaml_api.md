@@ -1417,7 +1417,7 @@ flow.
 
 If you prefer a logical interface holding encrypted communication, please set
 `ipsec-interface` to `'yes'` or a unsigned integer number, then a xfrm logical
-interface named `ipsec<number` will be created holding the IP retrieved from
+interface named `ipsec<number>` will be created holding the IP retrieved from
 IPsec remote.
 
 You may also check [IPsec example page](../features/ipsec.md) for use cases.
