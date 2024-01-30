@@ -1404,6 +1404,8 @@ The `libreswan` section, nmstate provides these properties:
    mode.
  * `leftmodecfgclient`: yes|no. Please explicitly set it to `no` when using in
    host-to-host mode.
+ * `type`: `transport` or `tunnel`. The `tunnel` is the default value if not
+   defined.
 
 Except the `psk` property, all other properties are libreswan specific options,
 please refer to the manpage of `ipsec.conf` for detail meaning of them.

@@ -4,6 +4,7 @@
 * [IPsec RSA authentication example](#ipsec-rsa-authentication-example)
 * [IPsec PSK authentication example](#ipsec-psk-authentication-example)
 * [IPSec Host-to-Host/P2P tunnel](#ipsec-host-to-hostp2p-tunnel)
+* [IPsec transport mode](#ipsec-transport-mode)
 
 <!-- vim-markdown-toc -->
 
@@ -119,4 +120,30 @@ src 192.0.2.155/32 dst 192.0.2.248/32
     dir in priority 1753281 ptype main
     tmpl src 192.0.2.155 dst 192.0.2.248
         proto esp reqid 16389 mode tunnel
+```
+
+# IPsec transport mode
+
+By default, nmstate is using `type: tunnel` mode, you may specific
+`type: transport` like:
+
+```yml
+---
+interfaces:
+- name: hosta_conn
+  type: ipsec
+  ipv4:
+    enabled: true
+    dhcp: true
+  libreswan:
+    type: transport
+    ipsec-interface: "99"
+    left: 192.0.2.251
+    leftid: '%fromcert'
+    leftcert: hosta.example.org
+    right: 192.0.2.151
+    rightid: '%fromcert'
+    ikev2: insist
+    ikelifetime: 24h
+    salifetime: 24h
 ```
