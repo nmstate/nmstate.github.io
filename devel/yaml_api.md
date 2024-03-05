@@ -1582,12 +1582,19 @@ dns-resolver:
     - example.org
 ```
 
-Due to NetworkManager limitations, when using NetworkManager backend, nmstate
-is required to find a interface to hold DNS settings in the order of:
- * First interface in desire state with static IP or auto IP with
-   `auto-dns: false`.
- * First unchanged interface in current state with static IP or auto IP with
-   `auto-dns: false`.
+NetworkManager backend has two set of DNS configurations:
+ * Global DNS set by D-BUS interface or NetworkManager.conf.
+ * Interface DNS stored in NetworkManager connection as `ipv4.dns` or
+   `ipv6.dns.`
+
+Nmstate will try to use global DNS via D-BUS interface call, and only use
+interface level DNS for any of these use case:
+ 1. Has IPv6 link-local address as name server: e.g. `fe80::deef:1%eth1`
+ 2. User want static DNS server appended before dynamic one. In this case,
+    user should define `auto-dns: true` explicitly along with static DNS.
+ 3. User want to force DNS server stored in interface for static IP
+    interface. This case, user need to state static DNS config along with
+    static IP config.
 
 To purge the static DNS configure, please use
 
