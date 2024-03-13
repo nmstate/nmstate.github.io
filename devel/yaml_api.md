@@ -18,6 +18,7 @@
             * [Interface Controller](#interface-controller)
             * [Accept All MAC addresses](#accept-all-mac-addresses)
             * [Copy MAC From](#copy-mac-from)
+            * [Dispatch script](#dispatch-script)
         * [IP](#ip)
             * [IP Enable](#ip-enable)
             * [DHCP](#dhcp)
@@ -362,6 +363,32 @@ interfaces:
       - name: eth2
       - name: eth1
 ```
+
+#### Dispatch script
+
+Since 2.2.17, nmstate has introduced support of invoking dispatch script upon
+the activation and deactivation of interface.
+
+For example, this desire state will instruct network backend to invoke
+`echo post-up-eth1 | systemd-cat` after the interface is activated, and
+`echo post-down-eth1 | systemd-cat` after the interface been deactivated.
+
+```yml
+---
+interfaces:
+- name: eth1
+  type: ethernet
+  state: up
+  dispatch:
+    post-activation: |
+      echo post-up-eth1 | systemd-cat
+    post-deactivation: |
+      echo post-down-eth1 | systemd-cat
+```
+
+Setting the `post-activation` or `post-deactivation` to empty string will
+remove the dispatch scripts. Removing the interface using
+`state: absent` also remove the dispatch scripts.
 
 ### IP
 
