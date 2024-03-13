@@ -830,6 +830,7 @@ The `vfs` section holds VF specific settings:
  * `max-tx-rate`
  * `vlan-id`
  * `qos`
+ * `vlan-proto` -- choice of `802.1q`(default) or `802.1ad`
 
 Once the `vfs` section is defined in desire state, user is required to provide
 __all__ VFS configuration, nmstate will not merge it with current status.
