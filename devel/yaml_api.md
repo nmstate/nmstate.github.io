@@ -1520,6 +1520,13 @@ Each route entry could have these parameters:
    route, it will only delete routes __without__ `next-hop-address`.
  * `metric`: Integer. Set to -1 for let backend decide.
  * `table-id`: Integer. Set to 0 for main table id 254.
+ * `cwnd`: Integer. TCP congestion window. According to linux kernel, The
+   `cwnd` property of route requires the `lock cwnd` flag been set at the same
+   time, otherwise the `cwnd` will take effect. Hence, on querying, nmstate
+   treat routes without `lock cwnd` flag as empty `cwnd`. When applying,
+   nmstate backend always set `lock cwnd`. If you want to modify existing
+   `cwnd`, like modifying other route properties, you need to mark old
+   route as `state: absnet` and append new route.
 
 ## Route Rules
 
