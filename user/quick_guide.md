@@ -4,7 +4,7 @@
 
 This guide is helpful to install Nmstate from source, for installing stable
 release or other installation methods, pleaser refer to [Nmstate installation
-guide](./install.md)
+guide](./install.html)
 
 ### Dependencies
 
@@ -23,12 +23,8 @@ In order to support specific capabilities, additional packages are required:
 ```bash
 git clone https://github.com/nmstate/nmstate.git
 cd nmstate
-pip install --user --upgrade .
+PREFIX=/usr make install
 ```
-
-Note: In order to report current state, installing Nmstate as a non-root user
-should be enough. For change support, install the package as root.
-
 
 ## View state
 

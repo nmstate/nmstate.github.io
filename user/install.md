@@ -4,12 +4,7 @@
     * [RPM based](#rpm-based)
         * [Stable release](#stable-release)
         * [Developer Branch](#developer-branch)
-    * [PyPI/pip](#pypipip)
-        * [Stable Release](#stable-release-1)
-        * [Developer Branch](#developer-branch-1)
-    * [setup.py](#setuppy)
-        * [Stable Release](#stable-release-2)
-        * [Developer Branch](#developer-branch-2)
+    * [Install from source](#install-from-source)
 
 <!-- vim-markdown-toc -->
 
@@ -19,19 +14,10 @@
 
 ### Stable release
 
-Nmstate is in Fedora and EPEL 7 testing, you may install it using below
+Nmstate is in Fedora 31+ and RHEL 8+, you may install it using below
 commands.
 
- * Fedora 31+
-
 ```bash
-sudo dnf install nmstate
-```
-
- * RHEL 8 using copr repo
-
-```bash
-sudo dnf copr enable nmstate/nmstate-stable
 sudo dnf install nmstate
 ```
 
@@ -46,42 +32,10 @@ sudo dnf copr enable nmstate/nmstate-git
 sudo dnf install nmstate
 ```
 
-## PyPI/pip
-
-### Stable Release
+## Install from source
 
 ```bash
-pip --user --upgrade install nmstate
-```
-
-### Developer Branch
-
-```bash
-git clone https://github.com/nmstate/nmstate.git
+# Use git or download tarball from https://github.com/nmstate/nmstate/releases
 cd nmstate
-pip install --user --upgrade .
-```
-
-## setup.py
-
-### Stable Release
-
-```bash
-# Download tarball and signature from:
-# https://github.com/nmstate/nmstate/releases/
-gpg2 --recv-keys F7910D93CA83D77348595C0E899014C0463C12BB
-gpg2 --verify ./nmstate-*.tar.gz.asc nmstate-*.tar.gz
-tar xf nmstate-*.tar.gz
-cd nmstate-*
-python setup.py build
-python setup.py install
-```
-
-### Developer Branch
-
-```bash
-git clone https://github.com/nmstate/nmstate.git
-cd nmstate
-python setup.py build
-python setup.py install
+PREFIX=/usr make install
 ```
