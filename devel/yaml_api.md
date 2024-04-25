@@ -1638,6 +1638,8 @@ dns-resolver:
   config: {}
 ```
 
+Please check [DNS feature page for YAML examples][dns_feature_url].
+
 ## Hostname
 
 Only available on nmstate version 2.1.1+.
@@ -1702,5 +1704,6 @@ ovs-db:
     ovn-localnet-bridge-mappings: "ovn-external:breth0"
 ```
 
+[dns_feature_url]: ../features/dns.md
 [sriov_vf_name]: ../features/iface_vf_id.md
 [libreswan_url]: https://libreswan.org/

@@ -33,6 +33,7 @@ NetworkManager acts as the main (and currently the only) provider supported.
 - [Refer SR-IOV VF via PF name and VF ID](./features/iface_vf_id.md)
 - [Refer Interface using MAC Address](./features/mac_identifier.md)
 - [IPsec](./features/ipsec.md)
+- [DNS](./features/dns.md)
 
 ## Example output
 
