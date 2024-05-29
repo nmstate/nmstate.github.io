@@ -320,6 +320,20 @@ routes:
     table-id: 254
 ```
 
+For dropping a configured route, it must be marked as absent.
+
+```yaml
+---
+routes:
+  config:
+  - destination: 198.51.100.0/24
+    metric: 150
+    next-hop-address: 192.0.2.1
+    next-hop-interface: eth1
+    table-id: 254
+    state: absent
+```
+
 ## Route Rule
 
 ```yaml
