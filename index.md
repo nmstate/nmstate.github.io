@@ -40,7 +40,7 @@ NetworkManager acts as the main (and currently the only) provider supported.
 ```yaml
 $ sudo nmstatectl show
 ---
-dns:
+dns-resolver:
   config:
     server:
       - 192.0.2.1
