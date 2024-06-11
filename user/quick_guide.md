@@ -10,13 +10,8 @@ guide](./install.html)
 
 Nmstate requires NetworkManager 1.26 or later version installed and started.
 
-In order to support specific capabilities, additional packages are required:
+In order to support specific capabilities, additional packages is required:
 - OpenVSwitch support through the NM provider requires `NetworkManager-ovs`.
-
-- Extended ovsdb support requires `openvswitch-2.11` and
-`python3-openvswitch2.11` or greater.
-
-- Team interface support through the NM provider requires `NetworkManager-team`
 
 ### Install from source
 
@@ -38,21 +33,22 @@ The following command will dump the current networking state in yaml format:
 `nmstatectl show`
 
 ```yaml
+---
 interfaces:
-- description: Production Network
-  ethernet:
-    auto-negotiation: true
-    duplex: full
-    speed: 1000
+- name: eth3
+  description: Production Network
+  type: ethernet
+  state: up
+  mtu: 1500
   ipv4:
+    enabled: true
     address:
     - ip: 192.0.2.142
       prefix-length: 24
-    enabled: true
-  mtu: 1500
-  name: eth3
-  state: up
-  type: ethernet
+  ethernet:
+    auto-negotiation: true
+    speed: 1000
+    duplex: full
 ```
 
 To dump the state in json format, use '--json' flag:
@@ -146,9 +142,11 @@ The following script modifies the state of the eth3 interface.
 import libnmstate
 
 state = libnmstate.show()
-eth3_state = next(ifstate for ifstate in state['interfaces'] if ifstate['name'] == 'eth3')
+eth3_state = next(
+    ifstate for ifstate in state["interfaces"] if ifstate["name"] == "eth3"
+)
 
 # take eth3 down
-eth3_state['state'] = 'down'
+eth3_state["state"] = "down"
 libnmstate.apply(state)
 ```
