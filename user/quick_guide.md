@@ -8,10 +8,10 @@ guide](./install.html)
 
 ### Dependencies
 
-Nmstate requires NetworkManager 1.26 or later version installed and started.
+Nmstate requires NetworkManager 1.40 or later version installed and started.
 
-In order to support specific capabilities, additional packages is required:
-- OpenVSwitch support through the NM provider requires `NetworkManager-ovs`.
+In order to support specific capabilities, additional package is required:
+- OpenvSwitch support through the NM provider requires `NetworkManager-ovs`.
 
 ### Install from source
 
