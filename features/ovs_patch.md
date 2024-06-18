@@ -17,6 +17,7 @@ interfaces:
 - name: ovs-br0
   type: ovs-bridge
   state: up
+  bridge:
     port:
     - name: patch0
 - name: ovs-br1
