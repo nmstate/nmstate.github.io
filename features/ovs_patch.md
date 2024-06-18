@@ -1,6 +1,6 @@
 <!-- vim-markdown-toc GFM -->
 
-* [Open vSwitch Patch Port](#open-vswitch-patch-port)
+- [Open vSwitch Patch Port](#open-vswitch-patch-port)
 
 <!-- vim-markdown-toc -->
 
@@ -9,7 +9,7 @@
 [Open vSwitch patch port][1] support is introduced by nmstate-0.3.2.
 
 The OVS patch port is used for connecting two bridges.
-This is the example of patching ovs bridge `br0` with `br1` via `patch0-patch1`
+This is the example of patching OVS bridge `br0` with `br1` via `patch0-patch1`
 pair.
 
 ```yml
