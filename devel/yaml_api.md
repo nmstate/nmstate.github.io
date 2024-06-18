@@ -951,7 +951,7 @@ The `vlan` sections contains two parameters:
 
 With nmstate 2.2.1+, when using Nmstate with NetworkManager backend, nmstate
 can creating VLAN over unmanaged interface, hence if you never mention VLAN
-parent in `interfafaces` section of desired state, nmstate will not convert
+parent in `interfaces` section of desired state, nmstate will not convert
 VxLAN parent interface from unmanaged to managed.
 
 For `generate configuration(gc)` mode, unmentioned VLAN parent will not
@@ -992,7 +992,7 @@ Currently, we only support VxLAN based on IEEE 802.1Q protocol.
 
 With nmstate 2.2.1+, when using Nmstate with NetworkManager backend, nmstate
 can creating VxLAN over unmanaged interface, if you never mention VxLAN parent
-in `interfafaces` section of desired state, nmstate will not convert VxLAN
+in `interfaces` section of desired state, nmstate will not convert VxLAN
 parent interface from unmanaged to managed.
 
 For `generate configuration(gc)` mode, unmentioned VxLAN parent will not
