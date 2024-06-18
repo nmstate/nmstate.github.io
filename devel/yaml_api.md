@@ -949,6 +949,14 @@ The `vlan` sections contains two parameters:
  * `id`: VLAN ID integer.
  * `protocol`: `802.1q` (default) or `802.1ad`
 
+With nmstate 2.2.1+, when using Nmstate with NetworkManager backend, nmstate
+can creating VLAN over unmanaged interface, hence if you never mention VLAN
+parent in `interfafaces` section of desired state, nmstate will not convert
+VxLAN parent interface from unmanaged to managed.
+
+For `generate configuration(gc)` mode, unmentioned VLAN parent will not
+get automatically created interface profile.
+
 ### VxLAN Interface
 
 The `vxlan` section of interface holds the parameters of VxLAN specific
@@ -981,6 +989,14 @@ The `vxlan` sections contains two parameters:
  * `learning`: Whether store unknown link-layer address to forward database.
 
 Currently, we only support VxLAN based on IEEE 802.1Q protocol.
+
+With nmstate 2.2.1+, when using Nmstate with NetworkManager backend, nmstate
+can creating VxLAN over unmanaged interface, if you never mention VxLAN parent
+in `interfafaces` section of desired state, nmstate will not convert VxLAN
+parent interface from unmanaged to managed.
+
+For `generate configuration(gc)` mode, unmentioned VxLAN parent will not
+get automatically created interface profile.
 
 ### Linux Bridge Interface
 
