@@ -1,33 +1,35 @@
 ## MultiPath TCP
 
-MultiPath TCP(MPTCP support is introduced by nmstate 2.2.0 and requires
+MultiPath TCP (MPTCP) support is introduced by nmstate 2.2.0 and requires
 NetworkManager 1.40 or greater.
 
-By assigning MPTCP flags to IP address, MPTCP enabled TCP connection could be
+By assigning MPTCP flags to IP addresses, MPTCP-enabled TCP connections can
 benefit from extra TCP subflows.
-Nmstate could query out the MPTCP flags of each IP address found on specific
-interface, but only support assigning the same MPTCP flags to all the IP
+
+Nmstate can query out the MPTCP flags of each IP address found on a specific
+interface but only supports assigning the same MPTCP flags to all the IP
 addresses of this interface.
 
-To enable MPTCP use case, beside using nmstate to configure MPTCP flags on IP
-address, you might also need(depend on your linux distributions kernel config),
-these actions should be done before nmstate and persistent by yourself:
+To effectively enable MPTCP, besides using nmstate to configure MPTCP flags
+on IP addresses, depending on your Linux distribution kernel configuration,
+you might also need to perform these actions before using nmstate, and persist
+these changes by yourself:
 
- * Enable global MPTCP switch: `sysctl -w net.mptcp.enabled=1`.
-   RHEL/CentOS 9 by default is disabling MPTCP, hence placing a file in
-   `/etc/sysctl.d/` could persistent it.
+* Enable global MPTCP switch: `sysctl -w net.mptcp.enabled=1`.
+  RHEL/CentOS 9 by default is disabling MPTCP. Hence, placing a file in
+  `/etc/sysctl.d/` could persist it.
 
- * Increase MPTCP subflow limits: `ip mptcp limits set subflows 2`.
-   RHEL/CentOS 9 by default is setting subflow limit to 2. Hence no action
-   required.
+* Increase MPTCP subflow limits: `ip mptcp limits set subflows 2`.
+  RHEL/CentOS 9 by default is setting subflow limit to 2. Hence, no action
+  is required.
 
- * Might require `sysctl -w net.ipv4.conf.<iface_name>.rp_filter=0`
-   File in `/etc/sysctl.d/` could persistent it.
+* Might require `sysctl -w net.ipv4.conf.<iface_name>.rp_filter=0`
+  Hence, placing a file in `/etc/sysctl.d/` could persist it.
 
-These commands is only for testing purpose, please check with MPTCP documents
-and technical support for detail.
+These commands are only for testing purpose, please check with MPTCP documents
+and technical support for details.
 
-Example to add 'subflow' and 'signal' MPTCP flags to all IP of eth1.
+Example to add 'subflow' and 'signal' MPTCP flags to all IP addresses of eth1.
 
 ```yaml
 ---
@@ -47,7 +49,7 @@ interfaces:
           prefix-length: 24
 ```
 
-Example on querying MPTCP of eth1:
+Example of querying MPTCP of eth1:
 
 
 ```yaml
@@ -73,14 +75,15 @@ interfaces:
 
 
 ### Limitations
- * Nmstate can query MPTCP flags per IP address. But setting MPTCP flags on
-   IP address is not supported and will be ignored with a warning.
 
- * Nmstate will not apply MPTCP flags to link-local address, multicast
-   address, loopback address, and IPv6 unicast local address.
+* Nmstate can query MPTCP flags per IP address. However, setting MPTCP flags
+  on IP addresses is not supported and will be ignored with a warning.
+
+* Nmstate will not apply MPTCP flags to link-local addresses, multicast
+  addresses, loopback addresses, and IPv6 unicast local addresses.
 
 ### How to tell MPTCP is working.
 
- * Use `mptcpize run` to start the TCP server and client.
- * Use `tcpdump`, `tshark` or `wireshark` to capture the network flow.
-   Seek for MPTCP subflows.
+* Use `mptcpize run` to start the TCP server and client.
+* Use `tcpdump, `tshark`, or `wireshark` to capture the network flow.
+  Seek for MPTCP subflows.
