@@ -2,18 +2,19 @@
 
 New feature in nmstate 1.0.2.
 
-When you have no access to the host network stack but would like nmstate
-to generate the network configuration files for you save it. You may use
- * Python API: `libnmstate.generate_configurations(desired_state)`
- * CLI: `nmstatectl gc <path_to_state_json_or_yaml_file>`
+When you have no access to the host network stack, but would like nmstate
+to generate the network configuration files for you to save it, you may use:
 
-This function will not access network stack, so user have to provide
-full network states and no merge action will be done against current
-network status. If any undefined interface mentioned as port of
-bond/bridge/team/vlan and etc, nmstate is assuming undefined interface is
-with type of `ethernet`.
+* Python API: `libnmstate.generate_configurations(desired_state)`
+* CLI: `nmstatectl gc <path_to_state_json_or_yaml_file>`
 
-The output would like in the format like:
+This function will not access the network stack, so the user has to provide
+full network states, and no merge action will be done against current
+network status. If any undefined interface is mentioned as port of
+bond/bridge/team/vlan/etc, nmstate assumes the undefined interface is
+of type `ethernet`.
+
+The output should follow the format below:
 
 ```python
 {
@@ -39,7 +40,7 @@ interfaces:
 ```
 
 The STDOUT of `nmstatectl gc bond.yml` will contain below information
-for you to saved the configuration into NetworkManager folder by your own
+for you to save into the NetworkManager configuration folder by your own
 tools:
 
 
