@@ -81,7 +81,7 @@ interfaces:
 - [nmpolicy](https://nmstate.io/nmpolicy)
 
 ## Contacts
-- You can find us on #nmstate IRC channel on [Libera](https://libera.chat/).
+- You can find us on Matrix room: [`#nmstate:fedora.im`][matrix_room_url]
   The maintainers are Gris, edwardh and ffmancera, please feel free to ask
   whatever you need!
 
@@ -89,3 +89,4 @@ interfaces:
   report.
 
 [github_issue_url]: https://github.com/nmstate/nmstate/issues
+[matrix_room_url]: https://matrix.to/#/#nmstate:fedora.im
