@@ -1201,9 +1201,6 @@ Each OVS interface config could have:
  * `link-aggregation`: Bond config.
  * `vlan`: Vlan config. Please check `Linux Bridge Port VLAN` section.
 
-Limitations:
- * Only support access mode VLAN for now.
-
 #### OpenvSwitch DPDK
 
 Below yaml could be used to enable DPDK using PCI device `0000:af:00.1`:
