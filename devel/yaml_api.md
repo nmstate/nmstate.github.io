@@ -1,79 +1,79 @@
 <!-- vim-markdown-toc GFM -->
 
 * [Introduction](#introduction)
-    * [Interfaces](#interfaces)
-        * [Base Interface](#base-interface)
-            * [Name](#name)
-            * [Type](#type)
-            * [State](#state)
-            * [Description](#description)
-            * [Profile Name](#profile-name)
-            * [Interface Identifier](#interface-identifier)
-            * [MAC Address](#mac-address)
-            * [Permanent MAC Address](#permanent-mac-address)
-            * [MTU](#mtu)
-            * [Minimum MTU](#minimum-mtu)
-            * [Maximum MTU](#maximum-mtu)
-            * [Wait IP](#wait-ip)
-            * [Interface Controller](#interface-controller)
-            * [Accept All MAC addresses](#accept-all-mac-addresses)
-            * [Copy MAC From](#copy-mac-from)
-            * [Dispatch script](#dispatch-script)
-        * [IP](#ip)
-            * [IP Enable](#ip-enable)
-            * [DHCP](#dhcp)
-            * [IPv6 Autoconf](#ipv6-autoconf)
-            * [IP Address](#ip-address)
-            * [Auto DNS](#auto-dns)
-            * [Auto Routes](#auto-routes)
-            * [Auto Gateway](#auto-gateway)
-            * [Auto Route Table ID](#auto-route-table-id)
-            * [Auto Route Metric](#auto-route-metric)
-        * [Multipath TCP](#multipath-tcp)
-        * [Ethtool](#ethtool)
-        * [Ethtool feature](#ethtool-feature)
-        * [Ethtool coalesce](#ethtool-coalesce)
-        * [Ethtool ring](#ethtool-ring)
-        * [LLDP](#lldp)
-            * [LLDP Enabled](#lldp-enabled)
-            * [Neighbors](#neighbors)
-                * [TLV Type](#tlv-type)
-                * [TLV Subtype](#tlv-subtype)
-                * [Organization code](#organization-code)
-        * [Ethernet Interface](#ethernet-interface)
-            * [Ethernet speed](#ethernet-speed)
-            * [Ethernet duplex](#ethernet-duplex)
-            * [Ethernet Auto Negotiation](#ethernet-auto-negotiation)
-        * [SR-IOV](#sr-iov)
-            * [SR-IOV Total VFS Count](#sr-iov-total-vfs-count)
-            * [SR-IOV VF Specific Settings](#sr-iov-vf-specific-settings)
-        * [Bond Interface](#bond-interface)
-            * [Bond Mode](#bond-mode)
-            * [Bond Options](#bond-options)
-            * [Bond Ports](#bond-ports)
-        * [VLAN Interface](#vlan-interface)
-        * [VxLAN Interface](#vxlan-interface)
-        * [Linux Bridge Interface](#linux-bridge-interface)
-            * [Linux Bridge Options](#linux-bridge-options)
-        * [Linux Bridge Ports](#linux-bridge-ports)
-        * [Linux Bridge Port VLAN](#linux-bridge-port-vlan)
-        * [OpenvSwitch Bridge Interface](#openvswitch-bridge-interface)
-            * [OpenvSwitch Bridge Options](#openvswitch-bridge-options)
-        * [OpenvSwitch Bridge Ports](#openvswitch-bridge-ports)
-            * [OpenvSwitch DPDK](#openvswitch-dpdk)
-        * [OpenvSwitch Internal Interface](#openvswitch-internal-interface)
-        * [OpenvSwitch Bridge Patch Interface](#openvswitch-bridge-patch-interface)
-        * [Mac VTAP Interface](#mac-vtap-interface)
-        * [Mac VLAN Interface](#mac-vlan-interface)
-        * [IP over InfiniBand Interface](#ip-over-infiniband-interface)
-        * [Virtual Routing and Forwarding (VRF) Interface](#virtual-routing-and-forwarding-vrf-interface)
-        * [Linux Virtual Ethernet(veth) Interface](#linux-virtual-ethernetveth-interface)
-        * [IPsec Encryption](#ipsec-encryption)
-    * [Routes](#routes)
-    * [Route Rules](#route-rules)
-    * [DNS Resolver](#dns-resolver)
-    * [Hostname](#hostname)
-    * [OpenvSwitch Database](#openvswitch-database)
+	* [Interfaces](#interfaces)
+		* [Base Interface](#base-interface)
+			* [Name](#name)
+			* [Type](#type)
+			* [State](#state)
+			* [Description](#description)
+			* [Profile Name](#profile-name)
+			* [Interface Identifier](#interface-identifier)
+			* [MAC Address](#mac-address)
+			* [Permanent MAC Address](#permanent-mac-address)
+			* [MTU](#mtu)
+			* [Minimum MTU](#minimum-mtu)
+			* [Maximum MTU](#maximum-mtu)
+			* [Wait IP](#wait-ip)
+			* [Interface Controller](#interface-controller)
+			* [Accept All MAC addresses](#accept-all-mac-addresses)
+			* [Copy MAC From](#copy-mac-from)
+			* [Dispatch script](#dispatch-script)
+		* [IP](#ip)
+			* [IP Enable](#ip-enable)
+			* [DHCP](#dhcp)
+			* [IPv6 Autoconf](#ipv6-autoconf)
+			* [IP Address](#ip-address)
+			* [Auto DNS](#auto-dns)
+			* [Auto Routes](#auto-routes)
+			* [Auto Gateway](#auto-gateway)
+			* [Auto Route Table ID](#auto-route-table-id)
+			* [Auto Route Metric](#auto-route-metric)
+		* [Multipath TCP](#multipath-tcp)
+		* [Ethtool](#ethtool)
+		* [Ethtool feature](#ethtool-feature)
+		* [Ethtool coalesce](#ethtool-coalesce)
+		* [Ethtool ring](#ethtool-ring)
+		* [LLDP](#lldp)
+			* [LLDP Enabled](#lldp-enabled)
+			* [Neighbors](#neighbors)
+				* [TLV Type](#tlv-type)
+				* [TLV Subtype](#tlv-subtype)
+				* [Organization code](#organization-code)
+		* [Ethernet Interface](#ethernet-interface)
+			* [Ethernet speed](#ethernet-speed)
+			* [Ethernet duplex](#ethernet-duplex)
+			* [Ethernet Auto Negotiation](#ethernet-auto-negotiation)
+		* [SR-IOV](#sr-iov)
+			* [SR-IOV Total VFS Count](#sr-iov-total-vfs-count)
+			* [SR-IOV VF Specific Settings](#sr-iov-vf-specific-settings)
+		* [Bond Interface](#bond-interface)
+			* [Bond Mode](#bond-mode)
+			* [Bond Options](#bond-options)
+			* [Bond Ports](#bond-ports)
+		* [VLAN Interface](#vlan-interface)
+		* [VxLAN Interface](#vxlan-interface)
+		* [Linux Bridge Interface](#linux-bridge-interface)
+			* [Linux Bridge Options](#linux-bridge-options)
+		* [Linux Bridge Ports](#linux-bridge-ports)
+		* [Linux Bridge Port VLAN](#linux-bridge-port-vlan)
+		* [OpenvSwitch Bridge Interface](#openvswitch-bridge-interface)
+			* [OpenvSwitch Bridge Options](#openvswitch-bridge-options)
+		* [OpenvSwitch Bridge Ports](#openvswitch-bridge-ports)
+			* [OpenvSwitch DPDK](#openvswitch-dpdk)
+		* [OpenvSwitch Internal Interface](#openvswitch-internal-interface)
+		* [OpenvSwitch Bridge Patch Interface](#openvswitch-bridge-patch-interface)
+		* [Mac VTAP Interface](#mac-vtap-interface)
+		* [Mac VLAN Interface](#mac-vlan-interface)
+		* [IP over InfiniBand Interface](#ip-over-infiniband-interface)
+		* [Virtual Routing and Forwarding (VRF) Interface](#virtual-routing-and-forwarding-vrf-interface)
+		* [Linux Virtual Ethernet(veth) Interface](#linux-virtual-ethernetveth-interface)
+		* [IPsec Encryption](#ipsec-encryption)
+	* [Routes](#routes)
+	* [Route Rules](#route-rules)
+	* [DNS Resolver](#dns-resolver)
+	* [Hostname](#hostname)
+	* [OpenvSwitch Database](#openvswitch-database)
 
 <!-- vim-markdown-toc -->
 
@@ -665,15 +665,86 @@ interfaces:
 The `feature` subsection of `ethtool` holds the __changeable__ features of
 specified interface using feature name as key string and boolean as value.
 
-The subsection supports these parameters:
+Currently, nmstate support enable/disable features(if NIC support so):
 
- * `rx-gro`: boolean
- * `tx-nocache-copy`: boolean
- * `hw-tc-offload`: boolean
- * `rx-udp_tunnel-port-oflload`: boolean
- * `tx-generic-segmentation`: boolean
- * `rx-udp-gro-forwarding`: boolean
- * `rx-gro-list`: boolean
+ * `esp-hw-offload`
+ * `esp-tx-csum-hw-offload`
+ * `tx-checksum-fcoe-crc`
+ * `fcoe-mtu`
+ * `tx-checksum-ip-generic`
+ * `rx-gro`
+ * `tx-checksum-ipv4`
+ * `tx-generic-segmentation`
+ * `tx-checksum-ipv6`
+ * `highdma`
+ * `tx-checksum-sctp`
+ * `hw-tc-offload`
+ * `tx-esp-segmentation`
+ * `l2-fwd-offload`
+ * `tx-fcoe-segmentation`
+ * `loopback`
+ * `tx-gre-csum-segmentation`
+ * `rx-lro`
+ * `tx-gre-segmentation`
+ * `macsec-hw-offload`
+ * `tx-gso-list`
+ * `rx-ntuple-filter`
+ * `tx-gso-partial`
+ * `rx-checksum`
+ * `tx-gso-robust`
+ * `rx-all`
+ * `tx-ipxip4-segmentation`
+ * `rx-fcs`
+ * `tx-ipxip6-segmentation`
+ * `rx-gro-hw`
+ * `tx-nocache-copy`
+ * `rx-gro-list`
+ * `tx-scatter-gather`
+ * `rx-hashing`
+ * `tx-scatter-gather-fraglist`
+ * `rx-udp-gro-forwarding`
+ * `tx-sctp-segmentation`
+ * `rx-udp_tunnel-port-offload`
+ * `tx-tcp6-segmentation`
+ * `rx-vlan-hw-parse`
+ * `tx-tcp-ecn-segmentation`
+ * `rx-vlan-filter`
+ * `tx-tcp-mangleid-segmentation`
+ * `rx-vlan-stag-filter`
+ * `tx-tcp-segmentation`
+ * `rx-vlan-stag-hw-parse`
+ * `tx-tunnel-remcsum-segmentation`
+ * `tx-scatter-gather`
+ * `tx-udp-segmentation`
+ * `tls-hw-record`
+ * `tx-udp_tnl-csum-segmentation`
+ * `tls-hw-rx-offload`
+ * `tx-udp_tnl-segmentation`
+ * `tls-hw-tx-offload`
+ * `tx-vlan-hw-insert`
+ * `tso`
+ * `tx-vlan-stag-hw-insert`
+
+Nmstate also support these aliases used by `ethtool` CLI tool:
+
+ * `rx` -- `rx-checksum`
+ * `rx-checksumming` -- `rx-checksum`
+ * `ufo` -- `tx-udp-fragmentation`
+ * `gso` -- `tx-generic-segmentation`
+ * `generic-segmentation-offload` -- `tx-generic-segmentation`
+ * `gro` -- `rx-gro`
+ * `generic-receive-offload` -- `rx-gro`
+ * `lro` -- `rx-lro`
+ * `large-receive-offload` -- `rx-lro`
+ * `rxvlan` -- `rx-vlan-hw-parse`
+ * `rx-vlan-offload` -- `rx-vlan-hw-parse`
+ * `txvlan` -- `tx-vlan-hw-insert`
+ * `tx-vlan-offload` -- `tx-vlan-hw-insert`
+ * `ntuple` -- `rx-ntuple-filter`
+ * `ntuple-filters` -- `rx-ntuple-filter`
+ * `rxhash` -- `rx-hashing`
+ * `receive-hashing` -- `rx-hashing`
+
 
 ### Ethtool coalesce
 
