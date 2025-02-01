@@ -1,6 +1,7 @@
 <!-- vim-markdown-toc GFM -->
 
 * [Python code examples](#python-code-examples)
+    * [Change libnmstate logging](#change-libnmstate-logging)
     * [Interface common tasks](#interface-common-tasks)
         * [Remove interface configuration](#remove-interface-configuration)
         * [Set static IP address](#set-static-ip-address)
@@ -35,6 +36,25 @@
 <!-- vim-markdown-toc -->
 
 # Python code examples
+
+## Change libnmstate logging
+
+New feature since 2.2.40
+
+Nmstate python module introduced logger `libnmstate` which allow you to do
+specific tune on logging of nmstate only.
+
+```python
+import logging
+import libnmstate
+
+logging.basicConfig(level=logging.DEBUG)
+
+logger = logging.getLogger("libnmstate")
+logger.setLevel(logging.DEBUG)
+
+print(libnmstate.show())
+```
 
 ## Interface common tasks
 ### Remove interface configuration
