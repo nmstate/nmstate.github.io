@@ -1,79 +1,80 @@
 <!-- vim-markdown-toc GFM -->
 
 * [Introduction](#introduction)
-	* [Interfaces](#interfaces)
-		* [Base Interface](#base-interface)
-			* [Name](#name)
-			* [Type](#type)
-			* [State](#state)
-			* [Description](#description)
-			* [Profile Name](#profile-name)
-			* [Interface Identifier](#interface-identifier)
-			* [MAC Address](#mac-address)
-			* [Permanent MAC Address](#permanent-mac-address)
-			* [MTU](#mtu)
-			* [Minimum MTU](#minimum-mtu)
-			* [Maximum MTU](#maximum-mtu)
-			* [Wait IP](#wait-ip)
-			* [Interface Controller](#interface-controller)
-			* [Accept All MAC addresses](#accept-all-mac-addresses)
-			* [Copy MAC From](#copy-mac-from)
-			* [Dispatch script](#dispatch-script)
-		* [IP](#ip)
-			* [IP Enable](#ip-enable)
-			* [DHCP](#dhcp)
-			* [IPv6 Autoconf](#ipv6-autoconf)
-			* [IP Address](#ip-address)
-			* [Auto DNS](#auto-dns)
-			* [Auto Routes](#auto-routes)
-			* [Auto Gateway](#auto-gateway)
-			* [Auto Route Table ID](#auto-route-table-id)
-			* [Auto Route Metric](#auto-route-metric)
-		* [Multipath TCP](#multipath-tcp)
-		* [Ethtool](#ethtool)
-		* [Ethtool feature](#ethtool-feature)
-		* [Ethtool coalesce](#ethtool-coalesce)
-		* [Ethtool ring](#ethtool-ring)
-		* [LLDP](#lldp)
-			* [LLDP Enabled](#lldp-enabled)
-			* [Neighbors](#neighbors)
-				* [TLV Type](#tlv-type)
-				* [TLV Subtype](#tlv-subtype)
-				* [Organization code](#organization-code)
-		* [Ethernet Interface](#ethernet-interface)
-			* [Ethernet speed](#ethernet-speed)
-			* [Ethernet duplex](#ethernet-duplex)
-			* [Ethernet Auto Negotiation](#ethernet-auto-negotiation)
-		* [SR-IOV](#sr-iov)
-			* [SR-IOV Total VFS Count](#sr-iov-total-vfs-count)
-			* [SR-IOV VF Specific Settings](#sr-iov-vf-specific-settings)
-		* [Bond Interface](#bond-interface)
-			* [Bond Mode](#bond-mode)
-			* [Bond Options](#bond-options)
-			* [Bond Ports](#bond-ports)
-		* [VLAN Interface](#vlan-interface)
-		* [VxLAN Interface](#vxlan-interface)
-		* [Linux Bridge Interface](#linux-bridge-interface)
-			* [Linux Bridge Options](#linux-bridge-options)
-		* [Linux Bridge Ports](#linux-bridge-ports)
-		* [Linux Bridge Port VLAN](#linux-bridge-port-vlan)
-		* [OpenvSwitch Bridge Interface](#openvswitch-bridge-interface)
-			* [OpenvSwitch Bridge Options](#openvswitch-bridge-options)
-		* [OpenvSwitch Bridge Ports](#openvswitch-bridge-ports)
-			* [OpenvSwitch DPDK](#openvswitch-dpdk)
-		* [OpenvSwitch Internal Interface](#openvswitch-internal-interface)
-		* [OpenvSwitch Bridge Patch Interface](#openvswitch-bridge-patch-interface)
-		* [Mac VTAP Interface](#mac-vtap-interface)
-		* [Mac VLAN Interface](#mac-vlan-interface)
-		* [IP over InfiniBand Interface](#ip-over-infiniband-interface)
-		* [Virtual Routing and Forwarding (VRF) Interface](#virtual-routing-and-forwarding-vrf-interface)
-		* [Linux Virtual Ethernet(veth) Interface](#linux-virtual-ethernetveth-interface)
-		* [IPsec Encryption](#ipsec-encryption)
-	* [Routes](#routes)
-	* [Route Rules](#route-rules)
-	* [DNS Resolver](#dns-resolver)
-	* [Hostname](#hostname)
-	* [OpenvSwitch Database](#openvswitch-database)
+    * [Interfaces](#interfaces)
+        * [Base Interface](#base-interface)
+            * [Name](#name)
+            * [Type](#type)
+            * [State](#state)
+            * [Description](#description)
+            * [Profile Name](#profile-name)
+            * [Interface Identifier](#interface-identifier)
+            * [MAC Address](#mac-address)
+            * [Permanent MAC Address](#permanent-mac-address)
+            * [MTU](#mtu)
+            * [Minimum MTU](#minimum-mtu)
+            * [Maximum MTU](#maximum-mtu)
+            * [Wait IP](#wait-ip)
+            * [Interface Controller](#interface-controller)
+            * [Accept All MAC addresses](#accept-all-mac-addresses)
+            * [Copy MAC From](#copy-mac-from)
+            * [Dispatch script](#dispatch-script)
+        * [IP](#ip)
+            * [IP Enable](#ip-enable)
+            * [DHCP](#dhcp)
+            * [IPv6 Autoconf](#ipv6-autoconf)
+            * [IP Address](#ip-address)
+            * [Auto DNS](#auto-dns)
+            * [Auto Routes](#auto-routes)
+            * [Auto Gateway](#auto-gateway)
+            * [Auto Route Table ID](#auto-route-table-id)
+            * [Auto Route Metric](#auto-route-metric)
+        * [Multipath TCP](#multipath-tcp)
+        * [Ethtool](#ethtool)
+        * [Ethtool feature](#ethtool-feature)
+        * [Ethtool coalesce](#ethtool-coalesce)
+        * [Ethtool ring](#ethtool-ring)
+        * [LLDP](#lldp)
+            * [LLDP Enabled](#lldp-enabled)
+            * [Neighbors](#neighbors)
+                * [TLV Type](#tlv-type)
+                * [TLV Subtype](#tlv-subtype)
+                * [Organization code](#organization-code)
+        * [Ethernet Interface](#ethernet-interface)
+            * [Ethernet speed](#ethernet-speed)
+            * [Ethernet duplex](#ethernet-duplex)
+            * [Ethernet Auto Negotiation](#ethernet-auto-negotiation)
+        * [SR-IOV](#sr-iov)
+            * [SR-IOV Total VFS Count](#sr-iov-total-vfs-count)
+            * [SR-IOV VF Specific Settings](#sr-iov-vf-specific-settings)
+        * [Bond Interface](#bond-interface)
+            * [Bond Mode](#bond-mode)
+            * [Bond Options](#bond-options)
+            * [Bond Ports](#bond-ports)
+        * [VLAN Interface](#vlan-interface)
+        * [VxLAN Interface](#vxlan-interface)
+        * [Linux Bridge Interface](#linux-bridge-interface)
+            * [Linux Bridge Options](#linux-bridge-options)
+        * [Linux Bridge Ports](#linux-bridge-ports)
+        * [Linux Bridge Port VLAN](#linux-bridge-port-vlan)
+        * [OpenvSwitch Bridge Interface](#openvswitch-bridge-interface)
+            * [OpenvSwitch Bridge Options](#openvswitch-bridge-options)
+        * [OpenvSwitch Bridge Ports](#openvswitch-bridge-ports)
+            * [OpenvSwitch DPDK](#openvswitch-dpdk)
+        * [OpenvSwitch Internal Interface](#openvswitch-internal-interface)
+        * [OpenvSwitch Bridge Patch Interface](#openvswitch-bridge-patch-interface)
+        * [Mac VTAP Interface](#mac-vtap-interface)
+        * [Mac VLAN Interface](#mac-vlan-interface)
+        * [IP over InfiniBand Interface](#ip-over-infiniband-interface)
+        * [Virtual Routing and Forwarding (VRF) Interface](#virtual-routing-and-forwarding-vrf-interface)
+        * [Linux Virtual Ethernet(veth) Interface](#linux-virtual-ethernetveth-interface)
+        * [IPsec Encryption](#ipsec-encryption)
+        * [Loopback Interface](#loopback-interface)
+    * [Routes](#routes)
+    * [Route Rules](#route-rules)
+    * [DNS Resolver](#dns-resolver)
+    * [Hostname](#hostname)
+    * [OpenvSwitch Database](#openvswitch-database)
 
 <!-- vim-markdown-toc -->
 
@@ -1533,6 +1534,38 @@ interface named `ipsec<number>` will be created holding the IP retrieved from
 IPsec remote.
 
 You may also check [IPsec example page](../features/ipsec.md) for use cases.
+
+### Loopback Interface
+
+New feature in 2.2.2
+
+Example loopback interface YAML:
+
+```yml
+interfaces:
+- name: lo
+  type: loopback
+  state: up
+  mac-address: 00:00:00:00:00:00
+  mtu: 65536
+  ipv4:
+    enabled: true
+    dhcp: false
+    address:
+    - ip: 127.0.0.1
+      prefix-length: 8
+  ipv6:
+    enabled: true
+    dhcp: false
+    address:
+    - ip: ::1
+      prefix-length: 128
+```
+
+Use `state: absent` will revert loopback interface back to kernel defaults.
+
+Even desired state does not have `127.0.0.1/8` or `::1/128`, nmstate will
+still include those two IPs to loopback interface.
 
 ## Routes
 
