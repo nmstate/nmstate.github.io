@@ -70,6 +70,7 @@
         * [Linux Virtual Ethernet(veth) Interface](#linux-virtual-ethernetveth-interface)
         * [IPsec Encryption](#ipsec-encryption)
         * [Loopback Interface](#loopback-interface)
+        * [IPvLAN Interface](#ipvlan-interface)
     * [Routes](#routes)
     * [Route Rules](#route-rules)
     * [DNS Resolver](#dns-resolver)
@@ -1566,6 +1567,39 @@ Use `state: absent` will revert loopback interface back to kernel defaults.
 
 Even desired state does not have `127.0.0.1/8` or `::1/128`, nmstate will
 still include those two IPs to loopback interface.
+
+### IPvLAN Interface
+
+New feature in 2.2.38
+
+Example YAML:
+
+```yml
+interfaces:
+- name: ipvlan0
+  type: ipvlan
+  state: up
+  ipvlan:
+    mode: l3
+    base-iface: eth1
+    private: false
+    vepa: false
+```
+The `ipvlan` section contains these options:
+* `mode`: String. Should be `l2`, `l3` or `l3s`.
+    * `l2`: ipvlan receive and respond to ARP requests, it provides good
+      performance, but less control on the network traffic.
+    * `l3`: ipvlan process only L3 traffic and above, does not respond to ARP
+      request and users must configure the neighbour entries for the IPVLAN IP
+      addresses on the relevant peers manually.
+    * `l3s`: ipvlan process the same way as in L3 mode, except that both egress
+      and ingress traffics of a relevant container are landed on netfilter chain
+      in the default namespace.
+* `base-iface`: String. Parent interface name.
+* `private`: Boolean. It controls the isolation between the ipvlan interface and
+  other devices on the network.
+* `vepa`: Boolean. When enabled, traffic will be forwarded through a central
+  switch, helping improve network management and reduce broadcast traffic.
 
 ## Routes
 
