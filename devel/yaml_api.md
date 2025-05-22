@@ -1237,6 +1237,13 @@ options:
  * `mcast-snooping-enable`: String.
  * `fail-mode`: String.
  * `datapath`: String. Only for DPDK.
+ * `allow-extra-patch-ports`: Boolean. When set to true, the verification
+   stage of nmstate will ignore extra OVS patch port not mentioned in `port`
+   section. This allows external tool to attach OVS patch port upon nmstate
+   creating the OVS bridge. This option is not persisted because it only
+   control nmstate verification stage during apply action. The default value
+   is false means the verification stage will make sure OVS bridge port list
+   match with desired state.
 
 ### OpenvSwitch Bridge Ports
 
