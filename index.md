@@ -79,6 +79,7 @@ interfaces:
 ## Related projects
 - [kubernetes-nmstate](https://nmstate.io/kubernetes-nmstate)
 - [nmpolicy](https://nmstate.io/nmpolicy)
+- [nm-configurator](https://github.com/suse-edge/nm-configurator)
 
 ## Contacts
 - You can find us on Matrix room: [`#nmstate:fedora.im`][matrix_room_url]
