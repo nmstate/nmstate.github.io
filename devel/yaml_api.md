@@ -788,6 +788,21 @@ The `ring` subsection supports these parameters:
 
 All of them are 32 bits unsigned integer.
 
+Example YAML:
+
+```rust
+---
+interfaces:
+  - name: enp1s0
+    state: up
+    ethtool:
+      ring:
+        rx: 256
+        rx-jumbo: 0
+        rx-mini: 0
+        tx: 256
+```
+
 ### LLDP
 
 #### LLDP Enabled
