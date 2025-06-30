@@ -10,6 +10,7 @@
             * [Profile Name](#profile-name)
             * [Interface Identifier](#interface-identifier)
             * [MAC Address](#mac-address)
+            * [PCI Address](#pci-address)
             * [Permanent MAC Address](#permanent-mac-address)
             * [MTU](#mtu)
             * [Minimum MTU](#minimum-mtu)
@@ -70,7 +71,8 @@
         * [Linux Virtual Ethernet(veth) Interface](#linux-virtual-ethernetveth-interface)
         * [IPsec Encryption](#ipsec-encryption)
         * [Loopback Interface](#loopback-interface)
-        * [IPvLAN Interface](#ipvlan-interface)
+        * [IPVLAN Interface](#ipvlan-interface)
+        * [HSR/PRP Interface](#hsrprp-interface)
     * [Routes](#routes)
     * [Route Rules](#route-rules)
     * [DNS Resolver](#dns-resolver)
@@ -165,6 +167,7 @@ interfaces:
   state: up
   mac-address: 1C:FF:EE:DD:3B:D3
   permanent-mac-address: 1C:FF:EE:DD:BB:D3
+  pci-address: 0000:07:00.0
   mtu: 1500
   min-mtu: 256
   max-mtu: 2304
@@ -250,6 +253,8 @@ configurations. The valid values are:
    holding the specified interface name.
  * `mac-address`: Specified configuration is applied to interface holding
    the specified MAC address.
+ * `pci-address`: Specified configuration is applied to interface holding
+   the specified PCI address.
 
 #### MAC Address
 
@@ -271,6 +276,56 @@ For applying or generating configurations:
    to hold the specified MAC address
  * `identifier: mac-address`, interface holding the specified MAC address
    will be used instead of interface name.
+
+Example on matching interface by MAC address:
+
+```yml
+---
+interfaces:
+  - name: wan0
+    type: ethernet
+    state: up
+    identifier: mac-address
+    mac-address: 00:23:45:67:89:1a
+    ipv4:
+      enabled: true
+      dhcp: true
+    ipv6:
+      enabled: true
+      dhcp: true
+      autoconf: true
+```
+
+#### PCI Address
+
+New since 2.2.47.
+
+The `pci-address` property holds the PCI address of this interface.
+
+When showing, nmstate will use format like `0000:07:00.0`.
+When applying, nmstate accept format like `07:00.0` with domain set to 0.
+
+When using with `identifier: pci-address`, desired state will be applied to
+interface holding specified PCI address instead of desired interface name.
+
+Example on matching interface by PCI address:
+
+```yml
+---
+interfaces:
+  - name: wan0
+    type: ethernet
+    state: up
+    identifier: pci-address
+    pci-address: 0000:07:00.0
+    ipv4:
+      enabled: true
+      dhcp: true
+    ipv6:
+      enabled: true
+      dhcp: true
+      autoconf: true
+```
 
 #### Permanent MAC Address
 
@@ -1590,7 +1645,7 @@ Use `state: absent` will revert loopback interface back to kernel defaults.
 Even desired state does not have `127.0.0.1/8` or `::1/128`, nmstate will
 still include those two IPs to loopback interface.
 
-### IPvLAN Interface
+### IPVLAN Interface
 
 New feature in 2.2.38
 
@@ -1622,6 +1677,18 @@ The `ipvlan` section contains these options:
   other devices on the network.
 * `vepa`: Boolean. When enabled, traffic will be forwarded through a central
   switch, helping improve network management and reduce broadcast traffic.
+
+### HSR/PRP Interface
+
+New feature since 2.2.22
+
+HSR (High Availability Seamless Redundancy) and PRP (Parallel Redundancy
+Protocol) interface are treat as `type: hsr`.
+
+Example YAML for you to create a HSR interface:
+
+```yml
+```
 
 ## Routes
 

@@ -32,6 +32,7 @@ NetworkManager acts as the main (and currently the only) provider supported.
 - [Conditional compiling](./features/conditional_compile.md)
 - [Refer SR-IOV VF via PF name and VF ID](./features/iface_vf_id.md)
 - [Refer Interface using MAC Address](./features/mac_identifier.md)
+- [Refer Interface using PCI Address](./features/pci_identifier.md)
 - [IPsec](./features/ipsec.md)
 - [DNS](./features/dns.md)
 
