@@ -1054,13 +1054,13 @@ The `options` property of bond supports:
  * `use_carrier`
  * `xmit_hash_policy`
  * `balance_slb`
+ * `lacp_active` (new in 2.2.47)
+ * `ns_ip6_target` (new in 2.2.47)
 
 Please check kernel document for their allowed value and combinations.
 
 The `balance_slb` is not kernel option of bond, but user space configuration,
 only supported by nmstate 2.2.1+, NetworkManager 1.41+ on patched linux kernel.
-
-The verification process of nmstate will ignore bond option miss-match.
 
 #### Bond Ports
 
