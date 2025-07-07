@@ -34,3 +34,71 @@ interfaces:
 
 Above profile could be delete by `state:absent` using `name: wan0` or its real
 interface name.
+
+You can also refer port by profile name in OVS bridge, linux bridge, VRF and
+bond.
+
+Example YAML for referring bond port by MAC address:
+
+```yml
+---
+interfaces:
+- name: port1
+  type: ethernet
+  mac-address: 00:23:45:67:89:1a
+  identifier: mac-address
+- name: port2
+  type: ethernet
+  mac-address: 00:23:45:67:89:1b
+  identifier: mac-address
+- name: bond0
+  type: bond
+  state: up
+  link-aggregation:
+    mode: balance-rr
+    ports:
+      - port1
+      - port2
+```
+
+
+You can also refer to base-interface by profile name in VLAN, VxLAN, MacSec,
+MacVtap, MacVlan. Example on using MAC address to identify VLAN base interface:
+
+```yml
+---
+interfaces:
+  - name: port1
+    type: ethernet
+    identifier: mac-address
+    mac-address: 00:23:45:67:89:1a
+  - name: vlan101
+    type: vlan
+    state: up
+    vlan:
+      base-iface: port1
+      id: 101
+```
+
+You can also refer to route next-hop-interface by profile name. For example:
+
+```yml
+---
+interfaces:
+  - name: port1
+    type: ethernet
+    state: up
+    mac-address: 00:23:45:67:89:1a
+    identifier: mac-address
+    ipv4:
+      enabled: true
+      address:
+      - ip: 192.0.2.251
+        prefix-length: 24
+      dhcp: false
+routes:
+  config:
+  - destination: 0.0.0.0/0
+    next-hop-address: 192.0.2.1
+    next-hop-interface: port1
+```
