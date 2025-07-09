@@ -35,8 +35,8 @@ interfaces:
 Above profile could be delete by `state:absent` using `name: wan0` or its real
 interface name.
 
-You can also refer port by profile name in OVS bridge, linux bridge, VRF and
-bond.
+Since nmstate version 2.2.41, you can also refer port by profile name in OVS
+bridge, linux bridge, VRF and bond.
 
 Example YAML for referring bond port by MAC address:
 
@@ -61,9 +61,9 @@ interfaces:
       - port2
 ```
 
-
-You can also refer to base-interface by profile name in VLAN, VxLAN, MacSec,
-MacVtap, MacVlan. Example on using MAC address to identify VLAN base interface:
+Since nmstate version 2.2.41, you can also refer to base-interface by profile
+name in VLAN, VxLAN, MacSec, MacVtap, MacVlan. Example on using MAC address to
+identify VLAN base interface:
 
 ```yml
 ---
@@ -80,7 +80,8 @@ interfaces:
       id: 101
 ```
 
-You can also refer to route next-hop-interface by profile name. For example:
+Since nmstate version 2.2.41, you can also refer to route next-hop-interface by
+profile name. For example:
 
 ```yml
 ---
