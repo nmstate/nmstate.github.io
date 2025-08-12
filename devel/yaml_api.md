@@ -30,6 +30,8 @@
             * [Auto Gateway](#auto-gateway)
             * [Auto Route Table ID](#auto-route-table-id)
             * [Auto Route Metric](#auto-route-metric)
+            * [DHCPv4 Client ID](#dhcpv4-client-id)
+            * [DHCPv6 Unique Identifier](#dhcpv6-unique-identifier)
         * [Multipath TCP](#multipath-tcp)
         * [Ethtool](#ethtool)
         * [Ethtool feature](#ethtool-feature)
@@ -503,6 +505,7 @@ interfaces:
       auto-routes: true
       auto-route-table-id: 0
       auto-route-metric: 101
+      dhcp-client-id: ll
     ipv6:
       enabled: true
       dhcp: true
@@ -512,6 +515,7 @@ interfaces:
       auto-routes: true
       auto-route-table-id: 0
       auto-route-metric: 102
+      dhcp-duid: ll
 ```
 
 #### IP Enable
@@ -536,6 +540,7 @@ not fail the verification:
  * `auto-routes`
  * `auto-route-table-id`
  * `auto-route-metric`
+ * `dhcp-client-id`
 
 When dynamic configuration disabled(IPv4 dhcp off, IPv6 dhcp off and autoconf
 off),  these properties will be ignored and will not fail the verification:
@@ -603,6 +608,27 @@ the routes retried from dynamic configuration method.
 
 If not mentioned in desire state or set to -1, nmstate will let network backend
 to determine the metric.
+
+#### DHCPv4 Client ID
+
+Available since nmstate 2.1.1.
+
+The `dhcp-client-id` property accepts string as arbitrary value, these special
+value are treat specially:
+ * `ll` or `LL`: Use link layer address as DHCPv4 client ID.
+ * `iaid+duid` or `IAID+DUID`: RFC 4361 type 255, 32 bits IAID followed by
+   DUID.
+
+#### DHCPv6 Unique Identifier
+
+Available since nmstate 2.1.1.
+
+The `dhcp-duid` property accepts string as arbitrary value, these special
+value are treat specially:
+ * `ll` or `LL`: Use link layer address
+ * `llt` or `LLT`: DUID Based on Link-Layer Address Plus Time
+ * `en` or `EN`: DUID Assigned by Vendor Based on Enterprise Number
+ * `uuid` or `UUID`: DUID Based on Universally Unique Identifier
 
 ### Multipath TCP
 
