@@ -948,8 +948,7 @@ This property is ignored when applying if `auto-negotiation: true`.
 The `auto-negotiation` property is the boolean switch for enabling
 auto negotiation on speed and duplex.
 
-Default to `true`.
-
+Undefined means preserving current setting.
 
 ### SR-IOV
 
