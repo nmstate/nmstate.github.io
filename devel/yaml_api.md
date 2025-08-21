@@ -1779,6 +1779,8 @@ routes:
 Each route entry could have these parameters:
 
  * `state`: Only set to `absent` for deleting matching routes when applying.
+   During querying, nmstate will set routes next hop to ignored interface as
+   `state: ignore`. Applying routes with `state: ignore` will be ignored.
  * `destination`: String. Mandatory for every non-absent routes.
  * `next-hop-interface`: String. Mandatory for every non-absent routes
  * `next-hop-address`: String. When setting this as empty string for absent
