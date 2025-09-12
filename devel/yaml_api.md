@@ -37,6 +37,7 @@
         * [Ethtool feature](#ethtool-feature)
         * [Ethtool coalesce](#ethtool-coalesce)
         * [Ethtool ring](#ethtool-ring)
+        * [Ethtool FEC(Forward Error Correction)](#ethtool-fecforward-error-correction)
         * [LLDP](#lldp)
             * [LLDP Enabled](#lldp-enabled)
             * [Neighbors](#neighbors)
@@ -883,6 +884,27 @@ interfaces:
         rx-mini: 0
         tx: 256
 ```
+
+### Ethtool FEC(Forward Error Correction)
+
+Example YAML to disable automatic FEC and enforce llrs mode:
+
+```yml
+---
+interfaces:
+  - name: sim0
+    type: ethernet
+    ethtool:
+      fec:
+        auto: false
+        mode: llrs
+```
+
+* `auto`: true or false. Once enabled, the `mode` setting will be ignored.
+* `mode`: valid values are: `off`, `rs`, `baser`, `llrs`.
+
+Please set FEC mode on the switch first, otherwise nmstate verification stage
+will complain about desired FEC mode cannot be activated.
 
 ### LLDP
 
