@@ -887,6 +887,8 @@ interfaces:
 
 ### Ethtool FEC(Forward Error Correction)
 
+New in version 2.2.43.
+
 Example YAML to disable automatic FEC and enforce llrs mode:
 
 ```yml
