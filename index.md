@@ -35,6 +35,7 @@ NetworkManager acts as the main (and currently the only) provider supported.
 - [Refer Interface using PCI Address](./features/pci_identifier.md)
 - [IPsec](./features/ipsec.md)
 - [DNS](./features/dns.md)
+- [Infiniband](./features/infiniband.md)
 
 ## Example output
 
