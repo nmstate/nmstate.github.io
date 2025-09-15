@@ -31,18 +31,18 @@ over IP to bond. Example YAML:
 ```yml
 ---
 interfaces:
-- name: mlx5_ib0.80ff
+- name: mlx5_ib0.80fe
   type: infiniband
   state: up
   infiniband:
     base-iface: mlx5_ib0
     mode: datagram
     pkey: '0x80ff'
-- name: mlx5_ib0.80fe
+- name: mlx5_ib1.80fe
   type: infiniband
   state: up
   infiniband:
-    base-iface: mlx5_ib0
+    base-iface: mlx5_ib1
     mode: datagram
     pkey: '0x80fe'
 - name: bond0
@@ -52,7 +52,7 @@ interfaces:
     mode: active-backup
     port:
     - mlx5_ib0.80fe
-    - mlx5_ib0.80ff
+    - mlx5_ib1.80fe
 ```
 
 [1]: https://nmstate.io/devel/yaml_api.html#ip-over-infiniband-interface
