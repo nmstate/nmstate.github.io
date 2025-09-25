@@ -569,7 +569,7 @@ interfaces:
 
 This is the example of interface with dynamic IP addresses:
 
-```
+```yml
 ---
 interfaces:
   - name: eth1
