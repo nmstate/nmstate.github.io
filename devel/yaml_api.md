@@ -20,6 +20,7 @@
             * [Accept All MAC addresses](#accept-all-mac-addresses)
             * [Copy MAC From](#copy-mac-from)
             * [Dispatch script](#dispatch-script)
+            * [Interface Alternative Name](#interface-alternative-name)
         * [IP](#ip)
             * [IP Enable](#ip-enable)
             * [DHCP](#dhcp)
@@ -449,6 +450,40 @@ interfaces:
 Setting the `post-activation` or `post-deactivation` to empty string will
 remove the dispatch scripts. Removing the interface using
 `state: absent` also remove the dispatch scripts.
+
+#### Interface Alternative Name
+
+Since 2.2.51, nmstate support configuration interface alternative names.
+
+Example YAML for adding alternative names:
+
+```rust
+---
+interfaces:
+  - name: enp7s0
+    alt-names:
+      - name: port1
+      - name: veryveryveryverylonglonglongname
+```
+
+Example YAML for removing alternative names:
+
+```
+---
+interfaces:
+  - name: enp7s0
+    alt-names:
+      - name: port1
+        state: absent
+      - name: veryveryveryverylonglonglongname
+        state: absent
+```
+
+Considering the alternative name might also added by external tools(e.g.
+systemd-udev), nmstate is doing incremental changes to interface alternative
+names, meaning:
+ * Applying YAML only append alt-names to existing.
+ * Only remove names marked with `state: absent`.
 
 ### IP
 

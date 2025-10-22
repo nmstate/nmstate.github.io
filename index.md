@@ -36,6 +36,7 @@ NetworkManager acts as the main (and currently the only) provider supported.
 - [IPsec](./features/ipsec.md)
 - [DNS](./features/dns.md)
 - [Infiniband](./features/infiniband.md)
+- [Interface Alternative Name](./features/alt-name.md)
 
 ## Example output
 
