@@ -1853,6 +1853,8 @@ Each route entry could have these parameters:
    nmstate backend always set `lock cwnd`. If you want to modify existing
    `cwnd`, like modifying other route properties, you need to mark old
    route as `state: absnet` and append new route.
+ * `vrf-name`: String. Store the route to the route table which specified VRF
+   is binding to.
 
 ## Route Rules
 
