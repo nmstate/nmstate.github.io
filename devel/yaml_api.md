@@ -1654,6 +1654,9 @@ interfaces:
 ```
 
 The `libreswan` section, nmstate provides these properties:
+ * `nm-auto-defaults`: Boolean. Please always explicitly set it to `false` for
+   aligning libreswan default values instead of NetworkManager default values.
+   Default is true for backwards compatibility.
  * `ipsec-interface`: String 'yes' or 'no' or unsigned integer.
  * `authby`: Authentication method. Normally you don't need to set it.
  * `dpddelay`: Integer.
@@ -1682,8 +1685,9 @@ The `libreswan` section, nmstate provides these properties:
  * `type`: `transport` or `tunnel`. The `tunnel` is the default value if not
    defined.
 
-Except the `psk` property, all other properties are libreswan specific options,
-please refer to the manpage of `ipsec.conf` for detail meaning of them.
+Except the `psk` and `nm-auto-defaults` properties, all other properties are
+libreswan specific options, please refer to the manpage of `ipsec.conf` for
+detail meaning of them.
 
 By default, nmstate will not create any virtual NIC representing the encrypted
 communication, they can be check via `ip xfrm policy` command. The IP provided

@@ -19,6 +19,7 @@ interfaces:
     enabled: true
     dhcp: true
   libreswan:
+    nm-auto-defaults: false
     ipsec-interface: "99"
     left: 192.0.2.251
     leftid: '%fromcert'
@@ -44,13 +45,14 @@ interfaces:
     enabled: true
     dhcp: true
   libreswan:
+    nm-auto-defaults: false
     ipsec-interface: "99"
     leftrsasigkey: 0sAwEAAesFfVZqFzRA9F
     left: 192.0.2.250
-    leftid: 'hosta-rsa.example.org'
+    leftid: '@hosta-rsa.example.org'
     right: 192.0.2.150
     rightrsasigkey: 0sAwEAAesFfVZqFzRA9E
-    rightid: 'hostb-rsa.example.org'
+    rightid: '@hostb-rsa.example.org'
     ikev2: insist
 ```
 
@@ -68,23 +70,20 @@ interfaces:
       enabled: true
       dhcp: true
     libreswan:
+      nm-auto-defaults: false
       ipsec-interface: "99"
       right: 192.0.2.153
-      rightid: 'hostb-psk.example.org'
+      rightid: '@hostb-psk.example.org'
       left: 192.0.2.250
-      leftid: 'hosta-psk.example.org'
+      leftid: '@hosta-psk.example.org'
       psk: "JjyNzrnHTnMqzloKaMuq2uCfJvSSUqTYdAXqD2U2OCFyVIJUUEHmXihBbPrUcmik"
+      authby: secret
       ikev2: insist
 ```
 
 The PSK method should be only used for test/develop purpose.
 
 # IPSec Host-to-Host/P2P tunnel
-
-By default, NetworkManager libreswan plugin is expecting client-server IPSec
-tunnel. In order to get it works for P2P(Host-to-Host) IPSec tunnel, please
-explicitly set `rightsubnet` to remote /32 IPv4 address and
-`leftmodecfgclient: no`.
 
 For example, assuming remote IPSec host IP is `192.0.2.155` and local IP is
 `192.0.2.248`
@@ -94,13 +93,12 @@ interfaces:
 - name: hosta_conn
   type: ipsec
   libreswan:
+    nm-auto-defaults: false
     left: 192.0.2.248
-    leftid: 'hosta.example.org'
+    leftid: '@hosta.example.org'
     leftcert: hosta.example.org
-    leftmodecfgclient: no
     right: 192.0.2.155
-    rightid: 'hostb.example.org'
-    rightsubnet: 192.0.2.155/32
+    rightid: '@hostb.example.org'
     ikev2: insist
 ```
 
@@ -136,6 +134,7 @@ interfaces:
     enabled: true
     dhcp: true
   libreswan:
+    nm-auto-defaults: false
     type: transport
     ipsec-interface: "99"
     left: 192.0.2.251
