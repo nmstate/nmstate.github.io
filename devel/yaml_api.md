@@ -1654,9 +1654,9 @@ interfaces:
 ```
 
 The `libreswan` section, nmstate provides these properties:
- * `nm-auto-defaults`: Boolean. Please always explicitly set it to `false` for
-   aligning libreswan default values instead of NetworkManager default values.
-   Default is true for backwards compatibility.
+ * `nm-auto-defaults`: Boolean. New in 2.2.56. Please always explicitly set it
+   to `false` for aligning libreswan default values instead of NetworkManager
+   default values. Default is true for backwards compatibility.
  * `ipsec-interface`: String 'yes' or 'no' or unsigned integer.
  * `authby`: Authentication method. Normally you don't need to set it.
  * `dpddelay`: Integer.
@@ -1684,6 +1684,11 @@ The `libreswan` section, nmstate provides these properties:
    using in host-to-host mode.
  * `type`: `transport` or `tunnel`. The `tunnel` is the default value if not
    defined.
+ * `rightca`: String. New in 2.2.56. Certificate Authority (CA) of remote peer.
+ * `leftprotoport`: String. New in 2.2.57. Allowed protocols and ports over
+   connection.
+ * `rightprotoport`: String. New in 2.2.57. Allowed protocols and ports over
+   connection.
 
 Except the `psk` and `nm-auto-defaults` properties, all other properties are
 libreswan specific options, please refer to the manpage of `ipsec.conf` for
