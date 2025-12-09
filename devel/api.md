@@ -242,7 +242,7 @@ Possible values:
 
 The maximum transmission unit of interface.
 
-Type: `interger`
+Type: `integer`
 
 ## `Interface.MIN_MTU`
 
@@ -464,7 +464,7 @@ Format: `192.0.2.251`
 
 The prefix length of static IPv4 address.
 
-Type: `interger`.
+Type: `integer`.
 
 ## `Interface.IPV6`
 The `Interface.IPV6` property holds the IPv6 stack information in a dictionary.
