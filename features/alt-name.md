@@ -16,7 +16,7 @@ and remove explicitly.
 
 Example YAML for adding alternative names:
 
-```rust
+```yml
 ---
 interfaces:
   - name: enp7s0
@@ -27,7 +27,7 @@ interfaces:
 
 Example YAML for removing alternative names:
 
-```
+```yml
 ---
 interfaces:
   - name: enp7s0
@@ -36,4 +36,61 @@ interfaces:
         state: absent
       - name: veryveryveryverylonglonglongname
         state: absent
+```
+
+
+Since nmstate 2.2.58, you may refer alt-name as interface name:
+
+```yml
+---
+interfaces:
+  - name: veryveryveryverylonglonglongname
+    tyep: ethernet
+    state: up
+    ipv4:
+      enabled: false
+```
+
+Since nmstate 2.2.58, you may refer alt-name as route next-hop-interface:
+
+```yml
+---
+routes:
+  config:
+  - destination: 198.51.100.0/24
+    metric: 150
+    next-hop-address: 192.0.2.1
+    next-hop-interface: veryveryveryverylonglonglongname
+    table-id: 254
+```
+
+Since nmstate 2.2.58, you may refer alt-name as
+bond/linux-bridge/ovs-bridge/vrf port. Example on linux bridge:
+
+```yml
+---
+interfaces:
+  - name: br0
+    type: linux-bridge
+    state: up
+    bridge:
+      port:
+        - name: veryveryveryverylonglonglongname
+      options:
+        stp:
+          enabled: false
+```
+
+Since nmstate 2.2.58, you may refer alt-name as base-iface of
+VLAN/VxLAN/MacSec/MacVlan:
+
+```yml
+---
+interfaces:
+  - name: vlan101
+    type: vlan
+    state: up
+    vlan:
+      base-iface: veryveryveryverylonglonglongname
+      id: 101
 ```

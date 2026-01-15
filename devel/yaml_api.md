@@ -485,6 +485,46 @@ names, meaning:
  * Applying YAML only append alt-names to existing.
  * Only remove names marked with `state: absent`.
 
+When deleting interface using `state: absent`, since version 2.2.58, nmstate
+will also purge all existing alternative names.
+
+Since version 2.2.58, anywhere in desired state YAML, you need a interface
+name, you can use alternative name instead. For example, you can use
+alternative name as interface name, bond port name, VLAN base-iface name,
+bridge port name, route next-hop-interface name and etc.
+
+For example:
+
+```yml
+---
+interfaces:
+  - name: enp7s0
+    type: ethernet
+    state: up
+    alt-names:
+      - name: port1
+      - name: veryveryveryverylonglonglongname
+  - name: bond99
+    type: bond
+    bond:
+      mode: 0
+      ports:
+        - veryveryveryverylonglonglongname
+  - name: vlan101
+    type: vlan
+    state: up
+    vlan:
+      base-iface: veryveryveryverylonglonglongname
+      id: 101
+routes:
+  config:
+  - destination: 198.51.100.0/24
+    metric: 150
+    next-hop-address: 192.0.2.1
+    next-hop-interface: veryveryveryverylonglonglongname
+    table-id: 254
+```
+
 ### IP
 
 This is the example of interface with static IP addresses:
