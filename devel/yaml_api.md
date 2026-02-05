@@ -79,6 +79,7 @@
         * [IPVLAN Interface](#ipvlan-interface)
         * [HSR/PRP Interface](#hsrprp-interface)
     * [Routes](#routes)
+        * [IP Tunnel Interface](#ip-tunnel-interface)
     * [Route Rules](#route-rules)
     * [DNS Resolver](#dns-resolver)
     * [Hostname](#hostname)
@@ -1830,9 +1831,19 @@ New feature since 2.2.22
 HSR (High Availability Seamless Redundancy) and PRP (Parallel Redundancy
 Protocol) interface are treat as `type: hsr`.
 
-Example YAML for you to create a HSR interface:
+Example YAML for PRP interface:
 
 ```yml
+interfaces:
+  - name: hsr0
+    type: hsr
+    state: up
+    copy-mac-from: eth1
+    hsr:
+      port1: eth1
+      port2: eth2
+      multicast-spec: 40
+      protocol: prp
 ```
 
 ## Routes
@@ -1916,6 +1927,61 @@ Each route entry could have these parameters:
    route as `state: absnet` and append new route.
  * `vrf-name`: String. Store the route to the route table which specified VRF
    is binding to.
+
+### IP Tunnel Interface
+
+New feature since 2.2.59.
+
+IP Tunnel interface. Example of IPv4-over-IPv4 tunnel
+
+```yml
+interfaces:
+- name: ipip0
+  type: ip-tunnel
+  state: up
+  mtu: 1480
+  ipv4:
+    enabled: false
+    forwarding: false
+  ipv6:
+    enabled: false
+  ip-tunnel:
+    mode: ipip
+    local: 192.0.2.1
+    remote: 192.0.2.2
+    ttl: 42
+    tos: 22
+    pmtu-disc: true
+    fwmark: 0
+```
+
+Properties of `ip-tunnel` section:
+ * `mode`:
+    * `ipip`: IPv4-over-IPv4 tunnel
+    * `sit`: IPv6-over-IPv4(SIT, Simple Internet Transition) tunnel
+    * `ip6ip6`: IPv6-over-IPv6 tunnel
+    * `ipip6`: IPv4-over-IPv6 tunnel
+ * `base-iface`: The parent interface name of the IP tunnel based on.
+ * `local`: Local IP address
+ * `remote`: Remote IP address
+ * `ttl`: Time to live count, integer from 0 to 255
+ * `tos`: Type of service, integer from 0 to 255
+ * `flow-label`: Flow label for outgoing packet. Integer from 0 to 0xffffff.
+ * `ip6tun-flags`: Flags for `ipip6` and `ip6ip6`. Array of string with these
+    valid flags:
+    * `ign-encap-limit`
+    * `use-orig-tclass`
+    * `use-orig-flowlabel`
+    * `mip6-dev`
+    * `rcv-dscp-copy`
+    * `use-orig-fw-mark`
+    * `allow-local-remote`
+    * `cap-xmit`
+    * `cap-rcv`
+    * `cap-perpacket`
+ * `pmtu-disc`: Enable/disable Path MTU Discovery: boolean.
+ * `encap-limit`: Encapsulation limit: integer from 0 to 255
+ * `fwmark`: firewall mark: integer 0 to u32::MAX.
 
 ## Route Rules
 
