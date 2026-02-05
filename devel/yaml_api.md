@@ -51,6 +51,7 @@
             * [Ethernet Auto Negotiation](#ethernet-auto-negotiation)
         * [SR-IOV](#sr-iov)
             * [SR-IOV Total VFS Count](#sr-iov-total-vfs-count)
+            * [Maximum supported SR-IOV VFS count](#maximum-supported-sr-iov-vfs-count)
             * [SR-IOV VF Specific Settings](#sr-iov-vf-specific-settings)
         * [Bond Interface](#bond-interface)
             * [Bond Mode](#bond-mode)
@@ -1062,6 +1063,7 @@ interfaces:
     ethernet:
       sr-iov:
         total-vfs: 2
+        max-vfs: 63
         vfs:
         - id: 0
           mac-address: 00:11:22:33:00:FF
@@ -1084,6 +1086,16 @@ interfaces:
 #### SR-IOV Total VFS Count
 
 The `total-vfs` property defines the SRIOV VF count of PF interface.
+
+#### Maximum supported SR-IOV VFS count
+
+New in nmstate 2.2.59
+
+The `max-vfs` property defines the maximum supported SR-IOV VFs count.
+Nmstate will raise error if desired `total-vfs` count exceeded the maximum
+supported one.
+
+The `max-vfs` property is for query only which will be ignored when apply.
 
 #### SR-IOV VF Specific Settings
 
