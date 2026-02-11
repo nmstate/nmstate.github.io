@@ -1978,6 +1978,9 @@ Each route entry could have these parameters:
    route as `state: absnet` and append new route.
  * `vrf-name`: String. Store the route to the route table which specified VRF
    is binding to.
+ * `lock-mtu`: Boolean. New in version 2.2.59. When set to true, the route MTU
+   is locked, preventing Path MTU Discovery (PMTUD) from automatically
+   adjusting it.
 
 ## Route Rules
 
