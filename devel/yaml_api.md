@@ -1858,11 +1858,6 @@ interfaces:
   type: ip-tunnel
   state: up
   mtu: 1480
-  ipv4:
-    enabled: false
-    forwarding: false
-  ipv6:
-    enabled: false
   ip-tunnel:
     mode: ipip
     local: 192.0.2.1
