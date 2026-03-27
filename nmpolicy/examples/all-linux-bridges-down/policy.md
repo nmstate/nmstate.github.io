@@ -1,8 +1,0 @@
-{% raw %}
-capture:
-  linux-bridges: interfaces.type=="linux-bridge" 
-  linux-bridges-down: capture.linux-bridges | interfaces.state:="down"
-
-desiredState: 
-  interfaces: "{{ capture.linux-bridges-down.interfaces }}"
-{% endraw %}
