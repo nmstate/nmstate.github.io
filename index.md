@@ -78,6 +78,7 @@ interfaces:
 - [Python API documentation](./devel/api.md)
 - [Nmstate 1.x: Plugin Design](./devel/plugin.md)
 - [Nmstate 1.x: Varlink support for libnmstate](./devel/varlink-libnmstate.md)
+- [Nmpolicy](./nmpolicy)
 
 ## Related projects
 - [kubernetes-nmstate](https://nmstate.io/kubernetes-nmstate)
