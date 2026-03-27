@@ -76,9 +76,9 @@ interfaces:
 - [YAML API documentation](./devel/yaml_api.md)
 - [Rust API document](https://docs.rs/nmstate)
 - [Python API documentation](./devel/api.md)
-- [Nmstate 1.x: Plugin Design](./devel/plugin.md)
-- [Nmstate 1.x: Varlink support for libnmstate](./devel/varlink-libnmstate.md)
 - [Nmpolicy](./nmpolicy)
+- [Nmstate 1.x: Plugin Design(Deprecated)](./devel/plugin.md)
+- [Nmstate 1.x: Varlink support for libnmstate(Deprecated)](./devel/varlink-libnmstate.md)
 
 ## Related projects
 - [kubernetes-nmstate](https://nmstate.io/kubernetes-nmstate)
