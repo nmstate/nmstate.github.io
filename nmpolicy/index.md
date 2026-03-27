@@ -1,9 +1,9 @@
 # Introduction
 
-Nmpoligy is an expressions driven declarative API for dynamic network
+Nmpolicy is an expressions driven declarative API for dynamic network
 configuration.
 
-Nmpoligy contains two sections:
+Nmpolicy contains two sections:
  * `capture`: Rule to filter desire state
  * `desired` or `desiredState`: Use capture data to generate new state.
 
