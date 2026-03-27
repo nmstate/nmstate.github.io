@@ -81,7 +81,6 @@ interfaces:
 
 ## Related projects
 - [kubernetes-nmstate](https://nmstate.io/kubernetes-nmstate)
-- [nmpolicy](https://nmstate.io/nmpolicy)
 - [nm-configurator](https://github.com/suse-edge/nm-configurator)
 
 ## Contacts
