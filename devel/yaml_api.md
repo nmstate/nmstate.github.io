@@ -1979,7 +1979,7 @@ Each route entry could have these parameters:
  * `vrf-name`: String. Store the route to the route table which specified VRF
    is binding to.
  * `mtu`: Integer. New in version 2.2.42. MTU used for this route entry,
-   without `lock-mtu` set to `true`, this MTU will still be altered by kernel
+   without `lock-mtu` set to `true`, this MTU might still be altered by kernel
    Path MTU discovery(PMTUD).
  * `lock-mtu`: Boolean. New in version 2.2.59. When set to true, the route MTU
    is locked, preventing Path MTU Discovery (PMTUD) from automatically
