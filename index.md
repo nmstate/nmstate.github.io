@@ -74,11 +74,11 @@ interfaces:
 - [Nmstate Quick Start Guide](./user/quick_guide.md)
 - [Nmstatectl (CLI tool)](./user/cli_guide.md)
 - [Nmstate Developer Guide](./devel/dev_guide.md)
-- [Design](./devel/design/networking-api.md)
 - [YAML API documentation](./devel/yaml_api.md)
 - [Rust API document](https://docs.rs/nmstate)
-- [Python API documentation](./devel/api.md)
+- [Python API documentation (unmantained doc, see YAML API instead)](./devel/api.md)
 - [Nmpolicy](./nmpolicy)
+- [Original design and motivation](./devel/design/networking-api.md)
 - [Nmstate 1.x: Plugin Design(Deprecated)](./devel/plugin.md)
 - [Nmstate 1.x: Varlink support for libnmstate(Deprecated)](./devel/varlink-libnmstate.md)
 

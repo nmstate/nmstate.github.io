@@ -2,7 +2,8 @@
 
 This document was created over the year 2018, much before this git repository
 and web site were a reality. It presents the original design of Nmstate and
-provides the motiviation for its existence.
+provides the motivation for its existence. It doesn't accurately reflect the
+current state and design of the project.
 
 ## OVERVIEW
 Networking has always been a major subsystem in the Linux ecosystem. Its
