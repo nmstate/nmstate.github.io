@@ -7,6 +7,7 @@ host networking settings in a declarative manner.
 The networking state is described by a pre-defined schema.
 Reporting of current state and changes to it (desired state) both conform to
 the schema.
+Changes to the current state are applied in a stateless and idempotent manner.
 
 Nmstate is aimed to satisfy enterprise needs to manage host networking through
 a northbound declarative API and multi provider support on the southbound.
