@@ -86,12 +86,13 @@ interfaces:
 - [nm-configurator](https://github.com/suse-edge/nm-configurator)
 
 ## Contacts
-- You can find us on Matrix room: [`#nmstate:fedora.im`][matrix_room_url]
-  The maintainers are Gris, edwardh and ffmancera, please feel free to ask
-  whatever you need!
+- You can find us on Matrix room: [`#nmstate:fedora.im`][matrix_room_url],
+  please feel free to ask whatever you need!
+  The current active maintainers are listed in [MAINTAINERS.md][MAINTAINERS.md].
 
 - Nmstate uses the [github issue][github_issue_url] for discussion or bug
   report.
 
 [github_issue_url]: https://github.com/nmstate/nmstate/issues
 [matrix_room_url]: https://matrix.to/#/#nmstate:fedora.im
+[MAINTAINERS.md]: https://github.com/nmstate/nmstate/blob/base/MAINTAINERS.md
