@@ -73,7 +73,7 @@ interfaces:
 ## Documentation
 - [Nmstate Quick Start Guide](./user/quick_guide.md)
 - [Nmstatectl (CLI tool)](./user/cli_guide.md)
-- [Nmstate Developer Guide](./devel/dev_guide.md)
+- [Nmstate contribution guide](https://github.com/nmstate/nmstate/blob/base/CONTRIBUTING.md)
 - [YAML API documentation](./devel/yaml_api.md)
 - [Rust API document](https://docs.rs/nmstate)
 - [Python API documentation (unmantained doc, see YAML API instead)](./devel/api.md)
