@@ -72,6 +72,7 @@ interfaces:
 
 ## Documentation
 - [Nmstate Quick Start Guide](./user/quick_guide.md)
+- [Nmstatectl (CLI tool)](./user/cli_guide.md)
 - [Nmstate Developer Guide](./devel/dev_guide.md)
 - [Design](./devel/design/networking-api.md)
 - [YAML API documentation](./devel/yaml_api.md)
