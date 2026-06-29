@@ -5,9 +5,9 @@ description: A Declarative API for Host Network Management
 github:
   repository_url: https://github.com/nmstate/nmstate
 include:
- - nmstate.gpg
- - utils
- - LICENSE.md
+  - utils
+  - LICENSE.md
+  - _redirects
 markdown: kramdown
 kramdown:
   input: GFM
