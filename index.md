@@ -7,6 +7,7 @@ host networking settings in a declarative manner.
 The networking state is described by a pre-defined schema.
 Reporting of current state and changes to it (desired state) both conform to
 the schema.
+Changes to the current state are applied in a stateless and idempotent manner.
 
 Nmstate is aimed to satisfy enterprise needs to manage host networking through
 a northbound declarative API and multi provider support on the southbound.
@@ -71,12 +72,13 @@ interfaces:
 
 ## Documentation
 - [Nmstate Quick Start Guide](./user/quick_guide.md)
-- [Nmstate Developer Guide](./devel/dev_guide.md)
-- [Design](./devel/design/networking-api.md)
+- [Nmstatectl (CLI tool)](./user/cli_guide.md)
+- [Nmstate contribution guide](https://github.com/nmstate/nmstate/blob/base/CONTRIBUTING.md)
 - [YAML API documentation](./devel/yaml_api.md)
 - [Rust API document](https://docs.rs/nmstate)
-- [Python API documentation](./devel/api.md)
+- [Python API documentation (unmantained doc, see YAML API instead)](./devel/api.md)
 - [Nmpolicy](./nmpolicy)
+- [Original design and motivation](./devel/design/networking-api.md)
 - [Nmstate 1.x: Plugin Design(Deprecated)](./devel/plugin.md)
 - [Nmstate 1.x: Varlink support for libnmstate(Deprecated)](./devel/varlink-libnmstate.md)
 
@@ -85,12 +87,13 @@ interfaces:
 - [nm-configurator](https://github.com/suse-edge/nm-configurator)
 
 ## Contacts
-- You can find us on Matrix room: [`#nmstate:fedora.im`][matrix_room_url]
-  The maintainers are Gris, edwardh and ffmancera, please feel free to ask
-  whatever you need!
+- You can find us on Matrix room: [`#nmstate:fedora.im`][matrix_room_url],
+  please feel free to ask whatever you need!
+  The current active maintainers are listed in [MAINTAINERS.md][MAINTAINERS.md].
 
 - Nmstate uses the [github issue][github_issue_url] for discussion or bug
   report.
 
 [github_issue_url]: https://github.com/nmstate/nmstate/issues
 [matrix_room_url]: https://matrix.to/#/#nmstate:fedora.im
+[MAINTAINERS.md]: https://github.com/nmstate/nmstate/blob/base/MAINTAINERS.md
