@@ -3,13 +3,13 @@
 New feature in nmstate 2.2.51.
 
 Interface alternative name is a kernel property of network interface which is
-treat equally as interface kernel name in netlink protocol.
+treated equally to the interface kernel name by the netlink protocol.
 
-Unlike kernel interface name limitation on 15 characters, alternative name
-length limitation is 255(might change in the future by kernel team).
+Unlike the kernel interface name limitation of 15 characters, interface alternative names
+are limited to 127 characters (although this could be changed in the future by the kernel team).
 
 Like kernel interface name, alternative name should unique among all interface
-names and all alternative names. Nmstate will raise error otherwise.
+names and all alternative names. Nmstate will raise an error otherwise.
 
 Nmstate does not override existing alternative names, you can only append
 and remove explicitly.
