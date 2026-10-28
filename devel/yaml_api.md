@@ -1065,6 +1065,7 @@ interfaces:
       sr-iov:
         total-vfs: 2
         max-vfs: 63
+        drivers-autoprobe: true
         vfs:
         - id: 0
           mac-address: 00:11:22:33:00:FF
@@ -1097,6 +1098,12 @@ Nmstate will raise error if desired `total-vfs` count exceeded the maximum
 supported one.
 
 The `max-vfs` property is for query only which will be ignored when apply.
+
+#### Drivers Autoprobe
+
+The `drivers-autoprobe` property set to true instructs kernel to bind
+VFs to their native host drivers. Set to false to disable this, resulting
+in no kernel VF netdev created.
 
 #### SR-IOV VF Specific Settings
 
