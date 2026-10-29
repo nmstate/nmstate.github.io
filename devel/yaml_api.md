@@ -1328,13 +1328,6 @@ interfaces:
 The `options` subsection of Linux bridge interface `bridge` section holds these
 options:
 
- * `allow-extra-ports`: Boolean. When set to true, the verification stage of
-   nmstate will ignore extra bridge ports not mentioned in `port` section.
-   This allows external tools to attach ports while nmstate is creating or
-   updating the bridge. This option is not persisted because it only controls
-   nmstate verification stage during apply action. The default value is false,
-   which means verification will enforce bridge port list match with desired
-   state.
  * `gc_timer`: Integer. Ignored when applying.
  * `group-addr`: String.
  * `group-forward-mask`: Integer.
@@ -1362,6 +1355,18 @@ options:
     * `max-age`: Integer
     * `priority`: Integer
  * `vlan-protocol`: `802.1q` (default) or `802.1ad`
+
+### Linux Bridge Allow Extra Ports
+
+If the `allow-extra-ports` option in the `bridge` section is set to true,
+the verification stage of nmstate will ignore extra bridge ports not
+mentioned in `port` section.
+
+This allows external tools to attach ports while nmstate is creating or
+updating the bridge. This option is not persisted because it only controls
+nmstate verification stage during apply action. The default value is false,
+which means verification will enforce bridge port list match with desired
+state.
 
 ### Linux Bridge Ports
 
@@ -1451,20 +1456,28 @@ options:
  * `mcast-snooping-enable`: String.
  * `fail-mode`: String.
  * `datapath`: String. Only for DPDK.
- * `allow-extra-ports`: Boolean. When set to true, the verification stage of
-   nmstate will ignore extra OVS bridge ports not mentioned in `port` section.
-   This allows external tools to attach OVS ports while nmstate is creating
-   or updating the OVS bridge. This option is not persisted because it only
-   controls nmstate verification stage during apply action. The default value
-   is false, which means verification will enforce bridge port list match with
-   desired state.
- * `allow-extra-patch-ports`: Boolean. When set to true, the verification
-   stage of nmstate will ignore extra OVS patch port not mentioned in `port`
-   section. This allows external tool to attach OVS patch port upon nmstate
-   creating the OVS bridge. This option is not persisted because it only
-   control nmstate verification stage during apply action. The default value
-   is false means the verification stage will make sure OVS bridge port list
-   match with desired state.
+
+#### OpenvSwitch Bridge Allow Extra Ports
+
+If the `allow-extra-ports` option in the `bridge` section is set to true, the
+verification stage of nmstate will ignore extra OVS bridge ports not
+mentioned in `port` section.
+
+This allows external tools to attach OVS ports while nmstate is creating
+or updating the OVS bridge. This option is not persisted because it only
+controls nmstate verification stage during apply action. The default value
+is false, which means verification will enforce bridge port list match with
+desired state.
+
+If the `allow-extra-patch-ports` option in the `bridge` section is set to
+true, the verification stage of nmstate will ignore extra OVS patch port
+not mentioned in `port` section.
+
+This allows external tool to attach OVS patch port upon nmstate
+creating the OVS bridge. This option is not persisted because it only
+control nmstate verification stage during apply action. The default value
+is false means the verification stage will make sure OVS bridge port list
+match with desired state.
 
 ### OpenvSwitch Bridge Ports
 
