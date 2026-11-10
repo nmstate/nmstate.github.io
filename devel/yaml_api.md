@@ -1369,10 +1369,19 @@ The `port` subsection of `bridge` section defines a list of linux bridge ports.
 
 Each linux bridge port contains these properties:
  * `name`: Interface name.
+ * `neigh-suppress`: Boolean. Enable ARP/ND proxy and suppression on this port.
  * `stp-hairpin-mode`: Boolean.
  * `stp-path-cost`: Integer.
  * `stp-priority`: Integer.
  * `vlan`: Please check `Linux Bridge Port VLAN` section.
+
+The kernel default of `neigh-suppress` for a newly created bridge port
+is `false`. If omitted, the NetworkManager profile retains its current
+setting rather than copying from the kernel. Queries reflect the
+active kernel value.
+
+Applying an explicit `true` or `false` requires NetworkManager
+1.58.2 or newer.
 
 ### Linux Bridge Port VLAN
 

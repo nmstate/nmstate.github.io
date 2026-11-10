@@ -12,6 +12,7 @@
     * [Interfaces: VLAN](#interfaces-vlan)
     * [Interfaces: VXLAN](#interfaces-vxlan)
     * [Interface: Linux Bridge](#interface-linux-bridge)
+        * [Setting VXLAN Neighbor Suppression](#setting-vxlan-neighbor-suppression)
     * [Interfaces: Team](#interfaces-team)
     * [Interfaces: Veth](#interfaces-veth)
     * [Route](#route)
@@ -230,6 +231,53 @@ interfaces:
           stp-hairpin-mode: false
           stp-path-cost: 100
           stp-priority: 32
+```
+
+### Setting VXLAN Neighbor Suppression
+
+Applying this example requires NetworkManager 1.58.2 or newer.
+
+Bridge a local VLAN to VXLAN, enabling neighbor suppression only on VXLAN.
+An external EVPN control plane handles MAC advertisements.
+
+The example assumes `eth1` is already up at `192.0.2.1` and can reach
+the remote tunnel endpoint `192.0.2.2`.
+
+```yaml
+---
+interfaces:
+  - name: br101
+    type: linux-bridge
+    state: up
+    ipv4:
+      enabled: false
+    ipv6:
+      enabled: false
+    bridge:
+      options:
+        stp:
+          enabled: false
+      port:
+        - name: eth1.101
+          neigh-suppress: false
+        - name: vxlan101
+          neigh-suppress: true
+  - name: eth1.101
+    type: vlan
+    state: up
+    vlan:
+      base-iface: eth1
+      id: 101
+  - name: vxlan101
+    type: vxlan
+    state: up
+    vxlan:
+      base-iface: eth1
+      id: 75101
+      local: 192.0.2.1
+      remote: 192.0.2.2
+      destination-port: 4789
+      learning: false
 ```
 
 ## Interfaces: Team
